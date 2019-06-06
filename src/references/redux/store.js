@@ -1,11 +1,11 @@
-import { createStore, applyMiddleware } from 'redux';
-import { compose } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 
 const initialState = {
-  posts: [],
+  categories: [],
 };
-const store = createStore(initialState, rootReducer, compose(applyMiddleware([thunk])));
+const store = createStore(rootReducer, initialState, compose(applyMiddleware(thunk)));
 
 export default store;

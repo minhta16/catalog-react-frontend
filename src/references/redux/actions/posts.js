@@ -1,4 +1,4 @@
-import { ADD_POST, GET_POSTS } from './types';
+import { ADD_POST, FETCH_POSTS } from './types';
 
 export const addPost = post => (dispatch) => {
   dispatch({
@@ -7,6 +7,6 @@ export const addPost = post => (dispatch) => {
   });
 };
 
-export const getPosts = () => dispatch => dispatch({
-  type: GET_POSTS,
+export const fetchPosts = () => dispatch => dispatch({
+  type: FETCH_POSTS,
 });

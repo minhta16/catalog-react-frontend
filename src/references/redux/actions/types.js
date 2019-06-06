@@ -1,2 +1,5 @@
 export const ADD_POST = 'ADD_POST';
-export const GET_POSTS = 'GET_POSTS';
+export const FETCH_POSTS = 'FETCH_POSTS';
+export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
+export const ADD_CATEGORY = 'ADD_CATEGORY';
+export const SELECT_MAIN_MENU_CATEGORY = 'SELECT_MAIN_MENU_CATEGORY';
