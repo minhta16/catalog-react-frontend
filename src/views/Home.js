@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { Container } from '@material-ui/core';
 import CategoriesTable from 'components/CategoriesTable';
@@ -11,14 +12,19 @@ class Home extends Component {
   }
 
   render() {
+    const { match, categories } = this.props;
     return (
       <Container maxWidth="lg">
-        <CategoriesTable />
+        <CategoriesTable categories={categories} categoryName={match.params.categoryName} />
       </Container>
     );
   }
 }
 
+Home.propTypes = {
+  match: PropTypes.shape.isRequired,
+  categories: PropTypes.shape.isRequired,
+};
 const mapStateToProps = state => ({
   categories: state.categories,
 });

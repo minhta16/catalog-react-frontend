@@ -1,32 +1,25 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   Paper, Grid, MenuItem, MenuList, Typography, Divider,
 } from '@material-ui/core';
 
+import { Link } from 'react-router-dom';
+
 class CategoriesTable extends Component {
   state = {
-    selectedCategory: { id: -1, name: '' },
-    categories: [
-      {
+    categories: {
+      Football: {
         id: 1,
         name: 'Football',
       },
-      { id: 2, name: 'Soccer' },
-    ],
-  };
-
-  componentDidMount() {
-    return 0;
-  }
-
-  handleItemClick = category => () => {
-    this.setState({
-      selectedCategory: category,
-    });
+      Soccer: { id: 2, name: 'Soccer' },
+    },
   };
 
   render() {
-    const { categories, selectedCategory } = this.state;
+    const { categories } = this.state;
+    const { categoryName } = this.props;
     return (
       <Paper>
         <Grid container spacing={2}>
@@ -35,26 +28,30 @@ class CategoriesTable extends Component {
               Categories
             </Typography>
             <MenuList>
-              {categories.map(category => (
+              {Object.keys(categories).map(key => (
                 <MenuItem
-                  key={category.name}
-                  selected={selectedCategory.id === category.id}
-                  onClick={this.handleItemClick(category)}
+                  key={key}
+                  selected={categoryName === key}
+                  // onClick={this.handleItemClick(category)}
+                  component={Link}
+                  to={`/${categories[key].name}`}
                 >
-                  {category.name}
+                  {categories[key].name}
                 </MenuItem>
               ))}
             </MenuList>
           </Grid>
           <Grid item xs={9}>
             <Typography className="left-margin" variant="h4">
-              {selectedCategory.name || 'Choose a category'}
+              {categoryName || 'Choose a category'}
             </Typography>
             <Divider variant="middle" />
             <MenuList>
-              {categories.map(category => (
-                <MenuItem>{category.name}</MenuItem>
-              ))}
+              {categoryName ? (
+                Object.keys(categories).map(key => <MenuItem key={key}>{key}</MenuItem>)
+              ) : (
+                <Typography variant="body1">Please select a category on the left.</Typography>
+              )}
             </MenuList>
           </Grid>
         </Grid>
@@ -62,5 +59,9 @@ class CategoriesTable extends Component {
     );
   }
 }
+
+CategoriesTable.propTypes = {
+  categoryName: PropTypes.string.isRequired,
+};
 
 export default CategoriesTable;
