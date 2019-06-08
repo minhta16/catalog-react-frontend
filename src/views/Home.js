@@ -7,15 +7,11 @@ import CategoriesTable from 'components/CategoriesTable';
 import 'App.css';
 
 class Home extends Component {
-  componentDidMount() {
-    return 0;
-  }
-
   render() {
     const { match, categories } = this.props;
     return (
       <Container maxWidth="lg">
-        <CategoriesTable categories={categories} categoryName={match.params.categoryName} />
+        <CategoriesTable categories={categories} selectedCatId={match.params.id} />
       </Container>
     );
   }

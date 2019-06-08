@@ -1,15 +1,19 @@
-import { fetchApiCategories } from 'references/scripts/apiCalls';
+import { fetchApiCategories, createApiCategories } from 'references/scripts/apiCalls';
 import { FETCH_CATEGORIES, ADD_CATEGORY } from './types';
 
 export const fetchCategories = () => (dispatch) => {
-  const categories = fetchApiCategories();
-  dispatch({
-    type: FETCH_CATEGORIES,
-    payload: categories,
+  fetchApiCategories().then((fetchedCategories) => {
+    dispatch({
+      type: FETCH_CATEGORIES,
+      payload: fetchedCategories,
+    });
   });
 };
 
-export const addCategory = category => dispatch => dispatch({
-  type: ADD_CATEGORY,
-  payload: category,
-});
+export const addCategory = (category, token) => (dispatch) => {
+  createApiCategories(category, token);
+  dispatch({
+    type: ADD_CATEGORY,
+    payload: category,
+  });
+};

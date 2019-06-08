@@ -4,22 +4,25 @@ import {
   Paper, Grid, MenuItem, MenuList, Typography, Divider,
 } from '@material-ui/core';
 
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { fetchCategories as fetchCategoriesRedux } from 'references/redux/actions/categories';
+import { fetchPosts as fetchPostsRedux } from 'references/redux/actions/posts';
 
 class CategoriesTable extends Component {
-  state = {
-    categories: {
-      Football: {
-        id: 1,
-        name: 'Football',
-      },
-      Soccer: { id: 2, name: 'Soccer' },
-    },
-  };
+  state = {};
+
+  componentDidMount() {
+    const { fetchCategories, selectedCatId, fetchPosts } = this.props;
+    fetchCategories();
+    if (selectedCatId) {
+      fetchPosts(selectedCatId)
+    }
+  }
 
   render() {
-    const { categories } = this.state;
-    const { categoryName } = this.props;
+    const { categories, selectedCatId, selectedCatItems, fetchPosts } = this.props;
+    const selectedCatName = categories[selectedCatId] ? categories[selectedCatId].name : '';
     return (
       <Paper>
         <Grid container spacing={2}>
@@ -31,10 +34,10 @@ class CategoriesTable extends Component {
               {Object.keys(categories).map(key => (
                 <MenuItem
                   key={key}
-                  selected={categoryName === key}
-                  // onClick={this.handleItemClick(category)}
+                  selected={selectedCatId === key}
                   component={Link}
-                  to={`/${categories[key].name}`}
+                  to={`/${key}`}
+                  onClick={e => fetchPosts(key)}
                 >
                   {categories[key].name}
                 </MenuItem>
@@ -43,14 +46,18 @@ class CategoriesTable extends Component {
           </Grid>
           <Grid item xs={9}>
             <Typography className="left-margin" variant="h4">
-              {categoryName || 'Choose a category'}
+              {selectedCatId ? selectedCatName : 'Choose a category'}
             </Typography>
             <Divider variant="middle" />
             <MenuList>
-              {categoryName ? (
-                Object.keys(categories).map(key => <MenuItem key={key}>{key}</MenuItem>)
+              {selectedCatId ? (
+                Object.keys(selectedCatItems).map(key => (
+                  <MenuItem key={key}>{selectedCatItems[key].name}</MenuItem>
+                ))
               ) : (
-                <Typography variant="body1">Please select a category on the left.</Typography>
+                <Typography variant="body1">
+                  Please select a category on the left to view its items.
+                </Typography>
               )}
             </MenuList>
           </Grid>
@@ -61,7 +68,23 @@ class CategoriesTable extends Component {
 }
 
 CategoriesTable.propTypes = {
-  categoryName: PropTypes.string.isRequired,
+  selectedCatId: PropTypes.string.isRequired,
+  categories: PropTypes.shape.isRequired,
+  fetchCategories: PropTypes.func.isRequired,
+  selectedCatItems: PropTypes.shape.isRequired,
+  fetchPosts: PropTypes.func.isRequired,
 };
 
-export default CategoriesTable;
+const mapStateToProps = state => ({
+  selectedCatItems: state.posts,
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchCategories: () => dispatch(fetchCategoriesRedux()),
+  fetchPosts: id => dispatch(fetchPostsRedux(id)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CategoriesTable);

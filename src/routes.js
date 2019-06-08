@@ -7,9 +7,9 @@ const routes = [
     exact: true,
   },
   {
-    path: '/:categoryName',
+    path: '/:id',
     view: Home,
-    exact: false,
+    exact: true,
   },
 ];
 
