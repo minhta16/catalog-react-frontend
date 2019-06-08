@@ -1,4 +1,5 @@
 import Home from 'views/Home';
+import Post from 'views/Post';
 
 const routes = [
   {
@@ -9,6 +10,11 @@ const routes = [
   {
     path: '/:id',
     view: Home,
+    exact: true,
+  },
+  {
+    path: '/:id/:postId',
+    view: Post,
     exact: true,
   },
 ];
