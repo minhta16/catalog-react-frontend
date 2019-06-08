@@ -7,6 +7,8 @@ import CategoriesTable from 'components/CategoriesTable';
 import 'App.css';
 
 class Home extends Component {
+  state = {};
+
   render() {
     const { match, categories } = this.props;
     return (

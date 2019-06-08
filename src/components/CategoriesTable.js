@@ -16,12 +16,17 @@ class CategoriesTable extends Component {
     const { fetchCategories, selectedCatId, fetchPosts } = this.props;
     fetchCategories();
     if (selectedCatId) {
-      fetchPosts(selectedCatId)
+      fetchPosts(selectedCatId);
     }
   }
 
   render() {
-    const { categories, selectedCatId, selectedCatItems, fetchPosts } = this.props;
+    const {
+      categories,
+      selectedCatId,
+      selectedCatItems,
+      fetchPosts,
+    } = this.props;
     const selectedCatName = categories[selectedCatId] ? categories[selectedCatId].name : '';
     return (
       <Paper>
@@ -37,7 +42,7 @@ class CategoriesTable extends Component {
                   selected={selectedCatId === key}
                   component={Link}
                   to={`/${key}`}
-                  onClick={e => fetchPosts(key)}
+                  onClick={() => fetchPosts(key)}
                 >
                   {categories[key].name}
                 </MenuItem>

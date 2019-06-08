@@ -3,3 +3,5 @@ export const FETCH_POSTS = 'FETCH_POSTS';
 export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
 export const ADD_CATEGORY = 'ADD_CATEGORY';
 export const SELECT_MAIN_MENU_CATEGORY = 'SELECT_MAIN_MENU_CATEGORY';
+export const FETCH_USERS = 'FETCH_USERS';
+export const SIGN_IN = 'SIGN_IN';
