@@ -13,6 +13,9 @@ const theme = createMuiTheme({
     primary: {
       main: '#411bd0',
     },
+    secondary: {
+      main: '#fff',
+    },
   },
 });
 
@@ -30,8 +33,8 @@ const App = () => (
   <Provider store={store}>
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
-      <CustomAppBar />
-      <Toolbar />
+      <CustomAppBar color="secondary" />
+      <Toolbar style={{ minHeight: '6em' }} />
       <div className="App">{routing}</div>
     </MuiThemeProvider>
   </Provider>
