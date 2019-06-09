@@ -27,3 +27,5 @@ HideOnScroll.propTypes = {
 HideOnScroll.defaultProps = {
   window: () => {},
 };
+
+export default HideOnScroll;

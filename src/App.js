@@ -1,9 +1,20 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import { CssBaseline, Toolbar } from '@material-ui/core';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import CustomAppBar from 'components/CustomAppBar';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import routes from 'routes';
 import store from 'references/redux/store';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#411bd0',
+    },
+  },
+});
 
 const routing = (
   <Router>
@@ -17,7 +28,12 @@ const routing = (
 
 const App = () => (
   <Provider store={store}>
-    <div className="App">{routing}</div>
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      <CustomAppBar />
+      <Toolbar />
+      <div className="App">{routing}</div>
+    </MuiThemeProvider>
   </Provider>
 );
 
