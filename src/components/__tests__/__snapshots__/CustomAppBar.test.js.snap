@@ -1,42 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`components/CustomAppBar should render correctly 1`] = `
-<HideOnScroll
-  window={[Function]}
+<WithStyles(ForwardRef(AppBar))
+  color="primary"
 >
-  <WithStyles(ForwardRef(AppBar))
-    color="primary"
-  >
-    <WithStyles(ForwardRef(Toolbar))>
-      <WithStyles(ForwardRef(IconButton))
-        color="inherit"
-        component={[Function]}
-        edge="start"
-        exact="true"
-        to="/"
-      >
-        <img
-          alt="site logo"
-          src="/img/logo.svg"
-        />
-      </WithStyles(ForwardRef(IconButton))>
-      <WithStyles(ForwardRef(Typography))
-        style={
-          Object {
-            "flexGrow": "1",
-          }
-        }
+  <WithStyles(ForwardRef(Toolbar))>
+    <WithStyles(ForwardRef(IconButton))
+      color="inherit"
+      component={[Function]}
+      edge="start"
+      exact="true"
+      to="/"
+    >
+      <img
+        alt="site logo"
+        src="/img/logo.svg"
       />
-      <LoginButton
-        currentUser={
-          Object {
-            "password": "minh",
-            "token": "abc",
-            "username": "minh",
-          }
+    </WithStyles(ForwardRef(IconButton))>
+    <WithStyles(ForwardRef(Typography))
+      style={
+        Object {
+          "flexGrow": "1",
         }
-      />
-    </WithStyles(ForwardRef(Toolbar))>
-  </WithStyles(ForwardRef(AppBar))>
-</HideOnScroll>
+      }
+    />
+    <LoginButton
+      currentUser={
+        Object {
+          "password": "minh",
+          "token": "abc",
+          "username": "minh",
+        }
+      }
+    />
+  </WithStyles(ForwardRef(Toolbar))>
+</WithStyles(ForwardRef(AppBar))>
 `;

@@ -3,6 +3,7 @@ import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { configure, shallow } from 'enzyme';
 import CategoriesTable from 'components/CategoriesTable';
+import { MenuItem } from '@material-ui/core';
 
 configure({ adapter: new Adapter() });
 
@@ -42,10 +43,23 @@ describe('components/CategoriesTable', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should display items when categories is clicked', () => {
+  it('should call fetchPosts when a category is clicked', () => {
     setup();
     const { fetchPosts } = props;
     wrapper.findWhere(node => node.key() === '1').simulate('click');
     expect(fetchPosts).toBeCalled();
+  });
+
+  it('should display items category is clicked', () => {
+    props.selectedCatItems = {
+      1: {
+        name: 'hihi',
+      },
+      2: {
+        name: 'hihi',
+      },
+    };
+    setup();
+    expect(wrapper.find(MenuItem).length).toBe(3);
   });
 });

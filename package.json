@@ -111,6 +111,7 @@
       "!**/examples/**",
       "!src/serviceWorker.js"
     ],
+    "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.js",
     "setupFiles": [
       "react-app-polyfill/jsdom"
     ],
