@@ -2,12 +2,7 @@
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { configure, shallow } from 'enzyme';
-import { Provider } from 'react-redux';
-import PostPaper from 'components/PostPaper';
-import configureMockStore from 'redux-mock-store';
-
-const mockStore = configureMockStore();
-const store = mockStore({});
+import { PostPaper } from 'components/PostPaper';
 
 configure({ adapter: new Adapter() });
 
@@ -22,11 +17,7 @@ describe('components/PostPaper', () => {
   // };
 
   const setup = () => {
-    wrapper = shallow(
-      <Provider store={store}>
-        <PostPaper {...props} />
-      </Provider>,
-    );
+    wrapper = shallow(<PostPaper {...props} />);
   };
 
   beforeEach(() => {

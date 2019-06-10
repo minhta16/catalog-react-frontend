@@ -1,44 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`components/PostPaper should render correctly 1`] = `
-<ContextProvider
-  value={
-    Object {
-      "store": Object {
-        "clearActions": [Function],
-        "dispatch": [Function],
-        "getActions": [Function],
-        "getState": [Function],
-        "replaceReducer": [Function],
-        "subscribe": [Function],
-      },
-      "subscription": Subscription {
-        "handleChangeWrapper": [Function],
-        "listeners": Object {
-          "clear": [Function],
-          "get": [Function],
-          "notify": [Function],
-          "subscribe": [Function],
-        },
-        "onStateChange": [Function],
-        "parentSub": undefined,
-        "store": Object {
-          "clearActions": [Function],
-          "dispatch": [Function],
-          "getActions": [Function],
-          "getState": [Function],
-          "replaceReducer": [Function],
-          "subscribe": [Function],
-        },
-        "unsubscribe": [Function],
-      },
-    }
-  }
+<WithStyles(ForwardRef(Paper))
+  className="left-margin"
 >
-  <PostPaper
-    body="body"
-    categoryId="1"
-    header="header"
-  />
-</ContextProvider>
+  <WithStyles(ForwardRef(Button))
+    color="primary"
+    component={[Function]}
+    to="/1"
+  >
+    Back
+  </WithStyles(ForwardRef(Button))>
+  <WithStyles(ForwardRef(Typography))
+    variant="h4"
+  >
+    header
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Typography))
+    variant="subtitle1"
+  >
+    By: Minh Ta
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Divider)) />
+  <WithStyles(ForwardRef(Typography))
+    variant="body1"
+  >
+    body
+  </WithStyles(ForwardRef(Typography))>
+</WithStyles(ForwardRef(Paper))>
 `;

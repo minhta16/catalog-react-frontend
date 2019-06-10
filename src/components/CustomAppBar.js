@@ -6,23 +6,20 @@ import {
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import HideOnScroll from './HideOnScroll';
 import LoginButton from './LoginButton';
 
-function CustomAppBar(props) {
+export function CustomAppBar(props) {
   const { color, currentUser } = props;
   return (
-    <HideOnScroll>
-      <AppBar color={color}>
-        <Toolbar>
-          <IconButton edge="start" color="inherit" component={Link} exact="true" to="/">
-            <img src="/img/logo.svg" alt="site logo" />
-          </IconButton>
-          <Typography style={{ flexGrow: '1' }} />
-          <LoginButton currentUser={currentUser} />
-        </Toolbar>
-      </AppBar>
-    </HideOnScroll>
+    <AppBar color={color}>
+      <Toolbar>
+        <IconButton edge="start" color="inherit" component={Link} exact="true" to="/">
+          <img src="/img/logo.svg" alt="site logo" />
+        </IconButton>
+        <Typography style={{ flexGrow: '1' }} />
+        <LoginButton currentUser={currentUser} />
+      </Toolbar>
+    </AppBar>
   );
 }
 

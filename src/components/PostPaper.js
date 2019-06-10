@@ -1,27 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Typography, Divider, Paper, Button,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
-class PostPaper extends Component {
-  state = {};
-
-  render() {
-    const { header, body, categoryId } = this.props;
-    return (
-      <Paper className="left-margin">
-        <Button color="primary" component={Link} to={`/${categoryId}`}>
-          Back
-        </Button>
-        <Typography variant="h4">{header}</Typography>
-        <Typography variant="subtitle1">By: Minh Ta</Typography>
-        <Divider />
-        <Typography variant="body1">{body}</Typography>
-      </Paper>
-    );
-  }
+export function PostPaper(props) {
+  const { header, body, categoryId } = props;
+  return (
+    <Paper className="left-margin">
+      <Button color="primary" component={Link} to={`/${categoryId}`}>
+        Back
+      </Button>
+      <Typography variant="h4">{header}</Typography>
+      <Typography variant="subtitle1">By: Minh Ta</Typography>
+      <Divider />
+      <Typography variant="body1">{body}</Typography>
+    </Paper>
+  );
 }
 
 PostPaper.propTypes = {

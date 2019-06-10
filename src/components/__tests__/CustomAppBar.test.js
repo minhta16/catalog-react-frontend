@@ -2,12 +2,7 @@
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { configure, shallow } from 'enzyme';
-import configureMockStore from 'redux-mock-store';
-import { Provider } from 'react-redux';
-import CustomAppBar from 'components/CustomAppBar';
-
-const mockStore = configureMockStore();
-const store = mockStore({});
+import { CustomAppBar } from 'components/CustomAppBar';
 
 configure({ adapter: new Adapter() });
 
@@ -17,11 +12,7 @@ describe('components/CustomAppBar', () => {
   // let warning;
 
   const setup = () => {
-    wrapper = shallow(
-      <Provider store={store}>
-        <CustomAppBar {...props} />
-      </Provider>,
-    );
+    wrapper = shallow(<CustomAppBar {...props} />);
   };
 
   beforeEach(() => {
