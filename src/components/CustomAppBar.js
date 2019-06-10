@@ -4,6 +4,7 @@ import {
   AppBar, Toolbar, IconButton, Typography,
 } from '@material-ui/core';
 
+import { connect } from 'react-redux';
 import HideOnScroll from './HideOnScroll';
 import LoginButton from './LoginButton';
 
@@ -31,5 +32,9 @@ class CustomAppBar extends Component {
 CustomAppBar.propTypes = {
   color: PropTypes.string.isRequired,
 };
+
+// const mapStateToProps = {
+//   log,
+// };
 
 export default CustomAppBar;

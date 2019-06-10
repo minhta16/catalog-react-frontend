@@ -11,4 +11,6 @@ class LoginButton extends Component {
   }
 }
 
+LoginButton.propTypes = {};
+
 export default LoginButton;
