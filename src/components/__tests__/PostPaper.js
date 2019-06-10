@@ -3,7 +3,6 @@ import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { configure, shallow } from 'enzyme';
 import { Provider } from 'react-redux';
-import toJson from 'enzyme-to-json';
 import PostPaper from 'components/PostPaper';
 import configureMockStore from 'redux-mock-store';
 
@@ -40,6 +39,6 @@ describe('components/PostPaper', () => {
 
   it('should render correctly', () => {
     setup();
-    expect(toJson(wrapper)).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });

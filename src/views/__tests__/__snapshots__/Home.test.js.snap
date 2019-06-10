@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`views/Home should render correctly 1`] = `
+<WithStyles(ForwardRef(Container))
+  maxWidth="lg"
+>
+  <CategoriesTable
+    categories={
+      Object {
+        "1": Object {
+          "created": "2019",
+          "description": "testDesc",
+          "id": "1",
+          "name": "testName",
+          "updated": "2019",
+        },
+      }
+    }
+    fetchPosts={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            "1",
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": undefined,
+          },
+        ],
+      }
+    }
+    selectedCatId="1"
+    selectedCatItems={Object {}}
+  />
+</WithStyles(ForwardRef(Container))>
+`;

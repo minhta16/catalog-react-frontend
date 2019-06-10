@@ -2,7 +2,6 @@
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { configure, shallow } from 'enzyme';
-import toJson from 'enzyme-to-json';
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import CustomAppBar from 'components/CustomAppBar';
@@ -16,11 +15,6 @@ describe('components/CustomAppBar', () => {
   let wrapper;
   let props;
   // let warning;
-
-  // const update = () => {
-  //   wrapper.update();
-  //   warning = wrapper.find(Warning);
-  // };
 
   const setup = () => {
     wrapper = shallow(
@@ -43,6 +37,6 @@ describe('components/CustomAppBar', () => {
 
   it('should render correctly', () => {
     setup();
-    expect(toJson(wrapper)).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });

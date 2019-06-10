@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/Post should render correctly 1`] = `
+<WithStyles(ForwardRef(Container))
+  maxWidth="lg"
+>
+  <PostPaper
+    body="desc"
+    categoryId="1"
+    created="2019"
+    header="name"
+  />
+</WithStyles(ForwardRef(Container))>
+`;

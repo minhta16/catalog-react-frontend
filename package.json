@@ -105,13 +105,11 @@
   },
   "jest": {
     "collectCoverage": true,
-    "coverageReporters": [
-      "json",
-      "html"
-    ],
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
-      "!src/**/*.d.ts"
+      "!src/**/*.d.ts",
+      "!**/examples/**",
+      "!src/serviceWorker.js"
     ],
     "setupFiles": [
       "react-app-polyfill/jsdom"
@@ -127,6 +125,9 @@
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
       "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
     },
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
     "transformIgnorePatterns": [
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
       "^.+\\.module\\.(css|sass|scss)$"

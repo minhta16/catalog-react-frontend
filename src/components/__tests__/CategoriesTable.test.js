@@ -2,7 +2,6 @@
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { configure, shallow } from 'enzyme';
-import toJson from 'enzyme-to-json';
 import CategoriesTable from 'components/CategoriesTable';
 
 configure({ adapter: new Adapter() });
@@ -40,7 +39,7 @@ describe('components/CategoriesTable', () => {
 
   it('should render correctly', () => {
     setup();
-    expect(toJson(wrapper)).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('should display items when categories is clicked', () => {

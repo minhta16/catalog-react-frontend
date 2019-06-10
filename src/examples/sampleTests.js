@@ -1,3 +1,8 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable react/jsx-no-undef */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-undef */
 import React from 'react';
 import { configure, shallow, mount } from 'enzyme';

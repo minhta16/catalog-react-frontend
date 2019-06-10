@@ -2,7 +2,6 @@
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { configure, shallow } from 'enzyme';
-import toJson from 'enzyme-to-json';
 import App from 'App';
 
 configure({ adapter: new Adapter() });
@@ -23,6 +22,6 @@ describe('src/App', () => {
 
   it('should render App without crashing', () => {
     setup();
-    expect(toJson(wrapper)).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });

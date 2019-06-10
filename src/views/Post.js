@@ -1,26 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import PostPaper from 'components/PostPaper';
 import { Container } from '@material-ui/core';
 
-class Post extends Component {
-  componentDidMount() {}
-
-  render() {
-    const { match, selectedCatItems } = this.props;
-    const currentPost = selectedCatItems[match.params.postId];
-    return (
-      <Container maxWidth="lg">
-        <PostPaper
-          header={currentPost.name}
-          created={currentPost.created}
-          body={currentPost.description}
-          categoryId={match.params.id}
-        />
-      </Container>
-    );
-  }
+export function Post(props) {
+  const { match, selectedCatItems } = props;
+  const currentPost = selectedCatItems[match.params.postId];
+  return (
+    <Container maxWidth="lg">
+      <PostPaper
+        header={currentPost.name}
+        created={currentPost.created}
+        body={currentPost.description}
+        categoryId={match.params.id}
+      />
+    </Container>
+  );
 }
 
 Post.propTypes = {

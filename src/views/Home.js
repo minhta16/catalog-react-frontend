@@ -9,9 +9,7 @@ import 'App.css';
 import { fetchCategories as fetchCategoriesRedux } from 'references/redux/actions/categories';
 import { fetchPosts as fetchPostsRedux } from 'references/redux/actions/posts';
 
-class Home extends Component {
-  state = {};
-
+export class Home extends Component {
   componentDidMount() {
     const { fetchCategories, match, fetchPosts } = this.props;
     fetchCategories();
@@ -63,6 +61,7 @@ const mapDispatchToProps = dispatch => ({
   fetchCategories: () => dispatch(fetchCategoriesRedux()),
   fetchPosts: id => dispatch(fetchPostsRedux(id)),
 });
+
 
 export default connect(
   mapStateToProps,
