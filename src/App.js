@@ -20,22 +20,22 @@ const theme = createMuiTheme({
 });
 
 const routing = (
-  <Router>
-    <Switch>
-      {routes.map(route => (
-        <Route key={route} exact={route.exact} path={route.path} component={route.view} />
-      ))}
-    </Switch>
-  </Router>
+  <Switch>
+    {routes.map(route => (
+      <Route key={route} exact={route.exact} path={route.path} component={route.view} />
+    ))}
+  </Switch>
 );
 
 const App = () => (
   <Provider store={store}>
     <MuiThemeProvider theme={theme}>
-      <CssBaseline />
-      <CustomAppBar color="secondary" />
-      <Toolbar style={{ minHeight: '6em' }} />
-      <div className="App">{routing}</div>
+      <Router>
+        <CssBaseline />
+        <CustomAppBar color="secondary" />
+        <Toolbar style={{ minHeight: '6em' }} />
+        <div className="App">{routing}</div>
+      </Router>
     </MuiThemeProvider>
   </Provider>
 );

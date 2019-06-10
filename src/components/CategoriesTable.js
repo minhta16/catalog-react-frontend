@@ -61,10 +61,14 @@ class CategoriesTable extends Component {
 }
 
 CategoriesTable.propTypes = {
-  selectedCatId: PropTypes.string.isRequired,
-  categories: PropTypes.shape.isRequired,
-  selectedCatItems: PropTypes.shape.isRequired,
+  selectedCatId: PropTypes.string,
+  categories: PropTypes.object.isRequired,
+  selectedCatItems: PropTypes.object.isRequired,
   fetchPosts: PropTypes.func.isRequired,
+};
+
+CategoriesTable.defaultProps = {
+  selectedCatId: '',
 };
 
 export default CategoriesTable;

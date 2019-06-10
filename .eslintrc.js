@@ -19,6 +19,7 @@ module.exports = {
   plugins: ['react'],
   rules: {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'react/forbid-prop-types': 0,
   },
   settings: {
     'import/resolver': {

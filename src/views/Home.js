@@ -41,11 +41,17 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-  match: PropTypes.shape.isRequired,
-  categories: PropTypes.shape.isRequired,
+  match: PropTypes.object,
+  categories: PropTypes.object,
   fetchCategories: PropTypes.func.isRequired,
   fetchPosts: PropTypes.func.isRequired,
-  selectedCatItems: PropTypes.shape.isRequired,
+  selectedCatItems: PropTypes.object,
+};
+
+Home.defaultProps = {
+  match: {},
+  categories: {},
+  selectedCatItems: {},
 };
 
 const mapStateToProps = state => ({

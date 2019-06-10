@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/CategoriesTable should render correctly 1`] = `
+<WithStyles(ForwardRef(Paper))>
+  <WithStyles(ForwardRef(Grid))
+    container={true}
+    spacing={2}
+  >
+    <WithStyles(ForwardRef(Grid))
+      className="vertical-divider"
+      item={true}
+      xs={3}
+    >
+      <WithStyles(ForwardRef(Typography))
+        className="mainmenu-categories-header"
+        variant="h4"
+      >
+        Categories
+      </WithStyles(ForwardRef(Typography))>
+      <ForwardRef(MenuList)>
+        <WithStyles(ForwardRef(MenuItem))
+          component={[Function]}
+          key="1"
+          onClick={[Function]}
+          selected={true}
+          to="/1"
+        >
+          testName
+        </WithStyles(ForwardRef(MenuItem))>
+      </ForwardRef(MenuList)>
+    </WithStyles(ForwardRef(Grid))>
+    <WithStyles(ForwardRef(Grid))
+      item={true}
+      xs={9}
+    >
+      <WithStyles(ForwardRef(Typography))
+        className="left-margin"
+        variant="h4"
+      >
+        testName
+      </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Divider))
+        variant="middle"
+      />
+      <ForwardRef(MenuList) />
+    </WithStyles(ForwardRef(Grid))>
+  </WithStyles(ForwardRef(Grid))>
+</WithStyles(ForwardRef(Paper))>
+`;

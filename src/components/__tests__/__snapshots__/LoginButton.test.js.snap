@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/LoginButton should render correctly 1`] = `
+<WithStyles(ForwardRef(Button))>
+  Login
+</WithStyles(ForwardRef(Button))>
+`;
