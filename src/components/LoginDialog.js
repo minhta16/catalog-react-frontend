@@ -18,9 +18,10 @@ export class LoginDialog extends Component {
   };
 
   onClickSubmit = () => {
-    const { onClick } = this.props;
+    const { onClick, onClose } = this.props;
     const { username, password } = this.state;
     onClick(username, password);
+    onClose();
   };
 
   handleChange = (e) => {
@@ -64,8 +65,12 @@ export class LoginDialog extends Component {
           </Link>
         </DialogContent>
         <DialogActions>
-          <Button onClick={this.onClickSubmit}>Login</Button>
-          <Button onClick={onClose}>Cancel</Button>
+          <Button id="login-dialog-login" onClick={this.onClickSubmit}>
+            Login
+          </Button>
+          <Button id="login-dialog-close" onClick={onClose}>
+            Cancel
+          </Button>
         </DialogActions>
       </Dialog>
     );

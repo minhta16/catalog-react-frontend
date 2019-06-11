@@ -20,6 +20,7 @@ class CategoriesTable extends Component {
             <MenuList>
               {Object.keys(categories).map((key) => (
                 <MenuItem
+                  className="categoryMenuItem"
                   key={key}
                   selected={selectedCatId === key}
                   component={Link}
@@ -39,12 +40,17 @@ class CategoriesTable extends Component {
             <MenuList>
               {selectedCatId ? (
                 Object.keys(selectedCatItems).map((key) => (
-                  <MenuItem key={key} component={Link} to={`/${selectedCatId}/${key}`}>
+                  <MenuItem
+                    className="itemsMenuItem"
+                    key={key}
+                    component={Link}
+                    to={`/${selectedCatId}/${key}`}
+                  >
                     {selectedCatItems[key].name}
                   </MenuItem>
                 ))
               ) : (
-                <Typography variant="body1">
+                <Typography className="itemTypography" variant="body1">
                   Please select a category on the left to view its items.
                 </Typography>
               )}

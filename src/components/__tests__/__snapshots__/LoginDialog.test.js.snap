@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/LoginDialog should render correctly 1`] = `
+<WithStyles(ForwardRef(Dialog))
+  onClose={[MockFunction]}
+  open={true}
+>
+  <WithStyles(ForwardRef(DialogTitle))>
+    Login
+  </WithStyles(ForwardRef(DialogTitle))>
+  <WithStyles(ForwardRef(DialogContent))>
+    <form
+      autoComplete="off"
+    >
+      <WithStyles(ForwardRef(TextField))
+        fullWidth={true}
+        id="username"
+        label="Username"
+        margin="normal"
+        onChange={[Function]}
+        required={true}
+        value=""
+        variant="outlined"
+      />
+      <WithStyles(ForwardRef(TextField))
+        fullWidth={true}
+        id="password"
+        label="Password"
+        margin="normal"
+        onChange={[Function]}
+        required={true}
+        type="password"
+        value=""
+        variant="outlined"
+      />
+    </form>
+    <WithStyles(ForwardRef(Link))
+      component={[Function]}
+      exact="true"
+      onClick={[MockFunction]}
+      to="/register"
+    >
+      Haven’t got an account yet? Register here!
+    </WithStyles(ForwardRef(Link))>
+  </WithStyles(ForwardRef(DialogContent))>
+  <WithStyles(ForwardRef(DialogActions))>
+    <WithStyles(ForwardRef(Button))
+      id="login-dialog-login"
+      onClick={[Function]}
+    >
+      Login
+    </WithStyles(ForwardRef(Button))>
+    <WithStyles(ForwardRef(Button))
+      id="login-dialog-close"
+      onClick={[MockFunction]}
+    >
+      Cancel
+    </WithStyles(ForwardRef(Button))>
+  </WithStyles(ForwardRef(DialogActions))>
+</WithStyles(ForwardRef(Dialog))>
+`;

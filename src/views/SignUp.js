@@ -35,7 +35,7 @@ export class SignUp extends Component {
 
   render() {
     const { username, name, email, password, confirmPassword, openTerms } = this.state;
-
+    const termsText = 'By clicking Resgister, you agree with our ';
     return (
       <Container maxWidth="lg">
         <Paper style={{ padding: '1em' }}>
@@ -94,8 +94,7 @@ export class SignUp extends Component {
               variant="outlined"
             />
             <Typography variant="subtitle2">
-              By clicking Resgister, you agree with our
-              {' '}
+              {termsText}
               <Link onClick={this.handleTermsClick}>Terms and Conditions</Link>
             </Typography>
             <Button variant="contained" color="primary" onClick={this.register}>

@@ -51,7 +51,7 @@ describe('components/CategoriesTable', () => {
     expect(fetchPosts).toBeCalled();
   });
 
-  it('should display items category is clicked', () => {
+  it('should display items if selectedCatId is provided', () => {
     props.selectedCatItems = {
       1: {
         name: 'hihi',
@@ -60,7 +60,22 @@ describe('components/CategoriesTable', () => {
         name: 'hihi',
       },
     };
+    props.selectedCatId = '1';
     setup();
-    expect(wrapper.find(MenuItem).length).toBe(3);
+    expect(wrapper.find('.itemsMenuItem').length).toBe(2);
+  });
+
+  it('should display a Typography if selectedCatId is not provided', () => {
+    props.selectedCatItems = {
+      1: {
+        name: 'hihi',
+      },
+      2: {
+        name: 'hihi',
+      },
+    };
+    props.selectedCatId = '';
+    setup();
+    expect(wrapper.find('.itemTypography').length).toBe(1);
   });
 });

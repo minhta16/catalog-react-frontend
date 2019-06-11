@@ -4,7 +4,8 @@ import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { signIn as signInRedux, selectCurrentUser } from 'references/redux/actions/users';
+import { signIn as signInRedux } from 'references/redux/actions/users';
+import { selectCurrentUser } from 'references/redux/selectors/users';
 import LoginButton from './LoginButton';
 import LoginDialog from './LoginDialog';
 
@@ -57,11 +58,9 @@ export const mapSelectorToProps = (state) => ({
   currentUser: selectCurrentUser(state),
 });
 
-export const mapDispatchToProps = (dispatch) => ({
-  signIn: (username, password) => {
-    dispatch(signInRedux(username, password));
-  },
-});
+export const mapDispatchToProps = {
+  signIn: signInRedux,
+};
 
 export default connect(
   mapSelectorToProps,

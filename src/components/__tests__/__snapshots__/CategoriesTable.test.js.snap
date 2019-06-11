@@ -19,6 +19,7 @@ exports[`components/CategoriesTable should render correctly 1`] = `
       </WithStyles(ForwardRef(Typography))>
       <ForwardRef(MenuList)>
         <WithStyles(ForwardRef(MenuItem))
+          className="categoryMenuItem"
           component={[Function]}
           key="1"
           onClick={[Function]}
