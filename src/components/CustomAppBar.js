@@ -32,7 +32,7 @@ export class CustomAppBar extends Component {
             <img src="/img/logo.svg" alt="site logo" />
           </IconButton>
           <Typography style={{ flexGrow: '1' }} />
-          <LoginButton currentUser={currentUser} onClick={this.handleLoginClick} />
+          <LoginButton variant="contained" color="primary" currentUser={currentUser} onClick={this.handleLoginClick} />
           <LoginDialog open={open} onClose={this.handleLoginClick} onClick={signIn} />
         </Toolbar>
       </AppBar>

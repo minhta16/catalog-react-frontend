@@ -7,13 +7,24 @@ export class LoginButton extends Component {
   state = {};
 
   render() {
-    const { onClick } = this.props;
-    return <Button onClick={onClick}>Login</Button>;
+    const { onClick, variant, color } = this.props;
+    return (
+      <Button onClick={onClick} variant={variant} color={color}>
+        Login
+      </Button>
+    );
   }
 }
 
 LoginButton.propTypes = {
   onClick: PropTypes.func.isRequired,
+  variant: PropTypes.string,
+  color: PropTypes.string,
+};
+
+LoginButton.defaultProps = {
+  variant: 'contained',
+  color: 'primary',
 };
 
 export default LoginButton;

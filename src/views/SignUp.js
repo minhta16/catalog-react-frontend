@@ -73,7 +73,9 @@ export class SignUp extends Component {
             <Typography variant="subtitle2">
               By clicking Resgister, you agree with our Terms of Condition.
             </Typography>
-            <Button variant="contained">Register</Button>
+            <Button variant="contained" color="primary">
+              Register
+            </Button>
           </form>
         </Paper>
       </Container>
