@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { fetchApiCategories, fetchApiItems } from '../apiCalls';
+import { fetchApiCategories, fetchApiItems, createUserAndSigninApi, signInApi } from '../apiCalls';
 
 describe('scripts/apiCalls', () => {
   beforeEach(() => {
@@ -65,5 +65,31 @@ describe('scripts/apiCalls', () => {
     expect(fetch.mock.calls[0][0]).toBe(
       `${process.env.REACT_APP_API_PATH}/categories/1/items?offset=0&limit=100`,
     );
+  });
+
+  it('should call signInApi correctly', () => {
+    fetch.mockResponse(
+      JSON.stringify({
+        access_token: 'abc',
+      }),
+    );
+    signInApi('meo', 'meo').then((res) => {
+      expect(res).toBe('abc');
+    });
+    expect(fetch.mock.calls.length).toBe(1);
+    expect(fetch.mock.calls[0][0]).toBe(`${process.env.REACT_APP_API_PATH}/auth`);
+  });
+
+  it('should call createUserAndSigninApi correctly', () => {
+    fetch.mockResponse(
+      JSON.stringify({
+        access_token: 'abc',
+      }),
+    );
+    createUserAndSigninApi('meo', 'meo', 'meo', 'meo').then((res) => {
+      expect(res).toBe('abc');
+    });
+    expect(fetch.mock.calls.length).toBe(1);
+    expect(fetch.mock.calls[0][0]).toBe(`${process.env.REACT_APP_API_PATH}/users`);
   });
 });

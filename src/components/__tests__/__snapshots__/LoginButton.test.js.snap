@@ -3,6 +3,7 @@
 exports[`components/LoginButton should render correctly 1`] = `
 <WithStyles(ForwardRef(Button))
   color="primary"
+  onClick={[MockFunction]}
   variant="contained"
 >
   Login

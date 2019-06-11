@@ -4,7 +4,7 @@ import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { signIn as signInRedux } from 'references/redux/actions/users';
+import { signIn as signInRedux, selectCurrentUser } from 'references/redux/actions/users';
 import LoginButton from './LoginButton';
 import LoginDialog from './LoginDialog';
 
@@ -53,17 +53,17 @@ CustomAppBar.defaultProps = {
   currentUser: { username: '', token: '' },
 };
 
-const mapStateToProps = (state) => ({
-  currentUser: state.currentUser,
+export const mapSelectorToProps = (state) => ({
+  currentUser: selectCurrentUser(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
+export const mapDispatchToProps = (dispatch) => ({
   signIn: (username, password) => {
     dispatch(signInRedux(username, password));
   },
 });
 
 export default connect(
-  mapStateToProps,
+  mapSelectorToProps,
   mapDispatchToProps,
 )(CustomAppBar);

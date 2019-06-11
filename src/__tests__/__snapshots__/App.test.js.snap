@@ -197,6 +197,7 @@ exports[`src/App should render App without crashing 1`] = `
           },
           "fontFamily": "\\"Roboto\\", \\"Helvetica\\", \\"Arial\\", sans-serif",
           "fontSize": 14,
+          "fontWeightBold": 700,
           "fontWeightLight": 300,
           "fontWeightMedium": 500,
           "fontWeightRegular": 400,

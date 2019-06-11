@@ -24,6 +24,7 @@ describe('components/CategoriesTable', () => {
   beforeEach(() => {
     props = {
       selectedCatId: '1',
+      onClick: jest.fn(),
       categories: {
         1: {
           created: '2019',
@@ -46,7 +47,7 @@ describe('components/CategoriesTable', () => {
   it('should call fetchPosts when a category is clicked', () => {
     setup();
     const { fetchPosts } = props;
-    wrapper.findWhere(node => node.key() === '1').simulate('click');
+    wrapper.findWhere((node) => node.key() === '1').simulate('click');
     expect(fetchPosts).toBeCalled();
   });
 

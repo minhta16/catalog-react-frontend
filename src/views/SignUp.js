@@ -22,10 +22,11 @@ export class SignUp extends Component {
     });
   };
 
-  register = () => {
-    const { username, name, email, password, confirmPassword } = this.state;
-    createUserAndSignin();
-  };
+  // register = () => {
+  //   const { username, name, email, password, confirmPassword } = this.state;
+  //   createUserAndSignin();
+  // };
+
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value,
@@ -93,7 +94,8 @@ export class SignUp extends Component {
               variant="outlined"
             />
             <Typography variant="subtitle2">
-              By clicking Resgister, you agree with our{' '}
+              By clicking Resgister, you agree with our
+              {' '}
               <Link onClick={this.handleTermsClick}>Terms and Conditions</Link>
             </Typography>
             <Button variant="contained" color="primary" onClick={this.register}>

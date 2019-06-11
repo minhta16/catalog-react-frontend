@@ -37,7 +37,7 @@ exports[`components/CustomAppBar should render correctly 1`] = `
       variant="contained"
     />
     <LoginDialog
-      onClick={[Function]}
+      onClick={[MockFunction]}
       onClose={[Function]}
       open={false}
     />

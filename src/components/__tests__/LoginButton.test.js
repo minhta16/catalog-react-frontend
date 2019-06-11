@@ -3,6 +3,7 @@ import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { configure, shallow } from 'enzyme';
 import LoginButton from 'components/LoginButton';
+import { JestEnvironment } from '@jest/environment';
 
 configure({ adapter: new Adapter() });
 
@@ -21,7 +22,9 @@ describe('components/LoginButton', () => {
   };
 
   beforeEach(() => {
-    props = {};
+    props = {
+      onClick: jest.fn(),
+    };
   });
 
   it('should render correctly', () => {

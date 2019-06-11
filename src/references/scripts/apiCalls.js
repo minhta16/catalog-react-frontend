@@ -79,48 +79,46 @@ export const createUserAndSigninApi = async (username, password, email, name) =>
     }),
   };
 
-  await fetch(`${process.env.REACT_APP_API_PATH}/users`, params)
-    .then((res) => res.json())
-    .then((data) => data.access_token)
+  const accessToken = await fetch(`${process.env.REACT_APP_API_PATH}/users`, params)
+    .then(() => signInApi(username, password))
     .catch(console.log);
 
-  const accessToken = signInApi(username, password);
   return accessToken;
 };
 
-export const createApiCategories = (category, token) => {
-  const params = {
-    headers: {
-      Authorization: `JWT ${token}`,
-      'content-type': 'application/json',
-    },
-    body: category,
-    method: 'POST',
-  };
-  fetch(`${process.env.REACT_APP_API_PATH}/categories/`, params);
-};
+// export const createApiCategories = (category, token) => {
+//   const params = {
+//     headers: {
+//       Authorization: `JWT ${token}`,
+//       'content-type': 'application/json',
+//     },
+//     body: category,
+//     method: 'POST',
+//   };
+//   fetch(`${process.env.REACT_APP_API_PATH}/categories/`, params);
+// };
 
 // not working yet
-export const fetchApiUsers = async () => {
-  const params = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    method: 'GET',
-  };
+// export const fetchApiUsers = async () => {
+//   const params = {
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     method: 'GET',
+//   };
 
-  const fetchedItems = await fetch(
-    `${process.env.REACT_APP_API_PATH}/categories//items?offset=0&limit=100`,
-    params,
-  )
-    .then((res) => res.json())
-    .then((data) => {
-      let returnData = {};
-      data.items.forEach((item) => {
-        returnData = { ...returnData, [item.id]: item };
-      });
-      return returnData;
-    })
-    .catch(console.log);
-  return fetchedItems;
-};
+//   const fetchedItems = await fetch(
+//     `${process.env.REACT_APP_API_PATH}/categories//items?offset=0&limit=100`,
+//     params,
+//   )
+//     .then((res) => res.json())
+//     .then((data) => {
+//       let returnData = {};
+//       data.items.forEach((item) => {
+//         returnData = { ...returnData, [item.id]: item };
+//       });
+//       return returnData;
+//     })
+//     .catch(console.log);
+//   return fetchedItems;
+// };
