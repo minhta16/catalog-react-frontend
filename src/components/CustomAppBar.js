@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  AppBar, Toolbar, IconButton, Typography,
-} from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -32,7 +30,12 @@ export class CustomAppBar extends Component {
             <img src="/img/logo.svg" alt="site logo" />
           </IconButton>
           <Typography style={{ flexGrow: '1' }} />
-          <LoginButton variant="contained" color="primary" currentUser={currentUser} onClick={this.handleLoginClick} />
+          <LoginButton
+            variant="contained"
+            color="primary"
+            currentUser={currentUser}
+            onClick={this.handleLoginClick}
+          />
           <LoginDialog open={open} onClose={this.handleLoginClick} onClick={signIn} />
         </Toolbar>
       </AppBar>
@@ -50,11 +53,11 @@ CustomAppBar.defaultProps = {
   currentUser: { username: '', token: '' },
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   currentUser: state.currentUser,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   signIn: (username, password) => {
     dispatch(signInRedux(username, password));
   },

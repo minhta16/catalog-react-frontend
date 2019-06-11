@@ -1,4 +1,4 @@
-import { signInApi } from 'references/scripts/apiCalls';
+import { signInApi, createUserAndSigninApi } from 'references/scripts/apiCalls';
 import { FETCH_USERS, SIGN_IN } from './types';
 
 export const fetchUsers = () => (dispatch) => {
@@ -10,6 +10,19 @@ export const fetchUsers = () => (dispatch) => {
 
 export const signIn = (username, password) => (dispatch) => {
   signInApi(username, password).then((token) => {
+    const currentUser = {
+      username,
+      token,
+    };
+    dispatch({
+      type: SIGN_IN,
+      payload: currentUser,
+    });
+  });
+};
+
+export const createUserAndSignIn = (username, name, email, password) => (dispatch) => {
+  createUserAndSigninApi(username, name, email, password).then((token) => {
     const currentUser = {
       username,
       token,

@@ -19,12 +19,7 @@ export class Home extends Component {
   }
 
   render() {
-    const {
-      match,
-      categories,
-      selectedCatItems,
-      fetchPosts,
-    } = this.props;
+    const { match, categories, selectedCatItems, fetchPosts } = this.props;
     return (
       <Container maxWidth="lg">
         <CategoriesTable
@@ -52,16 +47,15 @@ Home.defaultProps = {
   selectedCatItems: {},
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   selectedCatItems: state.posts,
   categories: state.categories,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   fetchCategories: () => dispatch(fetchCategoriesRedux()),
-  fetchPosts: id => dispatch(fetchPostsRedux(id)),
+  fetchPosts: (id) => dispatch(fetchPostsRedux(id)),
 });
-
 
 export default connect(
   mapStateToProps,

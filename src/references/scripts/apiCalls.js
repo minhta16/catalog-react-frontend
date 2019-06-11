@@ -10,7 +10,7 @@ export const fetchApiCategories = async () => {
     `${process.env.REACT_APP_API_PATH}/categories?offset=0&limit=100`,
     params,
   )
-    .then(res => res.json())
+    .then((res) => res.json())
     .then((data) => {
       let returnData = {};
       data.categories.forEach((category) => {
@@ -34,7 +34,7 @@ export const fetchApiItems = async (categoryId) => {
     `${process.env.REACT_APP_API_PATH}/categories/${categoryId}/items?offset=0&limit=100`,
     params,
   )
-    .then(res => res.json())
+    .then((res) => res.json())
     .then((data) => {
       let returnData = {};
       data.items.forEach((item) => {
@@ -52,16 +52,39 @@ export const signInApi = async (username, password) => {
       'Content-Type': 'application/json',
     },
     method: 'POST',
-    body: {
+    body: JSON.stringify({
       username,
       password,
-    },
+    }),
   };
 
   const accessToken = await fetch(`${process.env.REACT_APP_API_PATH}/auth`, params)
-    .then(res => res.json())
-    .then(data => data.access_token)
+    .then((res) => res.json())
+    .then((data) => data.access_token)
     .catch(console.log);
+  return accessToken;
+};
+
+export const createUserAndSigninApi = async (username, password, email, name) => {
+  const params = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify({
+      username,
+      password,
+      email,
+      name,
+    }),
+  };
+
+  await fetch(`${process.env.REACT_APP_API_PATH}/users`, params)
+    .then((res) => res.json())
+    .then((data) => data.access_token)
+    .catch(console.log);
+
+  const accessToken = signInApi(username, password);
   return accessToken;
 };
 
@@ -90,7 +113,7 @@ export const fetchApiUsers = async () => {
     `${process.env.REACT_APP_API_PATH}/categories//items?offset=0&limit=100`,
     params,
   )
-    .then(res => res.json())
+    .then((res) => res.json())
     .then((data) => {
       let returnData = {};
       data.items.forEach((item) => {

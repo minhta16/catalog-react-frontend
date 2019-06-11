@@ -315,6 +315,20 @@ exports[`src/App should render App without crashing 1`] = `
                 "$$typeof": Symbol(react.memo),
                 "WrappedComponent": [Function],
                 "compare": null,
+                "displayName": "Connect(SignUp)",
+                "type": [Function],
+              }
+            }
+            exact={true}
+            key="[object Object]"
+            path="/register"
+          />
+          <Route
+            component={
+              Object {
+                "$$typeof": Symbol(react.memo),
+                "WrappedComponent": [Function],
+                "compare": null,
                 "displayName": "Connect(Home)",
                 "type": [Function],
               }

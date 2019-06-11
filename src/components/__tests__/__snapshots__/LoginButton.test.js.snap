@@ -1,7 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`components/LoginButton should render correctly 1`] = `
-<WithStyles(ForwardRef(Button))>
+<WithStyles(ForwardRef(Button))
+  color="primary"
+  variant="contained"
+>
   Login
 </WithStyles(ForwardRef(Button))>
 `;

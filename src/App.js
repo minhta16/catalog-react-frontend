@@ -21,7 +21,7 @@ const theme = createMuiTheme({
 
 const routing = (
   <Switch>
-    {routes.map(route => (
+    {routes.map((route) => (
       <Route key={route} exact={route.exact} path={route.path} component={route.view} />
     ))}
   </Switch>

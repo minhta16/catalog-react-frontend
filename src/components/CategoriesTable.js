@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Paper, Grid, MenuItem, MenuList, Typography, Divider,
-} from '@material-ui/core';
+import { Paper, Grid, MenuItem, MenuList, Typography, Divider } from '@material-ui/core';
 
 import { Link } from 'react-router-dom';
 
@@ -10,9 +8,7 @@ class CategoriesTable extends Component {
   state = {};
 
   render() {
-    const {
-      categories, selectedCatId, selectedCatItems, fetchPosts,
-    } = this.props;
+    const { categories, selectedCatId, selectedCatItems, fetchPosts } = this.props;
     const selectedCatName = categories[selectedCatId] ? categories[selectedCatId].name : '';
     return (
       <Paper>
@@ -22,7 +18,7 @@ class CategoriesTable extends Component {
               Categories
             </Typography>
             <MenuList>
-              {Object.keys(categories).map(key => (
+              {Object.keys(categories).map((key) => (
                 <MenuItem
                   key={key}
                   selected={selectedCatId === key}
@@ -42,7 +38,7 @@ class CategoriesTable extends Component {
             <Divider variant="middle" />
             <MenuList>
               {selectedCatId ? (
-                Object.keys(selectedCatItems).map(key => (
+                Object.keys(selectedCatItems).map((key) => (
                   <MenuItem key={key} component={Link} to={`/${selectedCatId}/${key}`}>
                     {selectedCatItems[key].name}
                   </MenuItem>

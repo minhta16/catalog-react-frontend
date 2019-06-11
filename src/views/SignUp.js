@@ -1,14 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from 'react';
-
-import {
-  TextField, Paper, Container, Typography, Button, Link,
-} from '@material-ui/core';
+import { connect } from 'react-redux';
+import { TextField, Paper, Container, Typography, Button, Link } from '@material-ui/core';
 import TermsAndConditionsDialog from 'components/TermsAndConditionsDialog';
+import { createUserAndSignIn as createUserAndSignInRedux } from 'references/redux/actions/users';
 
 export class SignUp extends Component {
   state = {
     username: '',
+    name: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -22,6 +22,10 @@ export class SignUp extends Component {
     });
   };
 
+  register = () => {
+    const { username, name, email, password, confirmPassword } = this.state;
+    createUserAndSignin();
+  };
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value,
@@ -29,9 +33,7 @@ export class SignUp extends Component {
   };
 
   render() {
-    const {
-      username, email, password, confirmPassword, openTerms,
-    } = this.state;
+    const { username, name, email, password, confirmPassword, openTerms } = this.state;
 
     return (
       <Container maxWidth="lg">
@@ -43,6 +45,16 @@ export class SignUp extends Component {
               id="username"
               label="Username"
               value={username}
+              onChange={this.handleChange}
+              margin="normal"
+              fullWidth
+              variant="outlined"
+            />
+            <TextField
+              required
+              id="name"
+              label="Name"
+              value={name}
               onChange={this.handleChange}
               margin="normal"
               fullWidth
@@ -81,11 +93,10 @@ export class SignUp extends Component {
               variant="outlined"
             />
             <Typography variant="subtitle2">
-              By clicking Resgister, you agree with our
-              {' '}
+              By clicking Resgister, you agree with our{' '}
               <Link onClick={this.handleTermsClick}>Terms and Conditions</Link>
             </Typography>
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={this.register}>
               Register
             </Button>
           </form>
@@ -96,4 +107,13 @@ export class SignUp extends Component {
   }
 }
 
-export default SignUp;
+const mapDispatchToProps = (dispatch) => ({
+  createUserAndSignin: (username, name, email, password) => {
+    dispatch(createUserAndSignInRedux(username, name, email, password));
+  },
+});
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(SignUp);

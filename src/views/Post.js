@@ -24,7 +24,7 @@ Post.propTypes = {
   selectedCatItems: PropTypes.shape.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   selectedCatItems: state.posts,
 });
 Post.propTypes = {};

@@ -25,6 +25,7 @@ exports[`components/CustomAppBar should render correctly 1`] = `
       }
     />
     <LoginButton
+      color="primary"
       currentUser={
         Object {
           "password": "minh",
@@ -32,6 +33,13 @@ exports[`components/CustomAppBar should render correctly 1`] = `
           "username": "minh",
         }
       }
+      onClick={[Function]}
+      variant="contained"
+    />
+    <LoginDialog
+      onClick={[Function]}
+      onClose={[Function]}
+      open={false}
     />
   </WithStyles(ForwardRef(Toolbar))>
 </WithStyles(ForwardRef(AppBar))>

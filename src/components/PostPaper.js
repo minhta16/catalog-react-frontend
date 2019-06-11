@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Typography, Divider, Paper, Button,
-} from '@material-ui/core';
+import { Typography, Divider, Paper, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 export function PostPaper(props) {
