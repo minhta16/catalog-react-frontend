@@ -1,8 +1,10 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from 'react';
 
 import {
-  TextField, Paper, Container, Typography, Button,
+  TextField, Paper, Container, Typography, Button, Link,
 } from '@material-ui/core';
+import TermsAndConditionsDialog from 'components/TermsAndConditionsDialog';
 
 export class SignUp extends Component {
   state = {
@@ -10,6 +12,14 @@ export class SignUp extends Component {
     email: '',
     password: '',
     confirmPassword: '',
+    openTerms: false,
+  };
+
+  handleTermsClick = () => {
+    const { openTerms } = this.state;
+    this.setState({
+      openTerms: !openTerms,
+    });
   };
 
   handleChange = (e) => {
@@ -20,7 +30,7 @@ export class SignUp extends Component {
 
   render() {
     const {
-      username, email, password, confirmPassword,
+      username, email, password, confirmPassword, openTerms,
     } = this.state;
 
     return (
@@ -71,12 +81,15 @@ export class SignUp extends Component {
               variant="outlined"
             />
             <Typography variant="subtitle2">
-              By clicking Resgister, you agree with our Terms of Condition.
+              By clicking Resgister, you agree with our
+              {' '}
+              <Link onClick={this.handleTermsClick}>Terms and Conditions</Link>
             </Typography>
             <Button variant="contained" color="primary">
               Register
             </Button>
           </form>
+          <TermsAndConditionsDialog open={openTerms} onClose={this.handleTermsClick} />
         </Paper>
       </Container>
     );

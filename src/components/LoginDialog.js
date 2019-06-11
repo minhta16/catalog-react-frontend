@@ -59,7 +59,7 @@ export class LoginDialog extends Component {
               variant="outlined"
             />
           </form>
-          <Link component={RouterLink} exact="true" to="/register">
+          <Link onClick={onClose} component={RouterLink} exact="true" to="/register">
             Haven’t got an account yet? Register here!
           </Link>
         </DialogContent>
