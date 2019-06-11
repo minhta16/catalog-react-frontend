@@ -8,6 +8,8 @@ import 'App.css';
 
 import { fetchCategories as fetchCategoriesRedux } from 'references/redux/actions/categories';
 import { fetchPosts as fetchPostsRedux } from 'references/redux/actions/posts';
+import { selectAllPosts } from 'references/redux/selectors/posts';
+import { selectCategories, selectCategory } from 'references/redux/selectors/categories';
 
 export class Home extends Component {
   componentDidMount() {
@@ -19,12 +21,13 @@ export class Home extends Component {
   }
 
   render() {
-    const { match, categories, selectedCatItems, fetchPosts } = this.props;
+    const { match, categories, selectedCatItems, fetchPosts, selectedCategory } = this.props;
     return (
       <Container maxWidth="lg">
         <CategoriesTable
           categories={categories}
           selectedCatId={match.params.id}
+          selectedCat={selectedCategory}
           selectedCatItems={selectedCatItems}
           fetchPosts={fetchPosts}
         />
@@ -35,21 +38,24 @@ export class Home extends Component {
 
 Home.propTypes = {
   match: PropTypes.object,
-  categories: PropTypes.object,
+  categories: PropTypes.array,
   fetchCategories: PropTypes.func.isRequired,
   fetchPosts: PropTypes.func.isRequired,
-  selectedCatItems: PropTypes.object,
+  selectedCatItems: PropTypes.array,
+  selectedCategory: PropTypes.object,
 };
 
 Home.defaultProps = {
   match: {},
   categories: {},
   selectedCatItems: {},
+  selectedCategory: {},
 };
 
-const mapStateToProps = (state) => ({
-  selectedCatItems: state.posts,
-  categories: state.categories,
+const mapSelectorToProps = (state, ownProps) => ({
+  selectedCatItems: selectAllPosts(state),
+  categories: selectCategories(state),
+  selectedCategory: selectCategory(state, ownProps.match.params.id),
 });
 
 const mapDispatchToProps = {
@@ -58,6 +64,6 @@ const mapDispatchToProps = {
 };
 
 export default connect(
-  mapStateToProps,
+  mapSelectorToProps,
   mapDispatchToProps,
 )(Home);

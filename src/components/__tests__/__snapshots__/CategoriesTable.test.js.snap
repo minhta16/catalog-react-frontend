@@ -36,6 +36,7 @@ exports[`components/CategoriesTable should render correctly 1`] = `
     >
       <WithStyles(ForwardRef(Typography))
         className="left-margin"
+        id="categories-table-name-typo"
         variant="h4"
       >
         testName

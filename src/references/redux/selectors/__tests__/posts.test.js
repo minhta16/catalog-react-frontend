@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { selectPost } from '../posts';
+import { selectPost, selectAllPosts } from '../posts';
 
 describe('selectors/posts', () => {
   let state;
@@ -21,5 +21,10 @@ describe('selectors/posts', () => {
   it('should select the correct post', () => {
     const post = { name: 'yo', id: '1' };
     expect(selectPost(state, 1)).toMatchObject(post);
+  });
+
+  it('should select all correct posts', () => {
+    const posts = [{ name: 'yo', id: '1' }, { name: 'bro', id: '2' }];
+    expect(selectAllPosts(state)).toMatchObject(posts);
   });
 });

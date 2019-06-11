@@ -8,8 +8,8 @@ class CategoriesTable extends Component {
   state = {};
 
   render() {
-    const { categories, selectedCatId, selectedCatItems, fetchPosts } = this.props;
-    const selectedCatName = categories[selectedCatId] ? categories[selectedCatId].name : '';
+    const { categories, selectedCatId, selectedCatItems, fetchPosts, selectedCat } = this.props;
+    const selectedCatName = selectedCat ? selectedCat.name : '';
     return (
       <Paper>
         <Grid container spacing={2}>
@@ -18,35 +18,35 @@ class CategoriesTable extends Component {
               Categories
             </Typography>
             <MenuList>
-              {Object.keys(categories).map((key) => (
+              {categories.map((category) => (
                 <MenuItem
                   className="categoryMenuItem"
-                  key={key}
-                  selected={selectedCatId === key}
+                  key={category.id}
+                  selected={selectedCatId === category.id}
                   component={Link}
-                  to={`/${key}`}
-                  onClick={() => fetchPosts(key)}
+                  to={`/${category.id}`}
+                  onClick={() => fetchPosts(category.id)}
                 >
-                  {categories[key].name}
+                  {category.name}
                 </MenuItem>
               ))}
             </MenuList>
           </Grid>
           <Grid item xs={9}>
-            <Typography className="left-margin" variant="h4">
+            <Typography id="categories-table-name-typo" className="left-margin" variant="h4">
               {selectedCatId ? selectedCatName : 'Choose a category'}
             </Typography>
             <Divider variant="middle" />
             <MenuList>
               {selectedCatId ? (
-                Object.keys(selectedCatItems).map((key) => (
+                selectedCatItems.map((item) => (
                   <MenuItem
                     className="itemsMenuItem"
-                    key={key}
+                    key={item.name}
                     component={Link}
-                    to={`/${selectedCatId}/${key}`}
+                    to={`/${selectedCatId}/${item.id}`}
                   >
-                    {selectedCatItems[key].name}
+                    {item.name}
                   </MenuItem>
                 ))
               ) : (
@@ -64,9 +64,10 @@ class CategoriesTable extends Component {
 
 CategoriesTable.propTypes = {
   selectedCatId: PropTypes.string,
-  categories: PropTypes.object.isRequired,
-  selectedCatItems: PropTypes.object.isRequired,
+  categories: PropTypes.array.isRequired,
+  selectedCatItems: PropTypes.array.isRequired,
   fetchPosts: PropTypes.func.isRequired,
+  selectedCat: PropTypes.object.isRequired,
 };
 
 CategoriesTable.defaultProps = {

@@ -26,16 +26,16 @@ describe('views/Home', () => {
         },
       },
       fetchPosts: jest.fn(),
-      categories: {
-        1: {
+      categories: [
+        {
           created: '2019',
           updated: '2019',
           description: 'testDesc',
           name: 'testName',
           id: '1',
         },
-      },
-      selectedCatItems: {},
+      ],
+      selectedCatItems: [],
     };
   });
 
