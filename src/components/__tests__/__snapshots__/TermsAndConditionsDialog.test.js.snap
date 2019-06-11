@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/TermsAndConditionsDialog should render correctly 1`] = `
+<WithStyles(ForwardRef(Dialog))
+  onClose={[MockFunction]}
+  open={true}
+>
+  <WithStyles(ForwardRef(DialogTitle))>
+    Terms and Conditions
+  </WithStyles(ForwardRef(DialogTitle))>
+  <WithStyles(ForwardRef(DialogContent))
+    dividers={true}
+  >
+    <WithStyles(ForwardRef(DialogContentText))>
+      Cras mattis consectetur purus sit amet fermentum.
+  Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+  Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+  Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+    </WithStyles(ForwardRef(DialogContentText))>
+  </WithStyles(ForwardRef(DialogContent))>
+  <WithStyles(ForwardRef(DialogActions))>
+    <WithStyles(ForwardRef(Button))
+      onClick={[MockFunction]}
+    >
+      Got it!
+    </WithStyles(ForwardRef(Button))>
+  </WithStyles(ForwardRef(DialogActions))>
+</WithStyles(ForwardRef(Dialog))>
+`;

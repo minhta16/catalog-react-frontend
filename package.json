@@ -108,7 +108,8 @@
       "src/**/*.{js,jsx,ts,tsx}",
       "!src/**/*.d.ts",
       "!**/examples/**",
-      "!src/serviceWorker.js"
+      "!src/serviceWorker.js",
+      "!src/index.js"
     ],
     "setupFilesAfterEnv": [
       "<rootDir>/src/setupTests.js"

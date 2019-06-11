@@ -20,10 +20,10 @@ export const signIn = (username, password) => (dispatch) =>
   });
 
 export const createUserAndSignIn = (username, name, email, password) => (dispatch) =>
-  createUserAndSigninApi(username, name, email, password).then((token) => {
+  createUserAndSigninApi(username, name, email, password).then((data) => {
     const currentUser = {
       username,
-      token,
+      token: data.access_token,
     };
     return dispatch({
       type: SIGN_IN,

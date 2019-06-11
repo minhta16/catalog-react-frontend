@@ -12,20 +12,15 @@ import {
 
 export function TermsAndConditionsDialog(props) {
   const { open, onClose } = props;
+  const terms = `Cras mattis consectetur purus sit amet fermentum.
+  Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+  Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+  Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`;
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Terms and Conditions</DialogTitle>
       <DialogContent dividers>
-        <DialogContentText>
-          {[...new Array(50)]
-            .map(
-              () => `Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
-            )
-            .join('\n')}
-        </DialogContentText>
+        <DialogContentText>{terms}</DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>Got it!</Button>

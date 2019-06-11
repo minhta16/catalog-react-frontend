@@ -62,3 +62,8 @@ export const signInApi = (username, password) =>
   new Promise((resolve) => {
     process.nextTick(() => resolve(responseToken));
   });
+
+export const createUserAndSigninApi = (username, name, email, password) =>
+  new Promise((resolve) => {
+    process.nextTick(() => resolve(responseToken));
+  });

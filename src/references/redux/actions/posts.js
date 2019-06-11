@@ -9,9 +9,8 @@ export const fetchPosts = (id) => (dispatch) =>
     }),
   );
 
-export const addPost = (post) => (dispatch) => {
+export const addPost = (post) => (dispatch) =>
   dispatch({
     type: ADD_POST,
     payload: post,
   });
-};

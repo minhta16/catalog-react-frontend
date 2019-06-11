@@ -1,7 +1,7 @@
 export const selectCategories = (state) => {
   let categories = [];
-  Object.keys(state).forEach((key) => {
-    categories = [...categories, state[key]];
+  Object.keys(state.categories).forEach((key) => {
+    categories = [...categories, state.categories[key]];
   });
   return categories;
 };

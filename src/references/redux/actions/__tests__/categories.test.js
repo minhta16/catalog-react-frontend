@@ -13,8 +13,8 @@ jest.mock('references/scripts/apiCalls');
 describe('actions/categories', () => {
   const store = mockStore({});
 
-  it('should create FETCH_CATEGORIES when done fetching', () => {
-    store.dispatch(fetchCategories()).then(() => {
+  it('should create FETCH_CATEGORIES when done fetching', async () => {
+    await store.dispatch(fetchCategories()).then(() => {
       const actions = store.getActions();
       expect(actions[0]).toEqual({
         type: FETCH_CATEGORIES,
