@@ -10,14 +10,13 @@ export const fetchUsers = () => (dispatch) => {
 
 export const signIn = (username, password) => (dispatch) => {
   signInApi(username, password).then((token) => {
-    const user = {
+    const currentUser = {
       username,
-      password,
       token,
     };
     dispatch({
-      action: SIGN_IN,
-      payload: user,
+      type: SIGN_IN,
+      payload: currentUser,
     });
   });
 };
