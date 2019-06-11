@@ -52,10 +52,10 @@ const mapStateToProps = (state) => ({
   categories: state.categories,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchCategories: () => dispatch(fetchCategoriesRedux()),
-  fetchPosts: (id) => dispatch(fetchPostsRedux(id)),
-});
+const mapDispatchToProps = {
+  fetchCategories: fetchCategoriesRedux,
+  fetchPosts: fetchPostsRedux,
+};
 
 export default connect(
   mapStateToProps,

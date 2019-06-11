@@ -95,7 +95,9 @@ export class SignUp extends Component {
             />
             <Typography variant="subtitle2">
               {termsText}
-              <Link onClick={this.handleTermsClick}>Terms and Conditions</Link>
+              <Link id="sign-up-terms-and-condition" onClick={this.handleTermsClick}>
+                Terms and Conditions
+              </Link>
             </Typography>
             <Button variant="contained" color="primary" onClick={this.register}>
               Register
@@ -108,11 +110,9 @@ export class SignUp extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  createUserAndSignin: (username, name, email, password) => {
-    dispatch(createUserAndSignInRedux(username, name, email, password));
-  },
-});
+const mapDispatchToProps = {
+  createUserAndSignin: createUserAndSignInRedux,
+};
 
 export default connect(
   null,

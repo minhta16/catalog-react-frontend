@@ -1,10 +1,7 @@
 /* eslint-disable no-undef */
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
-import { configure, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import { Home } from 'views/Home';
-
-configure({ adapter: new Adapter() });
 
 describe('views/Home', () => {
   let wrapper;
@@ -48,11 +45,6 @@ describe('views/Home', () => {
   });
 
   describe('When view mounts', () => {
-    it('should call fetchCategories', () => {
-      setup();
-      expect(props.fetchCategories).toHaveBeenCalled();
-    });
-
     it('should call fetchCategories', () => {
       setup();
       expect(props.fetchCategories).toHaveBeenCalled();
