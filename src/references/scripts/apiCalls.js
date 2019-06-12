@@ -58,11 +58,10 @@ export const signInApi = async (username, password) => {
     }),
   };
 
-  const accessToken = await fetch(`${process.env.REACT_APP_API_PATH}/auth`, params)
+  const userData = await fetch(`${process.env.REACT_APP_API_PATH}/auth`, params)
     .then((res) => res.json())
-    .then((data) => data.access_token)
     .catch(console.log);
-  return accessToken;
+  return userData;
 };
 
 export const createUserAndSigninApi = async (username, password, email, name) => {
@@ -79,11 +78,11 @@ export const createUserAndSigninApi = async (username, password, email, name) =>
     }),
   };
 
-  const accessToken = await fetch(`${process.env.REACT_APP_API_PATH}/users`, params)
+  const userData = await fetch(`${process.env.REACT_APP_API_PATH}/users`, params)
     .then(() => signInApi(username, password))
     .catch(console.log);
 
-  return accessToken;
+  return userData;
 };
 
 // export const createApiCategories = (category, token) => {

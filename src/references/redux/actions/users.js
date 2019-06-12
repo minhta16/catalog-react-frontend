@@ -11,7 +11,7 @@ export const signIn = (username, password) => (dispatch) =>
   signInApi(username, password).then((data) => {
     const currentUser = {
       username,
-      token: data,
+      token: data.access_token,
     };
     return dispatch({
       type: SIGN_IN,
@@ -28,7 +28,7 @@ export const createUserAndSignIn = (username, password, email, name) => (dispatc
   createUserAndSigninApi(username, password, email, name).then((data) => {
     const currentUser = {
       username,
-      token: data,
+      token: data.access_token,
     };
     return dispatch({
       type: SIGN_IN,
