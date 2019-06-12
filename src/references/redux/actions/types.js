@@ -6,3 +6,4 @@ export const SELECT_MAIN_MENU_CATEGORY = 'SELECT_MAIN_MENU_CATEGORY';
 export const FETCH_USERS = 'FETCH_USERS';
 export const FETCH_CURRENT_USER = 'FETCH_CURRENT_USER';
 export const SIGN_IN = 'SIGN_IN';
+export const SIGN_OUT = 'SIGN_OUT';

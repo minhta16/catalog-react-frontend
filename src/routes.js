@@ -1,6 +1,7 @@
 import Home from 'views/Home';
 import Post from 'views/Post';
 import SignUp from 'views/SignUp';
+import Profile from 'views/Profile';
 
 const routes = [
   {
@@ -11,6 +12,11 @@ const routes = [
   {
     path: '/register',
     view: SignUp,
+    exact: true,
+  },
+  {
+    path: '/profile',
+    view: Profile,
     exact: true,
   },
   {

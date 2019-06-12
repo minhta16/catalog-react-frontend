@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Redirect, Link } from 'react-router-dom';
 
 import { Button, Avatar, Menu, MenuItem, Grid, Typography } from '@material-ui/core';
+import PersonIcon from '@material-ui/icons/Person';
+import ExitIcon from '@material-ui/icons/ExitToApp';
 
 export class LoginButton extends Component {
   state = {
@@ -20,9 +23,16 @@ export class LoginButton extends Component {
     });
   };
 
+  handleSignOut = () => {
+    const { signOut } = this.props;
+    signOut();
+    this.handleCloseMenu();
+  };
+
   render() {
     const { onClick, variant, color, currentUser } = this.props;
     const { anchorEl } = this.state;
+
     const menu = (
       <Menu
         id="simple-menu"
@@ -34,8 +44,16 @@ export class LoginButton extends Component {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
         transformOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
-        <MenuItem onClick={this.handleCloseMenu}>Profile</MenuItem>
-        <MenuItem onClick={this.handleCloseMenu}>Logout</MenuItem>
+        <MenuItem component={Link} exact="true" to="/profile">
+          <Grid container alignItems="center">
+            <PersonIcon color="primary" style={{ margin: '0 0.5rem 0 0' }} />
+            <Typography variant="body1">Profile</Typography>
+          </Grid>
+        </MenuItem>
+        <MenuItem onClick={this.handleSignOut} component={Link} exact="true" to="/">
+          <ExitIcon color="primary" style={{ margin: '0 0.5rem 0 0' }} />
+          <Typography variant="body1">Logout</Typography>
+        </MenuItem>
       </Menu>
     );
     return (
@@ -66,6 +84,7 @@ LoginButton.propTypes = {
   variant: PropTypes.string,
   color: PropTypes.string,
   currentUser: PropTypes.object.isRequired,
+  signOut: PropTypes.func.isRequired,
 };
 
 LoginButton.defaultProps = {

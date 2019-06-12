@@ -1,4 +1,4 @@
-import { FETCH_USERS, SIGN_IN } from '../actions/types';
+import { FETCH_USERS, SIGN_IN, SIGN_OUT } from '../actions/types';
 
 export const usersReducer = (state = {}, action) => {
   switch (action.type) {
@@ -12,6 +12,8 @@ export const usersReducer = (state = {}, action) => {
 export const currentUserReducer = (state = {}, action) => {
   switch (action.type) {
     case SIGN_IN:
+      return action.payload;
+    case SIGN_OUT:
       return action.payload;
     default:
       return state;

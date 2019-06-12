@@ -4,7 +4,7 @@ import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { signIn as signInRedux } from 'references/redux/actions/users';
+import { signIn as signInRedux, signOut as signOutRedux } from 'references/redux/actions/users';
 import { selectCurrentUser } from 'references/redux/selectors/users';
 import LoginButton from './LoginButton';
 import LoginDialog from './LoginDialog';
@@ -23,7 +23,7 @@ export class CustomAppBar extends Component {
 
   render() {
     const { open } = this.state;
-    const { color, currentUser, signIn } = this.props;
+    const { color, currentUser, signIn, signOut } = this.props;
     return (
       <AppBar color={color}>
         <Toolbar>
@@ -37,6 +37,7 @@ export class CustomAppBar extends Component {
             color="primary"
             currentUser={currentUser}
             onClick={this.handleLoginClick}
+            signOut={signOut}
           />
           <LoginDialog open={open} onClose={this.handleLoginClick} onClick={signIn} />
         </Toolbar>
@@ -49,10 +50,11 @@ CustomAppBar.propTypes = {
   color: PropTypes.string.isRequired,
   currentUser: PropTypes.object,
   signIn: PropTypes.func.isRequired,
+  signOut: PropTypes.func.isRequired,
 };
 
 CustomAppBar.defaultProps = {
-  currentUser: { username: '', token: '' },
+  currentUser: {},
 };
 
 export const mapSelectorToProps = (state) => ({
@@ -61,6 +63,7 @@ export const mapSelectorToProps = (state) => ({
 
 export const mapDispatchToProps = {
   signIn: signInRedux,
+  signOut: signOutRedux,
 };
 
 export default connect(
