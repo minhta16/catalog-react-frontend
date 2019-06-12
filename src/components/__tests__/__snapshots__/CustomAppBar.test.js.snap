@@ -33,6 +33,7 @@ exports[`components/CustomAppBar should render correctly 1`] = `
           "username": "minh",
         }
       }
+      id="custom-app-bar-login-button"
       onClick={[Function]}
       variant="contained"
     />

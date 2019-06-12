@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 import { Container } from '@material-ui/core';
 import CategoriesTable from 'components/CategoriesTable';
-import 'App.css';
 
 import { fetchCategories as fetchCategoriesRedux } from 'references/redux/actions/categories';
 import { fetchPosts as fetchPostsRedux } from 'references/redux/actions/posts';

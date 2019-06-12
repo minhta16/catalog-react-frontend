@@ -1,11 +1,58 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`components/LoginButton should render correctly 1`] = `
-<WithStyles(ForwardRef(Button))
-  color="primary"
-  onClick={[MockFunction]}
-  variant="contained"
->
-  Login
-</WithStyles(ForwardRef(Button))>
+<div>
+  <WithStyles(ForwardRef(Grid))
+    alignItems="center"
+    container={true}
+  >
+    <WithStyles(ForwardRef(Typography))
+      variant="body1"
+    >
+      Welcome, yolo
+    </WithStyles(ForwardRef(Typography))>
+    <WithStyles(ForwardRef(Avatar))
+      onClick={[Function]}
+      style={
+        Object {
+          "backgroundColor": "#fdb600",
+          "color": "#fff",
+          "margin": "0.5rem",
+        }
+      }
+    >
+      y
+    </WithStyles(ForwardRef(Avatar))>
+    <WithStyles(ForwardRef(Menu))
+      anchorOrigin={
+        Object {
+          "horizontal": "center",
+          "vertical": "bottom",
+        }
+      }
+      getContentAnchorEl={null}
+      id="simple-menu"
+      keepMounted={true}
+      onClose={[Function]}
+      open={false}
+      transformOrigin={
+        Object {
+          "horizontal": "center",
+          "vertical": "top",
+        }
+      }
+    >
+      <WithStyles(ForwardRef(MenuItem))
+        onClick={[Function]}
+      >
+        Profile
+      </WithStyles(ForwardRef(MenuItem))>
+      <WithStyles(ForwardRef(MenuItem))
+        onClick={[Function]}
+      >
+        Logout
+      </WithStyles(ForwardRef(MenuItem))>
+    </WithStyles(ForwardRef(Menu))>
+  </WithStyles(ForwardRef(Grid))>
+</div>
 `;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Button, Avatar, Menu, MenuItem } from '@material-ui/core';
+import { Button, Avatar, Menu, MenuItem, Grid, Typography } from '@material-ui/core';
 
 export class LoginButton extends Component {
   state = {
@@ -41,14 +41,18 @@ export class LoginButton extends Component {
     return (
       <div>
         {Object.keys(currentUser).length ? (
-          <div>
-            <Avatar color={color} onClick={this.handleClickAvatar}>
+          <Grid container alignItems="center">
+            <Typography variant="body1">{`Welcome, ${currentUser.username}`}</Typography>
+            <Avatar
+              style={{ backgroundColor: '#fdb600', color: '#fff', margin: '0.5rem' }}
+              onClick={this.handleClickAvatar}
+            >
               {currentUser.username.charAt(0)}
             </Avatar>
             {menu}
-          </div>
+          </Grid>
         ) : (
-          <Button onClick={onClick} variant={variant} color={color}>
+          <Button id="login-button" onClick={onClick} variant={variant} color={color}>
             Login
           </Button>
         )}

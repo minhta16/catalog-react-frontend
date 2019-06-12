@@ -93,6 +93,16 @@ exports[`src/App should render App without crashing 1`] = `
             "A400": "#303030",
             "A700": "#616161",
           },
+          "overrides": Object {
+            "MuiAvatar": Object {
+              "colorDefault": Object {
+                "& *": Object {
+                  "backgroundColor": "#fdb600",
+                  "color": "#fff",
+                },
+              },
+            },
+          },
           "primary": Object {
             "contrastText": "#fff",
             "dark": "rgb(45, 18, 145)",

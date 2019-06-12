@@ -10,6 +10,11 @@ describe('components/CustomAppBar', () => {
   let props;
   // let warning;
 
+  const update = () => {
+    wrapper.update();
+    wrapper.instance().forceUpdate();
+  };
+
   const setup = () => {
     wrapper = shallow(<CustomAppBar {...props} />);
   };
@@ -33,12 +38,11 @@ describe('components/CustomAppBar', () => {
 
   it('should call handleLoginClick when LoginButton is clicked', () => {
     setup();
-    wrapper.setState({
-      open: false,
-    });
+    wrapper.instance().handleLoginClick = jest.fn();
+    update();
     const loginButton = wrapper.find(LoginButton);
     loginButton.simulate('click');
-    expect(wrapper.state().open).toBe(true);
+    expect(wrapper.instance().handleLoginClick).toHaveBeenCalled();
   });
 
   it('should call signIn when Dialog is clicked', () => {
@@ -47,5 +51,13 @@ describe('components/CustomAppBar', () => {
     const loginDialog = wrapper.find(LoginDialog);
     loginDialog.simulate('click');
     expect(signIn).toHaveBeenCalled();
+  });
+
+  it('should update state.open when handleLoginClick is called', () => {
+    setup();
+    const { open } = wrapper.state();
+    const loginButton = wrapper.find(LoginButton);
+    loginButton.simulate('click');
+    expect(wrapper.state().open).toBe(!open);
   });
 });

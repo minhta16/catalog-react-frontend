@@ -4,6 +4,7 @@ import { CssBaseline, Toolbar } from '@material-ui/core';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import CustomAppBar from 'components/CustomAppBar';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import 'App.css';
 
 import routes from 'routes';
 import store from 'references/redux/store';
@@ -15,6 +16,16 @@ const theme = createMuiTheme({
     },
     secondary: {
       main: '#fff',
+    },
+    overrides: {
+      MuiAvatar: {
+        colorDefault: {
+          '& *': {
+            backgroundColor: '#fdb600',
+            color: '#fff',
+          },
+        },
+      },
     },
   },
 });

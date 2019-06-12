@@ -32,6 +32,7 @@ export class CustomAppBar extends Component {
           </IconButton>
           <Typography style={{ flexGrow: '1' }} />
           <LoginButton
+            id="custom-app-bar-login-button"
             variant="contained"
             color="primary"
             currentUser={currentUser}

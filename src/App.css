@@ -18,3 +18,9 @@
   padding: 0.5em;
   text-align: left;
 }
+
+.avatar {
+  background-color: #fdb600;
+  color: #fff;
+  margin: 0.5rem;
+}
