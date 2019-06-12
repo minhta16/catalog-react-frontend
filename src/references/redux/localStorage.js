@@ -40,9 +40,23 @@ export const saveCategories = (categories) => {
   }
 };
 
-export const loadState = () => {
-  return {
-    currentUser: loadCurrentUser(),
-    categories: loadCategories(),
-  };
+export const loadPosts = () => {
+  try {
+    const serializedState = localStorage.getItem('posts');
+    if (serializedState === null) {
+      return undefined;
+    }
+    return JSON.parse(serializedState);
+  } catch (err) {
+    return undefined;
+  }
+};
+
+export const savePosts = (posts) => {
+  try {
+    const serializedState = JSON.stringify(posts);
+    localStorage.setItem('posts', serializedState);
+  } catch (err) {
+    console.log(err);
+  }
 };

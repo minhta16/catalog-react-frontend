@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import PostPaper from 'components/PostPaper';
 import { Container } from '@material-ui/core';
+import { selectPost } from 'references/redux/selectors/posts';
 
 export function Post(props) {
-  const { match, selectedCatItems } = props;
-  const currentPost = selectedCatItems[match.params.postId];
+  const { match, currentPost } = props;
   return (
     <Container maxWidth="lg">
       <PostPaper
@@ -21,11 +21,11 @@ export function Post(props) {
 
 Post.propTypes = {
   match: PropTypes.shape.isRequired,
-  selectedCatItems: PropTypes.shape.isRequired,
+  currentPost: PropTypes.shape.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  selectedCatItems: state.posts,
+const mapStateToProps = (state, ownProps) => ({
+  currentPost: selectPost(state, ownProps.match.params.postId),
 });
 Post.propTypes = {};
 
