@@ -65,7 +65,7 @@ export class LoginDialog extends Component {
           </Link>
         </DialogContent>
         <DialogActions>
-          <Button id="login-dialog-login" onClick={this.onClickSubmit}>
+          <Button id="login-dialog-login" onClick={this.onClickSubmit} color="primary">
             Login
           </Button>
           <Button id="login-dialog-close" onClick={onClose}>
