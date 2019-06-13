@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/PostItem should render correctly 1`] = `
+<WithStyles(ForwardRef(Grid))
+  container={true}
+  justify="space-between"
+  spacing={2}
+>
+  <WithStyles(ForwardRef(Grid))
+    item={true}
+  >
+    <WithStyles(ForwardRef(Grid))
+      container={true}
+      direction="column"
+    >
+      <WithStyles(ForwardRef(Link))
+        color="inherit"
+        component={[Function]}
+        exact="true"
+        to="/1/undefined"
+        underline="none"
+        variant="h4"
+      >
+        bro
+      </WithStyles(ForwardRef(Link))>
+      <WithStyles(ForwardRef(Typography))
+        variant="subtitle1"
+      >
+        Created: 2019
+      </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography))
+        variant="caption"
+      >
+        ...
+      </WithStyles(ForwardRef(Typography))>
+    </WithStyles(ForwardRef(Grid))>
+  </WithStyles(ForwardRef(Grid))>
+  <WithStyles(ForwardRef(Grid))
+    item={true}
+  >
+    <WithStyles(ForwardRef(Typography)) />
+    <WithStyles(ForwardRef(IconButton))
+      onClick={[Function]}
+    >
+      <MoreVertIcon />
+    </WithStyles(ForwardRef(IconButton))>
+  </WithStyles(ForwardRef(Grid))>
+  <WithStyles(ForwardRef(Menu))
+    anchorOrigin={
+      Object {
+        "horizontal": "right",
+        "vertical": "bottom",
+      }
+    }
+    getContentAnchorEl={null}
+    id="simple-menu"
+    keepMounted={true}
+    onClose={[Function]}
+    open={false}
+    transformOrigin={
+      Object {
+        "horizontal": "right",
+        "vertical": "top",
+      }
+    }
+  >
+    <WithStyles(ForwardRef(MenuItem))
+      component={[Function]}
+      exact="true"
+      onClick={[Function]}
+      to="/profile/1/undefined/edit"
+    >
+      <WithStyles(ForwardRef(Grid))
+        alignItems="center"
+        container={true}
+      >
+        <UpdateIcon
+          color="primary"
+          style={
+            Object {
+              "margin": "0 0.5rem 0 0",
+            }
+          }
+        />
+        <WithStyles(ForwardRef(Typography))
+          variant="body1"
+        >
+          Update
+        </WithStyles(ForwardRef(Typography))>
+      </WithStyles(ForwardRef(Grid))>
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem))
+      id="post-item-delete"
+      onClick={[Function]}
+    >
+      <DeleteIcon
+        style={
+          Object {
+            "color": "#f44336",
+            "margin": "0 0.5rem 0 0",
+          }
+        }
+      />
+      <WithStyles(ForwardRef(Typography))
+        variant="body1"
+      >
+        Delete
+      </WithStyles(ForwardRef(Typography))>
+    </WithStyles(ForwardRef(MenuItem))>
+  </WithStyles(ForwardRef(Menu))>
+  <ConfirmDialog
+    contentText="Are you sure you want to delete bro?"
+    onClose={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Delete"
+  />
+</WithStyles(ForwardRef(Grid))>
+`;

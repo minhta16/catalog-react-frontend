@@ -2,12 +2,12 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { CssBaseline, Toolbar } from '@material-ui/core';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
-import CustomAppBar from 'components/CustomAppBar';
+import CustomAppBar from 'components/Shared/CustomAppBar';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import 'App.css';
 
 import routes from 'routes';
-import store from 'references/redux/store';
+import store from 'store';
 
 const theme = createMuiTheme({
   palette: {

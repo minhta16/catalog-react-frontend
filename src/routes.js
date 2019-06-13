@@ -1,8 +1,8 @@
-import Home from 'views/Home';
-import Post from 'views/Post';
-import SignUp from 'views/SignUp';
-import Profile from 'views/Profile';
-import ModifyItem from 'views/ModifyItem';
+import Home from 'components/Home/Home';
+import Post from 'components/Post/Post';
+import SignUp from 'components/SignUp/SignUp';
+import Profile from 'components/Profile/Profile';
+import ModifyItem from 'components/ModifyItem/ModifyItem';
 
 const routes = [
   {
