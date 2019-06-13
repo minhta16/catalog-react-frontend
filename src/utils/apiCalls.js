@@ -111,3 +111,21 @@ export const fetchCurrentUserPostsApi = async (token) => {
     .catch(console.log);
   return fetchedItems;
 };
+
+export const deletePostApi = async (token, categoryId, postId) => {
+  const params = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `JWT ${token}`,
+    },
+    method: 'DELETE',
+  };
+
+  const message = await fetch(
+    `${process.env.REACT_APP_API_PATH}/categories/${categoryId}/items/${postId}`,
+    params,
+  )
+    .then((res) => res.json())
+    .catch(console.log);
+  return message;
+};

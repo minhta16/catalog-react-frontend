@@ -1,4 +1,9 @@
-import { signInApi, createUserAndSigninApi, fetchCurrentUserPostsApi } from 'utils/apiCalls';
+import {
+  signInApi,
+  createUserAndSigninApi,
+  fetchCurrentUserPostsApi,
+  deletePostApi,
+} from 'utils/apiCalls';
 import { FETCH_USERS, SIGN_IN, SIGN_OUT, FETCH_CURRENT_USER_POST } from './types';
 
 export const fetchUsers = () => (dispatch) =>
@@ -49,3 +54,6 @@ export const fetchCurrentUserPost = (token) => (dispatch) =>
       payload: posts,
     });
   });
+
+export const deletePostAndRefetch = (token, categoryId, postId) => (dispatch) =>
+  deletePostApi(token, categoryId, postId).then(() => dispatch(fetchCurrentUserPost(token)));

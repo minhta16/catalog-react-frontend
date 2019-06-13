@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Typography, Grid, IconButton, Menu, MenuItem, Link as MUILink } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import UpdateIcon from '@material-ui/icons/Update';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { red } from '@material-ui/core/colors';
-import ConfirmDialog from '../Shared/ConfirmDialog';
+import { selectCategory } from 'selectors/categories';
+import { selectCurrentUserProp } from 'selectors/users';
+import { deletePostAndRefetch as deletePostAndRefetchRedux } from 'actions/users';
+import ConfirmDialog from 'components/Shared/ConfirmDialog';
 
 export class PostItem extends Component {
   state = {
@@ -26,6 +30,12 @@ export class PostItem extends Component {
     });
   };
 
+  handleConfirmDelete = async () => {
+    const { deletePostAndRefetch, token, post, openSnackbar } = this.props;
+    deletePostAndRefetch(token, post.category_id, post.id);
+    openSnackbar();
+  };
+
   toggleDeleteDialog = () => {
     const { openConfirm } = this.state;
     this.setState({
@@ -34,7 +44,7 @@ export class PostItem extends Component {
   };
 
   render() {
-    const { post, subtitleLength } = this.props;
+    const { post, subtitleLength, category } = this.props;
     const { anchorEl, openConfirm } = this.state;
 
     const menu = (
@@ -68,6 +78,14 @@ export class PostItem extends Component {
 
     return (
       <Grid container justify="space-between" spacing={2}>
+        <ConfirmDialog
+          open={openConfirm}
+          title="Delete"
+          onConfirm={this.handleConfirmDelete}
+          onCancel={this.toggleDeleteDialog}
+          onClose={this.toggleDeleteDialog}
+          contentText={`Are you sure you want to delete ${post.name}?`}
+        />
         <Grid item>
           <Grid container direction="column">
             <MUILink
@@ -80,6 +98,7 @@ export class PostItem extends Component {
             >
               {post.name}
             </MUILink>
+            <Typography variant="subtitle1">{`Category: ${category.name}`}</Typography>
             <Typography variant="subtitle1">{`Created: ${post.created}`}</Typography>
             <Typography variant="caption">
               {`${post.description.substring(subtitleLength)}...`}
@@ -93,26 +112,33 @@ export class PostItem extends Component {
           </IconButton>
         </Grid>
         {menu}
-        <ConfirmDialog
-          open={openConfirm}
-          title="Delete"
-          onConfirm={this.toggleDeleteDialog}
-          onCancel={this.toggleDeleteDialog}
-          onClose={this.toggleDeleteDialog}
-          contentText={`Are you sure you want to delete ${post.name}?`}
-        />
       </Grid>
     );
   }
 }
 
 PostItem.propTypes = {
+  token: PropTypes.string.isRequired,
   post: PropTypes.object.isRequired,
   subtitleLength: PropTypes.number,
+  category: PropTypes.object.isRequired,
+  deletePostAndRefetch: PropTypes.func.isRequired,
+  openSnackbar: PropTypes.func.isRequired,
 };
 
 PostItem.defaultProps = {
   subtitleLength: 100,
 };
 
-export default PostItem;
+const mapStateToProps = (state, ownProps) => ({
+  category: selectCategory(state, ownProps.post.category_id),
+  token: selectCurrentUserProp(state, 'token'),
+});
+
+const mapDispatchToProps = {
+  deletePostAndRefetch: deletePostAndRefetchRedux,
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(PostItem);

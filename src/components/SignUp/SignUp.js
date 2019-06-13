@@ -40,12 +40,12 @@ export class SignUp extends Component {
   register = () => {
     const { username, password, email, name, passwordMatchWarning, passWarning } = this.state;
     const { createUserAndSignIn } = this.props;
-    if (!(passwordMatchWarning || passWarning)) {
+    if (!passwordMatchWarning && !passWarning) {
       createUserAndSignIn(username, password, email, name);
+      this.setState({
+        redirect: true,
+      });
     }
-    this.setState({
-      redirect: true,
-    });
     // handle error here
   };
 
@@ -54,7 +54,7 @@ export class SignUp extends Component {
   };
 
   qualifiedPassword = (password) => {
-    return password.length >= 8 && /\d/.test(password) && /\w/.test(password);
+    return password.length >= 8 && /\d/.test(password) && /[A-z]/.test(password);
   };
 
   handleCreateWarnings() {

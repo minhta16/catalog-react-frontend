@@ -1,5 +1,11 @@
 /* eslint-disable no-undef */
-import { fetchApiCategories, fetchApiItems, createUserAndSigninApi, signInApi } from '../apiCalls';
+import {
+  fetchApiCategories,
+  fetchApiItems,
+  createUserAndSigninApi,
+  signInApi,
+  fetchCurrentUserPostsApi,
+} from '../apiCalls';
 
 describe('utils/apiCalls', () => {
   beforeEach(() => {
@@ -89,5 +95,22 @@ describe('utils/apiCalls', () => {
     });
     expect(fetch.mock.calls.length).toBe(1);
     expect(fetch.mock.calls[0][0]).toBe(`${process.env.REACT_APP_API_PATH}/users`);
+  });
+
+  it('should call fetchCurrentUserPostsApi correctly', () => {
+    const response = [
+      {
+        name: 'abc',
+      },
+      {
+        name: 'meomeo',
+      },
+    ];
+    fetch.mockResponse(JSON.stringify(response));
+    fetchCurrentUserPostsApi('meomeo').then((res) => {
+      expect(res).toMatchObject(response);
+    });
+    expect(fetch.mock.calls.length).toBe(1);
+    expect(fetch.mock.calls[0][0]).toBe(`${process.env.REACT_APP_API_PATH}/me/post`);
   });
 });
