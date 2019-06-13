@@ -97,27 +97,17 @@ export const createUserAndSigninApi = async (username, password, email, name) =>
 //   fetch(`${process.env.REACT_APP_API_PATH}/categories/`, params);
 // };
 
-// not working yet
-// export const fetchApiUsers = async () => {
-//   const params = {
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     method: 'GET',
-//   };
+export const fetchCurrentUserPostsApi = async (token) => {
+  const params = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `JWT ${token}`,
+    },
+    method: 'GET',
+  };
 
-//   const fetchedItems = await fetch(
-//     `${process.env.REACT_APP_API_PATH}/categories//items?offset=0&limit=100`,
-//     params,
-//   )
-//     .then((res) => res.json())
-//     .then((data) => {
-//       let returnData = {};
-//       data.items.forEach((item) => {
-//         returnData = { ...returnData, [item.id]: item };
-//       });
-//       return returnData;
-//     })
-//     .catch(console.log);
-//   return fetchedItems;
-// };
+  const fetchedItems = await fetch(`${process.env.REACT_APP_API_PATH}/me/post`, params)
+    .then((res) => res.json())
+    .catch(console.log);
+  return fetchedItems;
+};

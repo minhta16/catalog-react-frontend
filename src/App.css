@@ -19,6 +19,11 @@
   text-align: left;
 }
 
+.center-margin {
+  padding: 0.5em;
+  text-align: center;
+}
+
 .avatar {
   background-color: #fdb600;
   color: #fff;

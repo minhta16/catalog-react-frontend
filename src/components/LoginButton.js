@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Button, Avatar, Menu, MenuItem, Grid, Typography } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
@@ -44,7 +44,7 @@ export class LoginButton extends Component {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
         transformOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
-        <MenuItem component={Link} exact="true" to="/profile">
+        <MenuItem onClick={this.handleCloseMenu} component={Link} exact="true" to="/profile">
           <Grid container alignItems="center">
             <PersonIcon color="primary" style={{ margin: '0 0.5rem 0 0' }} />
             <Typography variant="body1">Profile</Typography>

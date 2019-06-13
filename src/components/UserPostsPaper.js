@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Typography, Divider, Paper, Avatar, Grid } from '@material-ui/core';
+import PostList from './PostList';
 
 export function UserPostsPaper(props) {
-  const { username, token } = props;
+  const { username, posts } = props;
   return (
     <Paper className="left-margin">
       <Grid container alignItems="center">
@@ -19,14 +20,18 @@ export function UserPostsPaper(props) {
         <Typography variant="body1">{username}</Typography>
       </Grid>
       <Divider />
-      <Typography variant="body1">{token}</Typography>
+      <PostList posts={posts} />
     </Paper>
   );
 }
 
 UserPostsPaper.propTypes = {
   username: PropTypes.string.isRequired,
-  token: PropTypes.string.isRequired,
+  posts: PropTypes.array,
+};
+
+UserPostsPaper.defaultProps = {
+  posts: [],
 };
 
 export default UserPostsPaper;

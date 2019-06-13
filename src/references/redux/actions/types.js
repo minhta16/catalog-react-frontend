@@ -7,3 +7,4 @@ export const FETCH_USERS = 'FETCH_USERS';
 export const FETCH_CURRENT_USER = 'FETCH_CURRENT_USER';
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_OUT = 'SIGN_OUT';
+export const FETCH_CURRENT_USER_POST = 'FETCH_CURRENT_USER_POST';

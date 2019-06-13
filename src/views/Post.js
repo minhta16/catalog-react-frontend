@@ -20,8 +20,8 @@ export function Post(props) {
 }
 
 Post.propTypes = {
-  match: PropTypes.shape.isRequired,
-  currentPost: PropTypes.shape.isRequired,
+  match: PropTypes.object.isRequired,
+  currentPost: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => ({

@@ -1,5 +1,9 @@
-import { signInApi, createUserAndSigninApi } from 'references/scripts/apiCalls';
-import { FETCH_USERS, SIGN_IN, SIGN_OUT } from './types';
+import {
+  signInApi,
+  createUserAndSigninApi,
+  fetchCurrentUserPostsApi,
+} from 'references/scripts/apiCalls';
+import { FETCH_USERS, SIGN_IN, SIGN_OUT, FETCH_CURRENT_USER_POST } from './types';
 
 export const fetchUsers = () => (dispatch) =>
   dispatch({
@@ -12,6 +16,7 @@ export const signIn = (username, password) => (dispatch) =>
     const currentUser = {
       username,
       token: data.access_token,
+      posts: [],
     };
     return dispatch({
       type: SIGN_IN,
@@ -29,9 +34,18 @@ export const createUserAndSignIn = (username, password, email, name) => (dispatc
     const currentUser = {
       username,
       token: data.access_token,
+      posts: [],
     };
     return dispatch({
       type: SIGN_IN,
       payload: currentUser,
     });
   });
+
+export const fetchCurrentUserPost = (token) => (dispatch) =>
+  fetchCurrentUserPostsApi(token).then((data) =>
+    dispatch({
+      type: FETCH_CURRENT_USER_POST,
+      payload: data,
+    }),
+  );
