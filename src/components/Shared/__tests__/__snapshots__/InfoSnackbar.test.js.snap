@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/LoginDialog should render correctly 1`] = `
+<WithStyles(ForwardRef(Snackbar))
+  action={
+    Array [
+      <ForwardRef(WithStyles)
+        aria-label="Close"
+        color="inherit"
+        onClick={[MockFunction]}
+      >
+        <Memo />
+      </ForwardRef(WithStyles)>,
+    ]
+  }
+  anchorOrigin={
+    Object {
+      "horizontal": "left",
+      "vertical": "bottom",
+    }
+  }
+  autoHideDuration={5000}
+  message="message"
+  onClose={[MockFunction]}
+  open={true}
+/>
+`;

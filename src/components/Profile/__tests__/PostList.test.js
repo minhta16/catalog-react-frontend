@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import { shallow } from 'enzyme';
+import InfoSnackbar from 'components/Shared/InfoSnackbar';
 import { PostList } from '../PostList';
 
 describe('components/Profile/PostList', () => {
@@ -34,5 +35,12 @@ describe('components/Profile/PostList', () => {
   it('should render correctly', () => {
     setup();
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should call closeSnackbar correctly', () => {
+    setup();
+    const snackbar = wrapper.find(InfoSnackbar);
+    snackbar.simulate('close');
+    expect(wrapper.state().openSnackbar).toBe(false);
   });
 });

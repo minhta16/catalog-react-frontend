@@ -71,4 +71,14 @@ describe('components/PostItem', () => {
       expect(wrapper.state().openConfirm).toBe(!openConfirm);
     });
   });
+
+  describe('handleConfirmDelete', () => {
+    it('should call deletePostAndRefetch and openSnackbar', () => {
+      setup();
+      const confirmDialog = wrapper.find('[title="Delete"]');
+      confirmDialog.simulate('confirm');
+      expect(props.deletePostAndRefetch).toHaveBeenCalled();
+      expect(props.openSnackbar).toHaveBeenCalled();
+    });
+  });
 });

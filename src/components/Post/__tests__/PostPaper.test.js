@@ -25,6 +25,8 @@ describe('components/PostPaper', () => {
       header: 'header',
       body: 'body',
       categoryId: '1',
+      categoryName: 'name',
+      created: '2019',
     };
   });
 

@@ -113,3 +113,8 @@ export const modifyPostApi = (token, categoryId, post) =>
       }),
     );
   });
+
+export const deletePostApi = (token, categoryId, postId) =>
+  new Promise((resolve) => {
+    process.nextTick(() => resolve(responseItemsArr));
+  });
