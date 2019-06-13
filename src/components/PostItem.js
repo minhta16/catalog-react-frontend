@@ -48,7 +48,12 @@ export class PostItem extends Component {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
-        <MenuItem onClick={this.handleClose} component={Link} exact="true" to="/update">
+        <MenuItem
+          onClick={this.handleClose}
+          component={Link}
+          exact="true"
+          to={`/profile/${post.category_id}/${post.id}/edit`}
+        >
           <Grid container alignItems="center">
             <UpdateIcon color="primary" style={{ margin: '0 0.5rem 0 0' }} />
             <Typography variant="body1">Update</Typography>

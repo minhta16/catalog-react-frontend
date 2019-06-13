@@ -68,26 +68,24 @@ describe('scripts/apiCalls', () => {
   });
 
   it('should call signInApi correctly', () => {
-    fetch.mockResponse(
-      JSON.stringify({
-        access_token: 'abc',
-      }),
-    );
+    const response = {
+      access_token: 'abc',
+    };
+    fetch.mockResponse(JSON.stringify(response));
     signInApi('meo', 'meo').then((res) => {
-      expect(res).toBe('abc');
+      expect(res).toMatchObject(response);
     });
     expect(fetch.mock.calls.length).toBe(1);
     expect(fetch.mock.calls[0][0]).toBe(`${process.env.REACT_APP_API_PATH}/auth`);
   });
 
   it('should call createUserAndSigninApi correctly', () => {
-    fetch.mockResponse(
-      JSON.stringify({
-        access_token: 'abc',
-      }),
-    );
+    const response = {
+      access_token: 'abc',
+    };
+    fetch.mockResponse(JSON.stringify(response));
     createUserAndSigninApi('meo', 'meo', 'meo', 'meo').then((res) => {
-      expect(res).toBe('abc');
+      expect(res).toMatchObject(response);
     });
     expect(fetch.mock.calls.length).toBe(1);
     expect(fetch.mock.calls[0][0]).toBe(`${process.env.REACT_APP_API_PATH}/users`);

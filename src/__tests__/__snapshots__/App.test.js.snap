@@ -340,6 +340,48 @@ exports[`src/App should render App without crashing 1`] = `
                 "$$typeof": Symbol(react.memo),
                 "WrappedComponent": [Function],
                 "compare": null,
+                "displayName": "Connect(Post)",
+                "type": [Function],
+              }
+            }
+            exact={true}
+            key="[object Object]"
+            path="/profile"
+          />
+          <Route
+            component={
+              Object {
+                "$$typeof": Symbol(react.memo),
+                "WrappedComponent": [Function],
+                "compare": null,
+                "displayName": "Connect(ModifyItem)",
+                "type": [Function],
+              }
+            }
+            exact={true}
+            key="[object Object]"
+            path="/profile/:id/:postId/edit"
+          />
+          <Route
+            component={
+              Object {
+                "$$typeof": Symbol(react.memo),
+                "WrappedComponent": [Function],
+                "compare": null,
+                "displayName": "Connect(ModifyItem)",
+                "type": [Function],
+              }
+            }
+            exact={true}
+            key="[object Object]"
+            path="/new-item"
+          />
+          <Route
+            component={
+              Object {
+                "$$typeof": Symbol(react.memo),
+                "WrappedComponent": [Function],
+                "compare": null,
                 "displayName": "Connect(Home)",
                 "type": [Function],
               }

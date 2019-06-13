@@ -45,6 +45,7 @@ exports[`components/LoginDialog should render correctly 1`] = `
   </WithStyles(ForwardRef(DialogContent))>
   <WithStyles(ForwardRef(DialogActions))>
     <WithStyles(ForwardRef(Button))
+      color="primary"
       id="login-dialog-login"
       onClick={[Function]}
     >

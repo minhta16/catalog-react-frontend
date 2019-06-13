@@ -90,7 +90,7 @@ export class SignUp extends Component {
     }
     return (
       <Container maxWidth="lg">
-        <Paper style={{ padding: '1em' }}>
+        <Paper className="paper">
           <Typography variant="h4">Register now!</Typography>
           <form autoComplete="off">
             <TextField

@@ -5,11 +5,7 @@ exports[`views/SignUp should render correctly 1`] = `
   maxWidth="lg"
 >
   <WithStyles(ForwardRef(Paper))
-    style={
-      Object {
-        "padding": "1em",
-      }
-    }
+    className="paper"
   >
     <WithStyles(ForwardRef(Typography))
       variant="h4"
@@ -40,7 +36,9 @@ exports[`views/SignUp should render correctly 1`] = `
         variant="outlined"
       />
       <WithStyles(ForwardRef(TextField))
+        error={true}
         fullWidth={true}
+        helperText="Email needs to match the format example@domain.com"
         id="email"
         label="Email Address"
         margin="normal"
@@ -50,7 +48,9 @@ exports[`views/SignUp should render correctly 1`] = `
         variant="outlined"
       />
       <WithStyles(ForwardRef(TextField))
+        error={true}
         fullWidth={true}
+        helperText="Password needs to have at least 8 characters AND at least 1 number"
         id="password"
         label="Password"
         margin="normal"
@@ -61,7 +61,9 @@ exports[`views/SignUp should render correctly 1`] = `
         variant="outlined"
       />
       <WithStyles(ForwardRef(TextField))
+        error={true}
         fullWidth={true}
+        helperText="Password doesn't match"
         id="confirmPassword"
         label="Confirm Password"
         margin="normal"
@@ -84,6 +86,8 @@ exports[`views/SignUp should render correctly 1`] = `
       </WithStyles(ForwardRef(Typography))>
       <WithStyles(ForwardRef(Button))
         color="primary"
+        disabled={true}
+        onClick={[Function]}
         variant="contained"
       >
         Register

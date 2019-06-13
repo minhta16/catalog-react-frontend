@@ -2,6 +2,7 @@ import Home from 'views/Home';
 import Post from 'views/Post';
 import SignUp from 'views/SignUp';
 import Profile from 'views/Profile';
+import ModifyItem from 'views/ModifyItem';
 
 const routes = [
   {
@@ -17,6 +18,16 @@ const routes = [
   {
     path: '/profile',
     view: Profile,
+    exact: true,
+  },
+  {
+    path: '/profile/:id/:postId/edit',
+    view: ModifyItem,
+    exact: true,
+  },
+  {
+    path: '/new-item',
+    view: ModifyItem,
     exact: true,
   },
   {

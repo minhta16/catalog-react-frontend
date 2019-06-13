@@ -35,6 +35,7 @@ exports[`components/CustomAppBar should render correctly 1`] = `
       }
       id="custom-app-bar-login-button"
       onClick={[Function]}
+      signOut={[MockFunction]}
       variant="contained"
     />
     <LoginDialog

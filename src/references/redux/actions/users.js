@@ -16,7 +16,7 @@ export const signIn = (username, password) => (dispatch) =>
     const currentUser = {
       username,
       token: data.access_token,
-      posts: [],
+      posts: {},
     };
     return dispatch({
       type: SIGN_IN,
@@ -34,7 +34,7 @@ export const createUserAndSignIn = (username, password, email, name) => (dispatc
     const currentUser = {
       username,
       token: data.access_token,
-      posts: [],
+      posts: {},
     };
     return dispatch({
       type: SIGN_IN,
@@ -43,9 +43,13 @@ export const createUserAndSignIn = (username, password, email, name) => (dispatc
   });
 
 export const fetchCurrentUserPost = (token) => (dispatch) =>
-  fetchCurrentUserPostsApi(token).then((data) =>
-    dispatch({
+  fetchCurrentUserPostsApi(token).then((data) => {
+    let posts = {};
+    data.forEach((post) => {
+      posts = { ...posts, [post.id]: post };
+    });
+    return dispatch({
       type: FETCH_CURRENT_USER_POST,
-      payload: data,
-    }),
-  );
+      payload: posts,
+    });
+  });

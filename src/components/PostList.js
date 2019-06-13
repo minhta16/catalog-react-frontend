@@ -10,9 +10,12 @@ export function PostList(props) {
       <Typography variant="h4" className="center-margin">
         Your Posts
       </Typography>
-      {posts.reverse().map((post) => (
-        <PostItem key={post.name} post={post} />
-      ))}
+      {posts
+        .slice()
+        .reverse()
+        .map((post) => (
+          <PostItem key={post.name} post={post} />
+        ))}
     </div>
   );
 }

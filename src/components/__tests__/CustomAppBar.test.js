@@ -23,6 +23,7 @@ describe('components/CustomAppBar', () => {
     props = {
       color: 'primary',
       signIn: jest.fn(),
+      signOut: jest.fn(),
       currentUser: {
         username: 'minh',
         password: 'minh',

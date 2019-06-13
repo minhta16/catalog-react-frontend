@@ -24,6 +24,9 @@
   text-align: center;
 }
 
+.paper {
+  padding: 1em;
+}
 .avatar {
   background-color: #fdb600;
   color: #fff;

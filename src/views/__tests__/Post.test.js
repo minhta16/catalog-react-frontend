@@ -35,6 +35,12 @@ describe('components/Post', () => {
           id: '1',
         },
       },
+      currentPost: {
+        name: 'name',
+        created: '2019',
+        description: 'desc',
+        id: '1',
+      },
     };
   });
 

@@ -5,15 +5,22 @@ import { SignUp } from 'views/SignUp';
 
 describe('views/SignUp', () => {
   let wrapper;
+  let props;
 
   const setup = () => {
-    wrapper = shallow(<SignUp />);
+    wrapper = shallow(<SignUp {...props} />);
   };
 
   const update = () => {
     wrapper.update();
     wrapper.instance().forceUpdate();
   };
+
+  beforeEach(() => {
+    props = {
+      createUserAndSignIn: jest.fn(),
+    };
+  });
 
   it('should render correctly', () => {
     setup();

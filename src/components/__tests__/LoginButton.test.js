@@ -24,6 +24,7 @@ describe('components/LoginButton', () => {
   beforeEach(() => {
     props = {
       onClick: jest.fn(),
+      signOut: jest.fn(),
       currentUser: {
         username: 'yolo',
         token: 'motconvitxoera2caicanh',

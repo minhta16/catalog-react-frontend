@@ -33,6 +33,7 @@ describe('actions/users', () => {
         payload: {
           username: 'abc',
           token: 'abc',
+          posts: {},
         },
       });
     });
@@ -46,6 +47,7 @@ describe('actions/users', () => {
         payload: {
           username: 'abc',
           token: 'abc',
+          posts: {},
         },
       });
     });
