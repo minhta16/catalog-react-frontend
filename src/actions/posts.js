@@ -1,5 +1,5 @@
-import { fetchApiItems } from 'utils/apiCalls';
-import { ADD_POST, FETCH_POSTS } from './types';
+import { fetchApiItems, addPostApi, modifyPostApi } from 'utils/apiCalls';
+import { FETCH_POSTS } from './types';
 
 export const fetchPosts = (id) => (dispatch) =>
   fetchApiItems(id).then((fetchedItems) =>
@@ -9,8 +9,14 @@ export const fetchPosts = (id) => (dispatch) =>
     }),
   );
 
-export const addPost = (post) => (dispatch) =>
-  dispatch({
-    type: ADD_POST,
-    payload: post,
+export const addPostAndRefetch = (token, categoryId, post) => (dispatch) =>
+  addPostApi(token, categoryId, post).then((data) => {
+    console.log(data);
+    dispatch(fetchPosts(categoryId));
+  });
+
+export const modifyPostAndRefetch = (token, categoryId, postId, post) => (dispatch) =>
+  modifyPostApi(token, categoryId, postId, post).then((data) => {
+    console.log(data);
+    dispatch(fetchPosts(categoryId));
   });

@@ -65,13 +65,17 @@ export class PostItem extends Component {
           to={`/profile/${post.category_id}/${post.id}/edit`}
         >
           <Grid container alignItems="center">
-            <UpdateIcon color="primary" style={{ margin: '0 0.5rem 0 0' }} />
-            <Typography variant="body1">Update</Typography>
+            <UpdateIcon color="primary" className="icon-padding" />
+            <Typography variant="button" color="primary">
+              Update
+            </Typography>
           </Grid>
         </MenuItem>
         <MenuItem id="post-item-delete" onClick={this.toggleDeleteDialog}>
-          <DeleteIcon style={{ margin: '0 0.5rem 0 0', color: red[500] }} />
-          <Typography variant="body1">Delete</Typography>
+          <DeleteIcon className="icon-padding" style={{ color: red[500] }} />
+          <Typography variant="button" style={{ color: red[500] }}>
+            Delete
+          </Typography>
         </MenuItem>
       </Menu>
     );

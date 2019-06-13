@@ -42,7 +42,7 @@ class CategoriesTable extends Component {
                 selectedCatItems.map((item) => (
                   <MenuItem
                     className="itemsMenuItem"
-                    key={item.name}
+                    key={item.id}
                     component={Link}
                     to={`/${selectedCatId}/${item.id}`}
                   >

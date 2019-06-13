@@ -129,3 +129,49 @@ export const deletePostApi = async (token, categoryId, postId) => {
     .catch(console.log);
   return message;
 };
+
+export const addPostApi = async (token, categoryId, post) => {
+  const params = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `JWT ${token}`,
+    },
+    method: 'POST',
+    body: JSON.stringify({
+      name: post.name,
+      description: post.description,
+      price: post.price,
+    }),
+  };
+
+  const message = await fetch(
+    `${process.env.REACT_APP_API_PATH}/categories/${categoryId}/items`,
+    params,
+  )
+    .then((res) => res.json())
+    .catch(console.log);
+  return message;
+};
+
+export const modifyPostApi = async (token, categoryId, itemId, post) => {
+  const params = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `JWT ${token}`,
+    },
+    method: 'PUT',
+    body: JSON.stringify({
+      name: post.name,
+      description: post.description,
+      price: post.price,
+    }),
+  };
+
+  const message = await fetch(
+    `${process.env.REACT_APP_API_PATH}/categories/${categoryId}/items/${itemId}`,
+    params,
+  )
+    .then((res) => res.json())
+    .catch(console.log);
+  return message;
+};
