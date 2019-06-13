@@ -95,3 +95,21 @@ export const fetchCurrentUserPostsApi = (token) =>
   new Promise((resolve) => {
     process.nextTick(() => resolve(responseItemsArr));
   });
+
+export const addPostApi = (token, categoryId, post) =>
+  new Promise((resolve) => {
+    process.nextTick(() =>
+      resolve({
+        message: 'meow',
+      }),
+    );
+  });
+
+export const modifyPostApi = (token, categoryId, post) =>
+  new Promise((resolve) => {
+    process.nextTick(() =>
+      resolve({
+        message: 'meow',
+      }),
+    );
+  });

@@ -8,10 +8,9 @@ describe('components/ModifyItem', () => {
   let props;
   // let warning;
 
-  // const update = () => {
-  //   wrapper.update();
-  //   warning = wrapper.find(Warning);
-  // };
+  const update = () => {
+    wrapper.update();
+  };
 
   const setup = () => {
     wrapper = shallow(<ModifyItem {...props} />);
@@ -31,6 +30,16 @@ describe('components/ModifyItem', () => {
         id: '1',
         category_id: '1',
       },
+      categories: [
+        {
+          name: 'haha',
+          description: 'haha',
+          id: '1',
+        },
+      ],
+      token: 'minh',
+      modifyPostAndRefetch: jest.fn(),
+      addPostAndRefetch: jest.fn(),
     };
   });
 
@@ -55,5 +64,37 @@ describe('components/ModifyItem', () => {
     props.match.params.id = '';
     setup();
     expect(wrapper.state().editing).toBe(false);
+  });
+
+  it('should call modifyPostAndRefetch() if editing', () => {
+    setup();
+    wrapper.setState({
+      editing: true,
+    });
+    update();
+    wrapper.instance().handleOnSubmit({ preventDefault: jest.fn() });
+    expect(props.modifyPostAndRefetch).toHaveBeenCalled();
+  });
+
+  it('should call addPostAndRefetch() if not editing', () => {
+    setup();
+    wrapper.setState({
+      editing: false,
+    });
+    update();
+    wrapper.instance().handleOnSubmit({ preventDefault: jest.fn() });
+    expect(props.addPostAndRefetch).toHaveBeenCalled();
+  });
+
+  it('should change state when handleCategoryChange() is called', () => {
+    setup();
+    const categoryDrop = wrapper.find('#categories');
+    categoryDrop.simulate('change', {
+      target: {
+        name: 'selectedCategory',
+        value: 99,
+      },
+    });
+    expect(wrapper.state().selectedCategory).toBe(99);
   });
 });

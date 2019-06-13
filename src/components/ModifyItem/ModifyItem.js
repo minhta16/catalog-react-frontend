@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { selectCurrentUserPost, selectCurrentUserProp } from 'selectors/users';
-import { modifyPostAndRefetch, addPostAndRefetch } from 'actions/posts';
+import {
+  modifyPostAndRefetch as modifyPostAndRefetchRedux,
+  addPostAndRefetch as addPostAndRefetchRedux,
+} from 'actions/posts';
 import { Typography, Container, Paper, TextField, Button, MenuItem } from '@material-ui/core';
 import { selectCategories } from 'selectors/categories';
 
@@ -22,8 +25,10 @@ export class ModifyItem extends Component {
     });
   };
 
-  handleOnSubmit = async () => {
-    const { token, match } = this.props;
+  handleOnSubmit = (e) => {
+    e.preventDefault();
+
+    const { token, match, modifyPostAndRefetch, addPostAndRefetch } = this.props;
     const { title, description, editing, selectedCategory } = this.state;
 
     if (editing) {
@@ -39,9 +44,9 @@ export class ModifyItem extends Component {
         price: 0,
       });
     }
-    // this.setState({
-    //   redirect: true,
-    // });
+    this.setState({
+      redirect: true,
+    });
   };
 
   handleCategoryChange = (e) => {
@@ -73,7 +78,11 @@ export class ModifyItem extends Component {
     const { match, categories } = this.props;
 
     if (redirect) {
-      return <Redirect exact to={`/${match.params.id}/${match.params.postId}`} />;
+      let path = `/${match.params.id}/${match.params.postId}`;
+      if (!editing) {
+        path = `/${match.params.id}`;
+      }
+      return <Redirect exact to={path} />;
     }
     return (
       <Container maxWidth="lg">
@@ -83,51 +92,68 @@ export class ModifyItem extends Component {
           ) : (
             <Typography variant="h4">New Post</Typography>
           )}
-          <TextField
-            id="categories"
-            name="selectedCategory"
-            select
-            label="Category"
-            fullWidth
-            value={selectedCategory}
-            onChange={this.handleCategoryChange}
-            disabled={editing}
-            required
-          >
-            {categories.map((category) => (
-              <MenuItem key={category.id} value={category.id}>
-                {category.name}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField
-            required
-            id="title"
-            label="Title"
-            value={title}
-            onChange={this.handleChange}
-            margin="normal"
-            fullWidth
-          />
-          <TextField
-            required
-            id="description"
-            label="Description"
-            value={description}
-            onChange={this.handleChange}
-            margin="normal"
-            fullWidth
-            multiline
-          />
-          <Button color="primary" onClick={this.handleOnSubmit}>
-            Submit
-          </Button>
-          <Button>Cancel</Button>
+          <form onSubmit={this.handleOnSubmit} autoComplete="off">
+            <TextField
+              id="categories"
+              name="selectedCategory"
+              select
+              label="Category"
+              fullWidth
+              value={selectedCategory}
+              onChange={this.handleCategoryChange}
+              disabled={editing}
+              required
+            >
+              {categories.map((category) => (
+                <MenuItem key={category.id} value={category.id}>
+                  {category.name}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField
+              required
+              id="title"
+              label="Title"
+              value={title}
+              onChange={this.handleChange}
+              margin="normal"
+              fullWidth
+            />
+            <TextField
+              required
+              id="description"
+              label="Description"
+              value={description}
+              onChange={this.handleChange}
+              margin="normal"
+              fullWidth
+              multiline
+            />
+            <Button color="primary" type="submit">
+              Submit
+            </Button>
+            <Button component={Link} exact="true" to="/profile">
+              Cancel
+            </Button>
+          </form>
         </Paper>
       </Container>
     );
   }
 }
+
+ModifyItem.propTypes = {
+  match: PropTypes.object.isRequired,
+  post: PropTypes.object,
+  token: PropTypes.string.isRequired,
+  categories: PropTypes.array.isRequired,
+  addPostAndRefetch: PropTypes.func.isRequired,
+  modifyPostAndRefetch: PropTypes.func.isRequired,
+};
+
+ModifyItem.defaultProps = {
+  post: {},
+};
 
 const mapStateToProps = (state, ownProps) => ({
   post: selectCurrentUserPost(state, ownProps.match.params.postId),
@@ -135,15 +161,12 @@ const mapStateToProps = (state, ownProps) => ({
   categories: selectCategories(state),
 });
 
-ModifyItem.propTypes = {
-  match: PropTypes.object.isRequired,
-  post: PropTypes.object,
-  token: PropTypes.string.isRequired,
-  categories: PropTypes.array.isRequired,
+const mapDispatchToProps = {
+  modifyPostAndRefetch: modifyPostAndRefetchRedux,
+  addPostAndRefetch: addPostAndRefetchRedux,
 };
 
-ModifyItem.defaultProps = {
-  post: {},
-};
-
-export default connect(mapStateToProps)(ModifyItem);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ModifyItem);

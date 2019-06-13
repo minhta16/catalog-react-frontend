@@ -22,7 +22,7 @@ class CategoriesTable extends Component {
                 <MenuItem
                   className="categoryMenuItem"
                   key={category.id}
-                  selected={selectedCatId === category.id}
+                  selected={String(selectedCatId) === String(category.id)}
                   component={Link}
                   to={`/${category.id}`}
                   onClick={() => fetchPosts(category.id)}

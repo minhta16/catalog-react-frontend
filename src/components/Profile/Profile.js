@@ -33,7 +33,7 @@ Profile.propTypes = {
 
 const mapStateToProps = (state) => ({
   currentUser: selectCurrentUser(state),
-  currentUserPosts: selectCurrentUserPosts(state),
+  currentUserPosts: selectCurrentUserPosts(state, 'reverse'),
 });
 
 const mapDispatchToProps = {

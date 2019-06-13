@@ -6,6 +6,14 @@ exports[`components/PostItem should render correctly 1`] = `
   justify="space-between"
   spacing={2}
 >
+  <ConfirmDialog
+    contentText="Are you sure you want to delete bro?"
+    onCancel={[Function]}
+    onClose={[Function]}
+    onConfirm={[Function]}
+    open={false}
+    title="Delete"
+  />
   <WithStyles(ForwardRef(Grid))
     item={true}
   >
@@ -23,6 +31,11 @@ exports[`components/PostItem should render correctly 1`] = `
       >
         bro
       </WithStyles(ForwardRef(Link))>
+      <WithStyles(ForwardRef(Typography))
+        variant="subtitle1"
+      >
+        Category: cat
+      </WithStyles(ForwardRef(Typography))>
       <WithStyles(ForwardRef(Typography))
         variant="subtitle1"
       >
@@ -75,15 +88,12 @@ exports[`components/PostItem should render correctly 1`] = `
         container={true}
       >
         <UpdateIcon
+          className="icon-padding"
           color="primary"
-          style={
-            Object {
-              "margin": "0 0.5rem 0 0",
-            }
-          }
         />
         <WithStyles(ForwardRef(Typography))
-          variant="body1"
+          color="primary"
+          variant="button"
         >
           Update
         </WithStyles(ForwardRef(Typography))>
@@ -94,27 +104,24 @@ exports[`components/PostItem should render correctly 1`] = `
       onClick={[Function]}
     >
       <DeleteIcon
+        className="icon-padding"
         style={
           Object {
             "color": "#f44336",
-            "margin": "0 0.5rem 0 0",
           }
         }
       />
       <WithStyles(ForwardRef(Typography))
-        variant="body1"
+        style={
+          Object {
+            "color": "#f44336",
+          }
+        }
+        variant="button"
       >
         Delete
       </WithStyles(ForwardRef(Typography))>
     </WithStyles(ForwardRef(MenuItem))>
   </WithStyles(ForwardRef(Menu))>
-  <ConfirmDialog
-    contentText="Are you sure you want to delete bro?"
-    onCancel={[Function]}
-    onClose={[Function]}
-    onConfirm={[Function]}
-    open={false}
-    title="Delete"
-  />
 </WithStyles(ForwardRef(Grid))>
 `;

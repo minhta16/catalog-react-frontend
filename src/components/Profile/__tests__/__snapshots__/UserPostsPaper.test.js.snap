@@ -7,23 +7,52 @@ exports[`components/PostItem should render correctly 1`] = `
   <WithStyles(ForwardRef(Grid))
     alignItems="center"
     container={true}
+    justify="space-between"
   >
-    <WithStyles(ForwardRef(Avatar))
-      style={
-        Object {
-          "backgroundColor": "#fdb600",
-          "color": "#fff",
-          "margin": "0.5rem",
-        }
-      }
+    <WithStyles(ForwardRef(Grid))
+      item={true}
     >
-      m
-    </WithStyles(ForwardRef(Avatar))>
-    <WithStyles(ForwardRef(Typography))
-      variant="body1"
+      <WithStyles(ForwardRef(Grid))
+        alignItems="center"
+        container={true}
+      >
+        <WithStyles(ForwardRef(Avatar))
+          style={
+            Object {
+              "backgroundColor": "#fdb600",
+              "color": "#fff",
+              "margin": "0.5rem",
+            }
+          }
+        >
+          m
+        </WithStyles(ForwardRef(Avatar))>
+        <WithStyles(ForwardRef(Typography))
+          variant="body1"
+        >
+          minh
+        </WithStyles(ForwardRef(Typography))>
+      </WithStyles(ForwardRef(Grid))>
+    </WithStyles(ForwardRef(Grid))>
+    <WithStyles(ForwardRef(Grid))
+      item={true}
     >
-      minh
-    </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(IconButton))
+        color="primary"
+        component={[Function]}
+        exact="true"
+        to="/new-item"
+      >
+        <LibraryAddIcon
+          className="icon-padding"
+        />
+        <WithStyles(ForwardRef(Typography))
+          variant="button"
+        >
+          New item
+        </WithStyles(ForwardRef(Typography))>
+      </WithStyles(ForwardRef(IconButton))>
+    </WithStyles(ForwardRef(Grid))>
   </WithStyles(ForwardRef(Grid))>
   <WithStyles(ForwardRef(Divider)) />
   <PostList

@@ -19,7 +19,12 @@ exports[`components/PostPaper should render correctly 1`] = `
   <WithStyles(ForwardRef(Typography))
     variant="subtitle1"
   >
-    By: Minh Ta
+    Created: undefined
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Typography))
+    variant="subtitle1"
+  >
+    Category: undefined
   </WithStyles(ForwardRef(Typography))>
   <WithStyles(ForwardRef(Divider)) />
   <WithStyles(ForwardRef(Typography))

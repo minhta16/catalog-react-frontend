@@ -63,9 +63,11 @@ describe('components/CategoriesTable', () => {
     props.selectedCatItems = [
       {
         name: 'hihi',
+        id: '1',
       },
       {
         name: 'hihi',
+        id: '2',
       },
     ];
     props.selectedCatId = '1';

@@ -14,7 +14,26 @@ exports[`components/ModifyItem should render correctly 1`] = `
     </WithStyles(ForwardRef(Typography))>
     <form
       autoComplete="off"
+      onSubmit={[Function]}
     >
+      <WithStyles(ForwardRef(TextField))
+        disabled={true}
+        fullWidth={true}
+        id="categories"
+        label="Category"
+        name="selectedCategory"
+        onChange={[Function]}
+        required={true}
+        select={true}
+        value="1"
+      >
+        <WithStyles(ForwardRef(MenuItem))
+          key="1"
+          value="1"
+        >
+          haha
+        </WithStyles(ForwardRef(MenuItem))>
+      </WithStyles(ForwardRef(TextField))>
       <WithStyles(ForwardRef(TextField))
         fullWidth={true}
         id="title"
@@ -34,6 +53,19 @@ exports[`components/ModifyItem should render correctly 1`] = `
         required={true}
         value="haha"
       />
+      <WithStyles(ForwardRef(Button))
+        color="primary"
+        type="submit"
+      >
+        Submit
+      </WithStyles(ForwardRef(Button))>
+      <WithStyles(ForwardRef(Button))
+        component={[Function]}
+        exact="true"
+        to="/profile"
+      >
+        Cancel
+      </WithStyles(ForwardRef(Button))>
     </form>
   </WithStyles(ForwardRef(Paper))>
 </WithStyles(ForwardRef(Container))>

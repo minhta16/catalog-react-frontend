@@ -2,8 +2,8 @@
 import { responseItems } from 'utils/__mocks__/apiCalls';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { fetchPosts, addPost } from '../posts';
-import { FETCH_POSTS, ADD_POST } from '../types';
+import { fetchPosts, addPostAndRefetch, modifyPostAndRefetch } from '../posts';
+import { FETCH_POSTS } from '../types';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -30,16 +30,31 @@ describe('actions/posts', () => {
       .catch(console.log);
   });
 
-  it('should create ADD_POST when done adding post', () => {
+  it('should create FETCH_POST when done adding post and refetching', () => {
     const post = {
       name: 'yo',
       id: '1',
     };
-    store.dispatch(addPost(post));
-    const actions = store.getActions();
-    expect(actions[0]).toMatchObject({
-      type: ADD_POST,
-      payload: post,
+    store.dispatch(addPostAndRefetch(post)).then(() => {
+      const actions = store.getActions();
+      expect(actions[0]).toMatchObject({
+        type: FETCH_POSTS,
+        payload: responseItems,
+      });
+    });
+  });
+
+  it('should create FETCH_POST when done modifying post and refetching', () => {
+    const post = {
+      name: 'yo',
+      id: '1',
+    };
+    store.dispatch(modifyPostAndRefetch(post)).then(() => {
+      const actions = store.getActions();
+      expect(actions[0]).toMatchObject({
+        type: FETCH_POSTS,
+        payload: responseItems,
+      });
     });
   });
 });

@@ -52,7 +52,7 @@ Home.defaultProps = {
 };
 
 const mapSelectorToProps = (state, ownProps) => ({
-  selectedCatItems: selectAllPosts(state),
+  selectedCatItems: selectAllPosts(state, 'reverse'),
   categories: selectCategories(state),
   selectedCategory: selectCategory(state, ownProps.match.params.id),
 });

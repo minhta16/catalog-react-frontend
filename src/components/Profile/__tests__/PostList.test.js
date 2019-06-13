@@ -25,6 +25,7 @@ describe('components/Profile/PostList', () => {
           description: 'bro',
           category_id: '1',
           created: '2019',
+          id: '1',
         },
       ],
     };

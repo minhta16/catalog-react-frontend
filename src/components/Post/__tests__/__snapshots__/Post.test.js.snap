@@ -7,6 +7,7 @@ exports[`components/Post should render correctly 1`] = `
   <PostPaper
     body="desc"
     categoryId="1"
+    categoryName="name"
     created="2019"
     header="name"
   />

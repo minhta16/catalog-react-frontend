@@ -5,6 +5,9 @@ import {
   createUserAndSigninApi,
   signInApi,
   fetchCurrentUserPostsApi,
+  deletePostApi,
+  addPostApi,
+  modifyPostApi,
 } from '../apiCalls';
 
 describe('utils/apiCalls', () => {
@@ -112,5 +115,49 @@ describe('utils/apiCalls', () => {
     });
     expect(fetch.mock.calls.length).toBe(1);
     expect(fetch.mock.calls[0][0]).toBe(`${process.env.REACT_APP_API_PATH}/me/post`);
+  });
+
+  it('should call deletePostApi correctly', () => {
+    const response = {
+      message: 'post deleted',
+    };
+    fetch.mockResponse(JSON.stringify(response));
+    deletePostApi('meomeo', 1, 2).then((res) => {
+      expect(res).toMatchObject(response);
+    });
+    expect(fetch.mock.calls.length).toBe(1);
+    expect(fetch.mock.calls[0][0]).toBe(`${process.env.REACT_APP_API_PATH}/categories/1/items/2`);
+  });
+
+  it('should call addPostApi correctly', () => {
+    const response = {
+      message: 'mock',
+    };
+    fetch.mockResponse(JSON.stringify(response));
+    addPostApi('meomeo', 1, {
+      name: 'test',
+      description: 'test',
+      price: 0,
+    }).then((res) => {
+      expect(res).toMatchObject(response);
+    });
+    expect(fetch.mock.calls.length).toBe(1);
+    expect(fetch.mock.calls[0][0]).toBe(`${process.env.REACT_APP_API_PATH}/categories/1/items`);
+  });
+
+  it('should call modifyPostApi correctly', () => {
+    const response = {
+      message: 'mock',
+    };
+    fetch.mockResponse(JSON.stringify(response));
+    modifyPostApi('meomeo', 1, 2, {
+      name: 'test',
+      description: 'test',
+      price: 0,
+    }).then((res) => {
+      expect(res).toMatchObject(response);
+    });
+    expect(fetch.mock.calls.length).toBe(1);
+    expect(fetch.mock.calls[0][0]).toBe(`${process.env.REACT_APP_API_PATH}/categories/1/items/2`);
   });
 });

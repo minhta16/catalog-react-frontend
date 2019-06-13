@@ -26,6 +26,13 @@ describe('components/PostItem', () => {
         category_id: '1',
         created: '2019',
       },
+      token: 'minh',
+      category: {
+        name: 'cat',
+        id: '1',
+      },
+      deletePostAndRefetch: jest.fn(),
+      openSnackbar: jest.fn(),
       subtitleLength: 100,
     };
   });

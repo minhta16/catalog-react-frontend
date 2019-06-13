@@ -41,6 +41,9 @@ describe('components/Post', () => {
         description: 'desc',
         id: '1',
       },
+      category: {
+        name: 'name',
+      },
     };
   });
 

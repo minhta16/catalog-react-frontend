@@ -23,12 +23,9 @@ export class PostList extends Component {
         <Typography variant="h4" className="center-margin">
           Your Posts
         </Typography>
-        {posts
-          .slice()
-          .reverse()
-          .map((post) => (
-            <PostItem key={post.id} post={post} openSnackbar={this.closeSnackbar(false)} />
-          ))}
+        {posts.map((post) => (
+          <PostItem key={post.id} post={post} openSnackbar={this.closeSnackbar(false)} />
+        ))}
 
         <InfoSnackbar
           open={openSnackbar}

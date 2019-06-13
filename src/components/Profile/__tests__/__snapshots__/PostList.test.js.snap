@@ -14,17 +14,23 @@ exports[`components/Profile/PostList should render correctly 1`] = `
   >
     Your Posts
   </WithStyles(ForwardRef(Typography))>
-  <PostItem
-    key="bro"
+  <Connect(PostItem)
+    key="1"
+    openSnackbar={[Function]}
     post={
       Object {
         "category_id": "1",
         "created": "2019",
         "description": "bro",
+        "id": "1",
         "name": "bro",
       }
     }
-    subtitleLength={100}
+  />
+  <InfoSnackbar
+    message="Post Deleted!"
+    onClose={[Function]}
+    open={false}
   />
 </div>
 `;

@@ -10,13 +10,7 @@ export const fetchPosts = (id) => (dispatch) =>
   );
 
 export const addPostAndRefetch = (token, categoryId, post) => (dispatch) =>
-  addPostApi(token, categoryId, post).then((data) => {
-    console.log(data);
-    dispatch(fetchPosts(categoryId));
-  });
+  addPostApi(token, categoryId, post).then(() => dispatch(fetchPosts(categoryId)));
 
 export const modifyPostAndRefetch = (token, categoryId, postId, post) => (dispatch) =>
-  modifyPostApi(token, categoryId, postId, post).then((data) => {
-    console.log(data);
-    dispatch(fetchPosts(categoryId));
-  });
+  modifyPostApi(token, categoryId, postId, post).then(() => dispatch(fetchPosts(categoryId)));
