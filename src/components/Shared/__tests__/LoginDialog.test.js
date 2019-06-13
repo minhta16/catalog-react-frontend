@@ -53,4 +53,11 @@ describe('components/LoginDialog', () => {
     usernameText.simulate('change', { target: { id: 'username', value: 'yolo' } });
     expect(wrapper.state().username).toBe('yolo');
   });
+
+  it('should return username_password when default onClick is called ', () => {
+    setup();
+    LoginDialog.defaultProps.onClick('meomeo', 'mimi').then((retVal) => {
+      expect(retVal).toBe('meomeo_mimi');
+    });
+  });
 });

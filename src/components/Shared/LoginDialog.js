@@ -85,7 +85,7 @@ LoginDialog.propTypes = {
 
 LoginDialog.defaultProps = {
   onClose: () => {},
-  onClick: async (username, password) => username + password,
+  onClick: async (username, password) => `${username}_${password}`,
   open: true,
 };
 export default LoginDialog;

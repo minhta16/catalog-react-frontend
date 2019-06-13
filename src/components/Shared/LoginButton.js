@@ -50,7 +50,13 @@ export class LoginButton extends Component {
             <Typography variant="body1">Profile</Typography>
           </Grid>
         </MenuItem>
-        <MenuItem onClick={this.handleSignOut} component={Link} exact="true" to="/">
+        <MenuItem
+          id="login-button-logout"
+          onClick={this.handleSignOut}
+          component={Link}
+          exact="true"
+          to="/"
+        >
           <ExitIcon color="primary" style={{ margin: '0 0.5rem 0 0' }} />
           <Typography variant="body1">Logout</Typography>
         </MenuItem>

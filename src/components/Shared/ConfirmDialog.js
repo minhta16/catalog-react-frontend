@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 
 export function ConfirmDialog(props) {
-  const { title, contentText, open, onClose, onConfirm } = props;
+  const { title, contentText, open, onCancel, onClose, onConfirm } = props;
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>{title}</DialogTitle>
@@ -18,10 +18,10 @@ export function ConfirmDialog(props) {
         <Typography variant="body1">{contentText}</Typography>
       </DialogContent>
       <DialogActions>
-        <Button id="confirm-dialog-login" onClick={onConfirm} color="primary">
+        <Button id="confirm-dialog-confirm" onClick={onConfirm} color="primary">
           Confirm
         </Button>
-        <Button id="login-dialog-close" onClick={onClose}>
+        <Button id="confirm-dialog-cancel" onClick={onCancel}>
           Cancel
         </Button>
       </DialogActions>
@@ -33,16 +33,18 @@ ConfirmDialog.propTypes = {
   title: PropTypes.string,
   contentText: PropTypes.string,
   open: PropTypes.bool,
-  onClose: PropTypes.func,
+  onCancel: PropTypes.func,
   onConfirm: PropTypes.func,
+  onClose: PropTypes.func,
 };
 
 ConfirmDialog.defaultProps = {
   title: '',
   contentText: '',
   open: false,
-  onClose: () => {},
+  onCancel: () => {},
   onConfirm: () => {},
+  onClose: () => {},
 };
 
 export default ConfirmDialog;

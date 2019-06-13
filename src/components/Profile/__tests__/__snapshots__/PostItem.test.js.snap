@@ -110,6 +110,7 @@ exports[`components/PostItem should render correctly 1`] = `
   </WithStyles(ForwardRef(Menu))>
   <ConfirmDialog
     contentText="Are you sure you want to delete bro?"
+    onCancel={[Function]}
     onClose={[Function]}
     onConfirm={[Function]}
     open={false}

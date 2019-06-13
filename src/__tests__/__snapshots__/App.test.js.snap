@@ -340,7 +340,7 @@ exports[`src/App should render App without crashing 1`] = `
                 "$$typeof": Symbol(react.memo),
                 "WrappedComponent": [Function],
                 "compare": null,
-                "displayName": "Connect(Post)",
+                "displayName": "Connect(Profile)",
                 "type": [Function],
               }
             }

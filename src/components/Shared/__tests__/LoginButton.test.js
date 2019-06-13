@@ -34,6 +34,16 @@ describe('components/LoginButton', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should call signOut and handleClsoeMenu when Log out button is clicked', () => {
+    setup();
+    wrapper.instance().handleCloseMenu = jest.fn();
+    update();
+    const logout = wrapper.find('#login-button-logout');
+    logout.simulate('click');
+    expect(props.signOut).toHaveBeenCalled();
+    expect(wrapper.instance().handleCloseMenu).toHaveBeenCalled();
+  });
+
   it('should call handleClickAvatar when avatar is clicked', () => {
     setup();
     wrapper.instance().handleClickAvatar = jest.fn();

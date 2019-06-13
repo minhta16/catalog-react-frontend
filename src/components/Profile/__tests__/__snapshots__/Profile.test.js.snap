@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/PostItem should render correctly 1`] = `
+<WithStyles(ForwardRef(Container))
+  maxWidth="lg"
+>
+  <UserPostsPaper
+    posts={
+      Array [
+        Object {
+          "description": "meo",
+          "name": "meo",
+        },
+      ]
+    }
+    token="minh"
+    username="minh"
+  />
+</WithStyles(ForwardRef(Container))>
+`;

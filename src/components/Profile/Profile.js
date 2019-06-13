@@ -6,7 +6,7 @@ import { Container } from '@material-ui/core';
 import { fetchCurrentUserPost as fetchCurrentUserPostRedux } from 'actions/users';
 import { selectCurrentUser, selectCurrentUserPosts } from 'selectors/users';
 
-export class Post extends Component {
+export class Profile extends Component {
   componentDidMount() {
     const { fetchCurrentUserPost, currentUser } = this.props;
     fetchCurrentUserPost(currentUser.token);
@@ -25,7 +25,7 @@ export class Post extends Component {
     );
   }
 }
-Post.propTypes = {
+Profile.propTypes = {
   currentUser: PropTypes.object.isRequired,
   fetchCurrentUserPost: PropTypes.func.isRequired,
   currentUserPosts: PropTypes.array.isRequired,
@@ -43,4 +43,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Post);
+)(Profile);

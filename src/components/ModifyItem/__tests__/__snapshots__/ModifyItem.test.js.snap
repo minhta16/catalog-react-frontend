@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/ModifyItem should render correctly 1`] = `
+<WithStyles(ForwardRef(Container))
+  maxWidth="lg"
+>
+  <WithStyles(ForwardRef(Paper))
+    className="paper"
+  >
+    <WithStyles(ForwardRef(Typography))
+      variant="h4"
+    >
+      Edit Post
+    </WithStyles(ForwardRef(Typography))>
+    <form
+      autoComplete="off"
+    >
+      <WithStyles(ForwardRef(TextField))
+        fullWidth={true}
+        id="title"
+        label="Title"
+        margin="normal"
+        onChange={[Function]}
+        required={true}
+        value="haha"
+      />
+      <WithStyles(ForwardRef(TextField))
+        fullWidth={true}
+        id="description"
+        label="Description"
+        margin="normal"
+        multiline={true}
+        onChange={[Function]}
+        required={true}
+        value="haha"
+      />
+    </form>
+  </WithStyles(ForwardRef(Paper))>
+</WithStyles(ForwardRef(Container))>
+`;

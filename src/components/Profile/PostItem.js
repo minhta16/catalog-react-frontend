@@ -97,6 +97,7 @@ export class PostItem extends Component {
           open={openConfirm}
           title="Delete"
           onConfirm={this.toggleDeleteDialog}
+          onCancel={this.toggleDeleteDialog}
           onClose={this.toggleDeleteDialog}
           contentText={`Are you sure you want to delete ${post.name}?`}
         />

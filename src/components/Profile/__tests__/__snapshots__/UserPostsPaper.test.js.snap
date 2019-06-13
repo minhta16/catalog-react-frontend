@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/PostItem should render correctly 1`] = `
+<WithStyles(ForwardRef(Paper))
+  className="left-margin"
+>
+  <WithStyles(ForwardRef(Grid))
+    alignItems="center"
+    container={true}
+  >
+    <WithStyles(ForwardRef(Avatar))
+      style={
+        Object {
+          "backgroundColor": "#fdb600",
+          "color": "#fff",
+          "margin": "0.5rem",
+        }
+      }
+    >
+      m
+    </WithStyles(ForwardRef(Avatar))>
+    <WithStyles(ForwardRef(Typography))
+      variant="body1"
+    >
+      minh
+    </WithStyles(ForwardRef(Typography))>
+  </WithStyles(ForwardRef(Grid))>
+  <WithStyles(ForwardRef(Divider)) />
+  <PostList
+    posts={
+      Array [
+        Object {
+          "description": "meo",
+          "name": "meo",
+        },
+      ]
+    }
+  />
+</WithStyles(ForwardRef(Paper))>
+`;
