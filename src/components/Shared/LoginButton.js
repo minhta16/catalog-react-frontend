@@ -64,7 +64,7 @@ export class LoginButton extends Component {
     );
     return (
       <div>
-        {Object.keys(currentUser).length ? (
+        {currentUser.token ? (
           <Grid container alignItems="center">
             <Typography variant="body1">{`Welcome, ${currentUser.username}`}</Typography>
             <Avatar

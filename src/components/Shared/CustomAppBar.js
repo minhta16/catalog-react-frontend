@@ -14,11 +14,25 @@ export class CustomAppBar extends Component {
     open: false,
   };
 
-  handleLoginClick = () => {
-    const { open } = this.state;
+  hanleOpenDialog = () => {
     this.setState({
-      open: !open,
+      open: true,
     });
+  };
+
+  handleCloseDialog = () => {
+    const { signOut } = this.props;
+    this.setState({
+      open: false,
+    });
+    signOut();
+  };
+
+  componentDidUpdate = (prevProps) => {
+    const { currentUser } = this.props;
+    if (!prevProps.currentUser.token && currentUser.token) {
+      this.handleCloseDialog();
+    }
   };
 
   render() {
@@ -36,10 +50,16 @@ export class CustomAppBar extends Component {
             variant="contained"
             color="primary"
             currentUser={currentUser}
-            onClick={this.handleLoginClick}
+            onClick={this.hanleOpenDialog}
             signOut={signOut}
           />
-          <LoginDialog open={open} onClose={this.handleLoginClick} onClick={signIn} />
+          <LoginDialog
+            open={open}
+            onClose={this.handleCloseDialog}
+            onClick={signIn}
+            error={currentUser.error}
+            errorMessage={currentUser.errorMessage}
+          />
         </Toolbar>
       </AppBar>
     );

@@ -11,5 +11,10 @@ exports[`components/Post should render correctly 1`] = `
     created="2019"
     header="name"
   />
+  <InfoSnackbar
+    message="tru"
+    onClose={[Function]}
+    open={true}
+  />
 </WithStyles(ForwardRef(Container))>
 `;

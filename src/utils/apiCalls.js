@@ -1,3 +1,8 @@
+const handleError = (err) =>
+  new Promise((resolve, reject) => {
+    reject(err);
+  });
+
 export const fetchApiCategories = async () => {
   const params = {
     headers: {
@@ -58,9 +63,10 @@ export const signInApi = async (username, password) => {
     }),
   };
 
-  const userData = await fetch(`${process.env.REACT_APP_API_PATH}/auth`, params)
-    .then((res) => res.json())
-    .catch(console.log);
+  const userData = await fetch(`${process.env.REACT_APP_API_PATH}/auth`, params).then((res) => {
+    if (!res.ok) return handleError(res);
+    return res.json();
+  });
   return userData;
 };
 

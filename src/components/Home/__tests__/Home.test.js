@@ -25,6 +25,9 @@ describe('views/Home', () => {
           id: '1',
         },
       },
+      location: {
+        snackbarMess: 'true',
+      },
       fetchPosts: jest.fn(),
       categories: [
         {

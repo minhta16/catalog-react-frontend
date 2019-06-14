@@ -23,7 +23,7 @@ export class Home extends Component {
       fetchPosts(match.params.id);
     }
     if (location.snackbarMess) {
-      this.closeSnackbar(false);
+      this.closeSnackbar(false)();
     }
   }
 

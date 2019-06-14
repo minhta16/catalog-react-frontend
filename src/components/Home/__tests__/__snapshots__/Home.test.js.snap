@@ -35,5 +35,10 @@ exports[`views/Home should render correctly 1`] = `
     selectedCatId="1"
     selectedCatItems={Array []}
   />
+  <InfoSnackbar
+    message="true"
+    onClose={[Function]}
+    open={true}
+  />
 </WithStyles(ForwardRef(Container))>
 `;

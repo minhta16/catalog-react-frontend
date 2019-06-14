@@ -1,4 +1,10 @@
-import { FETCH_USERS, SIGN_IN, SIGN_OUT, FETCH_CURRENT_USER_POST } from '../actions/types';
+import {
+  FETCH_USERS,
+  SIGN_IN,
+  SIGN_OUT,
+  FETCH_CURRENT_USER_POST,
+  AUTH_ERROR,
+} from '../actions/types';
 
 export const usersReducer = (state = {}, action) => {
   switch (action.type) {
@@ -9,14 +15,23 @@ export const usersReducer = (state = {}, action) => {
   }
 };
 
-export const currentUserReducer = (state = {}, action) => {
+const initialState = {
+  username: '',
+  token: '',
+  posts: {},
+  error: false,
+  errorMessage: '',
+};
+export const currentUserReducer = (state = initialState, action) => {
   switch (action.type) {
     case SIGN_IN:
-      return action.payload;
+      return { ...initialState, ...action.payload };
     case SIGN_OUT:
-      return action.payload;
+      return initialState;
     case FETCH_CURRENT_USER_POST:
       return { ...state, posts: action.payload };
+    case AUTH_ERROR:
+      return { ...state, error: true, errorMessage: 'Invalid username or password. Try again.' };
     default:
       return state;
   }

@@ -8,6 +8,7 @@ import {
   DialogActions,
   Button,
   Link,
+  Typography,
 } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -18,10 +19,9 @@ export class LoginDialog extends Component {
   };
 
   onClickSubmit = () => {
-    const { onClick, onClose } = this.props;
+    const { onClick } = this.props;
     const { username, password } = this.state;
     onClick(username, password);
-    onClose();
   };
 
   handleChange = (e) => {
@@ -31,12 +31,17 @@ export class LoginDialog extends Component {
   };
 
   render() {
-    const { open, onClose } = this.props;
+    const { open, onClose, error, errorMessage } = this.props;
     const { username, password } = this.state;
     return (
       <Dialog open={open} onClose={onClose}>
         <DialogTitle>Login</DialogTitle>
         <DialogContent>
+          {error && (
+            <Typography variant="body1" color="error">
+              {`${errorMessage}`}
+            </Typography>
+          )}
           <form autoComplete="off">
             <TextField
               required
@@ -81,11 +86,15 @@ LoginDialog.propTypes = {
   open: PropTypes.bool,
   onClose: PropTypes.func,
   onClick: PropTypes.func,
+  error: PropTypes.bool,
+  errorMessage: PropTypes.string,
 };
 
 LoginDialog.defaultProps = {
   onClose: () => {},
   onClick: async (username, password) => `${username}_${password}`,
   open: true,
+  error: false,
+  errorMessage: '',
 };
 export default LoginDialog;

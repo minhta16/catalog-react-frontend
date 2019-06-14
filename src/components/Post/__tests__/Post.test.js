@@ -3,6 +3,7 @@ import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { configure, shallow } from 'enzyme';
 import { Post } from 'components/Post/Post';
+import InfoSnackbar from 'components/Shared/InfoSnackbar';
 
 configure({ adapter: new Adapter() });
 describe('components/Post', () => {
@@ -27,6 +28,9 @@ describe('components/Post', () => {
           id: '1',
         },
       },
+      location: {
+        snackbarMess: 'tru',
+      },
       selectedCatItems: {
         1: {
           name: 'name',
@@ -50,5 +54,24 @@ describe('components/Post', () => {
   it('should render correctly', () => {
     setup();
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should call closeSnackbar() correctly', () => {
+    setup();
+    const snackbar = wrapper.find(InfoSnackbar);
+    snackbar.simulate('close');
+    expect(wrapper.state().openSnackbar).toBe(false);
+  });
+
+  it('should call closeSnackbar(true) if snackbarMess exists', () => {
+    props.location.snackbarMess = 'asd';
+    setup();
+    expect(wrapper.state().openSnackbar).toBe(true);
+  });
+
+  it('should call closeSnackbar(false) if snackbarMess does not exists', () => {
+    props.location.snackbarMess = '';
+    setup();
+    expect(wrapper.state().openSnackbar).toBe(false);
   });
 });

@@ -4,7 +4,7 @@ import {
   fetchCurrentUserPostsApi,
   deletePostApi,
 } from 'utils/apiCalls';
-import { FETCH_USERS, SIGN_IN, SIGN_OUT, FETCH_CURRENT_USER_POST } from './types';
+import { FETCH_USERS, SIGN_IN, SIGN_OUT, FETCH_CURRENT_USER_POST, AUTH_ERROR } from './types';
 
 export const fetchUsers = () => (dispatch) =>
   dispatch({
@@ -13,17 +13,24 @@ export const fetchUsers = () => (dispatch) =>
   });
 
 export const signIn = (username, password) => (dispatch) =>
-  signInApi(username, password).then((data) => {
-    const currentUser = {
-      username,
-      token: data.access_token,
-      posts: {},
-    };
-    return dispatch({
-      type: SIGN_IN,
-      payload: currentUser,
-    });
-  });
+  signInApi(username, password)
+    .then((data) => {
+      const currentUser = {
+        username,
+        token: data.access_token,
+        posts: {},
+      };
+      return dispatch({
+        type: SIGN_IN,
+        payload: currentUser,
+      });
+    })
+    .catch((error) =>
+      dispatch({
+        type: AUTH_ERROR,
+        payload: error,
+      }),
+    );
 
 export const signOut = () => ({
   type: SIGN_OUT,
@@ -31,17 +38,24 @@ export const signOut = () => ({
 });
 
 export const createUserAndSignIn = (username, password, email, name) => (dispatch) =>
-  createUserAndSigninApi(username, password, email, name).then((data) => {
-    const currentUser = {
-      username,
-      token: data.access_token,
-      posts: {},
-    };
-    return dispatch({
-      type: SIGN_IN,
-      payload: currentUser,
-    });
-  });
+  createUserAndSigninApi(username, password, email, name)
+    .then((data) => {
+      const currentUser = {
+        username,
+        token: data.access_token,
+        posts: {},
+      };
+      return dispatch({
+        type: SIGN_IN,
+        payload: currentUser,
+      });
+    })
+    .catch((error) =>
+      dispatch({
+        type: AUTH_ERROR,
+        payload: error,
+      }),
+    );
 
 export const fetchCurrentUserPost = (token) => (dispatch) =>
   fetchCurrentUserPostsApi(token).then((data) => {

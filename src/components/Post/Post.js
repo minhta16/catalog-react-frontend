@@ -15,7 +15,7 @@ export class Post extends Component {
   componentDidMount = () => {
     const { location } = this.props;
     if (location.snackbarMess) {
-      this.closeSnackbar(false);
+      this.closeSnackbar(false)();
     }
   };
 
