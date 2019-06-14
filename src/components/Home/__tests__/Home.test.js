@@ -10,7 +10,7 @@ describe('views/Home', () => {
 
   // const update = () => {
   //   wrapper.update();
-  //   // warning = wrapper.find(Warning);
+  //   wrapper.instance().forceUpdate();
   // };
 
   const setup = () => {

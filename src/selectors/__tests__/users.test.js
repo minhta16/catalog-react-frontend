@@ -63,6 +63,11 @@ describe('selectors/users', () => {
     expect(selectCurrentUserPosts(state, 'reverse')).toMatchObject(postsArr.slice().reverse());
   });
 
+  it('should return empty if state.posts is emptyy', () => {
+    expect(selectCurrentUserPosts({ currentUser: {} })).toMatchObject({});
+    expect(selectCurrentUserPosts({ currentUser: {} }, 'reverse')).toMatchObject({});
+  });
+
   it('should select the correct post with id', () => {
     expect(selectCurrentUserPost(state, '1')).toMatchObject({
       name: 'one',

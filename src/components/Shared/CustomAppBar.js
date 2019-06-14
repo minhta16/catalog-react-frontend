@@ -14,7 +14,7 @@ export class CustomAppBar extends Component {
     open: false,
   };
 
-  hanleOpenDialog = () => {
+  handleOpenDialog = () => {
     this.setState({
       open: true,
     });
@@ -50,7 +50,7 @@ export class CustomAppBar extends Component {
             variant="contained"
             color="primary"
             currentUser={currentUser}
-            onClick={this.hanleOpenDialog}
+            onClick={this.handleOpenDialog}
             signOut={signOut}
           />
           <LoginDialog

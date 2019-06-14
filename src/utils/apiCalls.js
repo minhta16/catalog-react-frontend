@@ -1,5 +1,5 @@
-const handleError = (err) =>
-  new Promise((resolve, reject) => {
+export const handleError = (err) =>
+  new Promise((_resolve, reject) => {
     reject(err);
   });
 

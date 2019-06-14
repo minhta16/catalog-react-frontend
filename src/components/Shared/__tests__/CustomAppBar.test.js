@@ -5,7 +5,7 @@ import { CustomAppBar } from 'components/Shared/CustomAppBar';
 import LoginButton from 'components/Shared/LoginButton';
 import LoginDialog from 'components/Shared/LoginDialog';
 
-describe('components/CustomAppBar', () => {
+describe('components/Shared/CustomAppBar', () => {
   let wrapper;
   let props;
   // let warning;
@@ -37,13 +37,17 @@ describe('components/CustomAppBar', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should call handleLoginClick when LoginButton is clicked', () => {
+  it('should handle handleOpenDialog() correctly', () => {
     setup();
-    wrapper.instance().handleLoginClick = jest.fn();
-    update();
-    const loginButton = wrapper.find(LoginButton);
-    loginButton.simulate('click');
-    expect(wrapper.instance().handleLoginClick).toHaveBeenCalled();
+    wrapper.instance().handleOpenDialog();
+    expect(wrapper.state().open).toBe(true);
+  });
+
+  it('should handle handleCloseDialog() correctly', () => {
+    setup();
+    wrapper.instance().handleCloseDialog();
+    expect(wrapper.state().open).toBe(false);
+    expect(props.signOut).toHaveBeenCalled();
   });
 
   it('should call signIn when Dialog is clicked', () => {
@@ -52,6 +56,27 @@ describe('components/CustomAppBar', () => {
     const loginDialog = wrapper.find(LoginDialog);
     loginDialog.simulate('click');
     expect(signIn).toHaveBeenCalled();
+  });
+
+  it('should handle componentDidUpdate correctly', () => {
+    props.currentUser.token = 'meomeo';
+    setup();
+    wrapper.instance().handleCloseDialog = jest.fn();
+    update();
+
+    wrapper.instance().componentDidUpdate({
+      currentUser: {
+        token: 'still meomeo',
+      },
+    });
+    expect(wrapper.instance().handleCloseDialog).not.toHaveBeenCalled();
+
+    wrapper.instance().componentDidUpdate({
+      currentUser: {
+        token: '',
+      },
+    });
+    expect(wrapper.instance().handleCloseDialog).toHaveBeenCalled();
   });
 
   it('should update state.open when handleLoginClick is called', () => {

@@ -82,8 +82,15 @@ export const fetchApiItems = (id) =>
   });
 
 export const signInApi = (username, password) =>
-  new Promise((resolve) => {
-    process.nextTick(() => resolve(responseToken));
+  new Promise((resolve, reject) => {
+    process.nextTick(() =>
+      username !== 'error'
+        ? resolve(responseToken)
+        : // eslint-disable-next-line prefer-promise-reject-errors
+          reject({
+            ok: false,
+          }),
+    );
   });
 
 export const createUserAndSigninApi = (username, name, email, password) =>

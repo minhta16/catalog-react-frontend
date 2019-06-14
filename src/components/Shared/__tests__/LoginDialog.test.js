@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import LoginDialog from 'components/Shared/LoginDialog';
 import { TextField } from '@material-ui/core';
 
-describe('components/LoginDialog', () => {
+describe('components/Shared/LoginDialog', () => {
   let wrapper;
   let props;
   // let warning;
@@ -18,6 +18,8 @@ describe('components/LoginDialog', () => {
       open: true,
       onClose: jest.fn(),
       onClick: jest.fn(),
+      error: false,
+      errorMessage: '',
     };
   });
 
@@ -31,12 +33,10 @@ describe('components/LoginDialog', () => {
     expect(wrapper.find(TextField).length).toBe(2);
   });
 
-  it('should call onClickSubmit calls onClick and onClose', () => {
+  it('should call onClickSubmit -> onClose when submitted', () => {
     setup();
-    const { onClick, onClose } = props;
     wrapper.instance().onClickSubmit();
-    expect(onClick).toHaveBeenCalled();
-    expect(onClose).toHaveBeenCalled();
+    expect(props.onClick).toHaveBeenCalled();
   });
 
   it('should call onClose when cancel is clicked', () => {
@@ -59,5 +59,17 @@ describe('components/LoginDialog', () => {
     LoginDialog.defaultProps.onClick('meomeo', 'mimi').then((retVal) => {
       expect(retVal).toBe('meomeo_mimi');
     });
+  });
+
+  it('should render error Typography when error is true', () => {
+    props.error = true;
+    setup();
+    expect(wrapper.find('[color="error"]').length).toBe(1);
+  });
+
+  it('should not render error Typography when error is false', () => {
+    props.error = false;
+    setup();
+    expect(wrapper.find('[color="error"]').length).toBe(0);
   });
 });

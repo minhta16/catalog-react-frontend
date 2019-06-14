@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/LoginDialog should render correctly 1`] = `
+exports[`components/Shared/LoginDialog should render correctly 1`] = `
 <WithStyles(ForwardRef(Dialog))
   onClose={[MockFunction]}
   open={true}

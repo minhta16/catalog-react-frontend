@@ -8,7 +8,7 @@ import {
   fetchCurrentUserPost,
   deletePostAndRefetch,
 } from '../users';
-import { SIGN_IN, FETCH_USERS, FETCH_CURRENT_USER_POST } from '../types';
+import { SIGN_IN, FETCH_USERS, FETCH_CURRENT_USER_POST, AUTH_ERROR } from '../types';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -40,6 +40,18 @@ describe('actions/users', () => {
           username: 'abc',
           token: 'abc',
           posts: {},
+        },
+      });
+    });
+  });
+
+  it('should create AUTH_ERROR when sign in causes an error', async () => {
+    await store.dispatch(signIn('error', 'abc')).then(() => {
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: AUTH_ERROR,
+        payload: {
+          ok: false,
         },
       });
     });
@@ -89,7 +101,8 @@ describe('actions/users', () => {
       });
     });
   });
-  it('should create FETCH_CURRENT_USER_POST when done fetching', async () => {
+
+  it('should create FETCH_CURRENT_USER_POST when done deleting post', async () => {
     await store.dispatch(deletePostAndRefetch('abcxyz', 1, 2)).then(() => {
       const actions = store.getActions();
       expect(actions[0]).toMatchObject({

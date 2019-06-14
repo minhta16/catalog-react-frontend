@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/CustomAppBar should render correctly 1`] = `
+exports[`components/Shared/CustomAppBar should render correctly 1`] = `
 <WithStyles(ForwardRef(AppBar))
   color="primary"
 >

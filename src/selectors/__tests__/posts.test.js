@@ -28,6 +28,12 @@ describe('selectors/posts', () => {
     expect(selectAllPosts(state)).toMatchObject(posts);
   });
 
+  it('should return empty if state.posts is undefined', () => {
+    expect(selectAllPosts({})).toMatchObject({});
+
+    expect(selectAllPosts({}, 'reverse')).toMatchObject({});
+  });
+
   it('should reverse all posts if we use reverse', () => {
     const posts = [{ name: 'yo', id: '1' }, { name: 'bro', id: '2' }];
     expect(selectAllPosts(state, 'reverse')).toMatchObject(posts.reverse());
