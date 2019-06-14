@@ -78,9 +78,12 @@ export class ModifyItem extends Component {
     const { match, categories } = this.props;
 
     if (redirect) {
-      let path = `/${match.params.id}/${match.params.postId}`;
+      let path = {
+        pathname: `/${match.params.id}/${match.params.postId}`,
+        snackbarMess: 'Post edited!',
+      };
       if (!editing) {
-        path = `/${match.params.id}`;
+        path = { pathname: `/${selectedCategory}`, snackbarMess: 'Post created!' };
       }
       return <Redirect exact to={path} />;
     }

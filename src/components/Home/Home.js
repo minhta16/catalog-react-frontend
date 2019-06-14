@@ -9,18 +9,40 @@ import { fetchCategories as fetchCategoriesRedux } from 'actions/categories';
 import { fetchPosts as fetchPostsRedux } from 'actions/posts';
 import { selectAllPosts } from 'selectors/posts';
 import { selectCategories, selectCategory } from 'selectors/categories';
+import InfoSnackbar from 'components/Shared/InfoSnackbar';
 
 export class Home extends Component {
+  state = {
+    openSnackbar: false,
+  };
+
   componentDidMount() {
-    const { fetchCategories, match, fetchPosts } = this.props;
+    const { fetchCategories, match, fetchPosts, location } = this.props;
     fetchCategories();
     if (match.params.id) {
       fetchPosts(match.params.id);
     }
+    if (location.snackbarMess) {
+      this.closeSnackbar(false);
+    }
   }
 
+  closeSnackbar = (close) => () => {
+    this.setState({
+      openSnackbar: !close,
+    });
+  };
+
   render() {
-    const { match, categories, selectedCatItems, fetchPosts, selectedCategory } = this.props;
+    const {
+      match,
+      categories,
+      selectedCatItems,
+      fetchPosts,
+      selectedCategory,
+      location,
+    } = this.props;
+    const { openSnackbar } = this.state;
     return (
       <Container maxWidth="lg">
         <CategoriesTable
@@ -29,6 +51,11 @@ export class Home extends Component {
           selectedCat={selectedCategory}
           selectedCatItems={selectedCatItems}
           fetchPosts={fetchPosts}
+        />
+        <InfoSnackbar
+          open={openSnackbar}
+          onClose={this.closeSnackbar(true)}
+          message={location.snackbarMess}
         />
       </Container>
     );
@@ -42,6 +69,7 @@ Home.propTypes = {
   fetchPosts: PropTypes.func.isRequired,
   selectedCatItems: PropTypes.array,
   selectedCategory: PropTypes.object,
+  location: PropTypes.object.isRequired,
 };
 
 Home.defaultProps = {
