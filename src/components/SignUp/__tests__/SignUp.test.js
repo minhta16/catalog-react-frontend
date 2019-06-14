@@ -2,7 +2,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { SignUp } from 'components/SignUp/SignUp';
-import { register } from 'serviceWorker';
 
 describe('views/SignUp', () => {
   let wrapper;

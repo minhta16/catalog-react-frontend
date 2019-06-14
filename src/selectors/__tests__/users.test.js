@@ -1,57 +1,66 @@
 /* eslint-disable no-undef */
-import { selectCurrentUser, selectCurrentUserPosts, selectCurrentUserPost } from '../users';
+import {
+  selectCurrentUser,
+  selectCurrentUserPosts,
+  selectCurrentUserPost,
+  selectCurrentUserProp,
+} from '../users';
 
 describe('selectors/users', () => {
   let state;
 
+  const posts = {
+    1: {
+      name: 'one',
+      id: '1',
+    },
+    2: {
+      name: 'two',
+      id: '2',
+    },
+  };
+
+  const postsArr = [
+    {
+      name: 'one',
+      id: '1',
+    },
+    {
+      name: 'two',
+      id: '2',
+    },
+  ];
+
+  const currentUser = {
+    name: 'abc',
+    token: 'abc',
+    posts,
+  };
+
   beforeEach(() => {
     state = {
-      currentUser: {
-        name: 'abc',
-        token: 'abc',
-        posts: {
-          1: {
-            name: 'one',
-            id: '1',
-          },
-          2: {
-            name: 'two',
-            id: '2',
-          },
-        },
-      },
+      currentUser,
     };
   });
 
   it('should select the correct user', () => {
-    const currentUser = {
-      name: 'abc',
-      token: 'abc',
-      posts: {
-        1: {
-          name: 'one',
-          id: '1',
-        },
-        2: {
-          name: 'two',
-          id: '2',
-        },
-      },
-    };
     expect(selectCurrentUser(state)).toMatchObject(currentUser);
   });
 
+  it('should select the user prop with selectCurrentUserProp', () => {
+    expect(selectCurrentUserProp(state, 'name')).toBe('abc');
+
+    expect(selectCurrentUserProp(state, 'token')).toBe('abc');
+
+    expect(selectCurrentUserProp(state, 'posts')).toBe(posts);
+  });
+
   it('should select the correct post', () => {
-    expect(selectCurrentUserPosts(state)).toMatchObject([
-      {
-        name: 'one',
-        id: '1',
-      },
-      {
-        name: 'two',
-        id: '2',
-      },
-    ]);
+    expect(selectCurrentUserPosts(state)).toMatchObject(postsArr);
+  });
+
+  it('should revsere the posts if "reverse" is passed', () => {
+    expect(selectCurrentUserPosts(state, 'reverse')).toMatchObject(postsArr.slice().reverse());
   });
 
   it('should select the correct post with id', () => {

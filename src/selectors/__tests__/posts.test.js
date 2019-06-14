@@ -27,4 +27,9 @@ describe('selectors/posts', () => {
     const posts = [{ name: 'yo', id: '1' }, { name: 'bro', id: '2' }];
     expect(selectAllPosts(state)).toMatchObject(posts);
   });
+
+  it('should reverse all posts if we use reverse', () => {
+    const posts = [{ name: 'yo', id: '1' }, { name: 'bro', id: '2' }];
+    expect(selectAllPosts(state, 'reverse')).toMatchObject(posts.reverse());
+  });
 });

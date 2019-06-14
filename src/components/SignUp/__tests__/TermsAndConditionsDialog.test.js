@@ -32,4 +32,10 @@ describe('components/TermsAndConditionsDialog', () => {
     const { onClose } = props;
     expect(onClose).toHaveBeenCalled();
   });
+
+  it('should call onClose defaultProps', () => {
+    setup();
+    expect(TermsAndConditionsDialog.defaultProps.onClose).toBeDefined();
+    expect(TermsAndConditionsDialog.defaultProps.onClose()).toBe(undefined);
+  });
 });
