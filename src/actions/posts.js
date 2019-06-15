@@ -1,16 +1,16 @@
-import { fetchApiItems, addPostApi, modifyPostApi } from 'utils/apiCalls';
-import { FETCH_POSTS } from './types';
+import api from 'utils/apiCalls';
+import { PostsType } from './types';
 
 export const fetchPosts = (id) => (dispatch) =>
-  fetchApiItems(id).then((fetchedItems) =>
+  api.fetchItems(id).then((fetchedItems) =>
     dispatch({
-      type: FETCH_POSTS,
+      type: PostsType.FETCH_POSTS,
       payload: fetchedItems,
     }),
   );
 
 export const addPostAndRefetch = (token, categoryId, post) => (dispatch) =>
-  addPostApi(token, categoryId, post).then(() => dispatch(fetchPosts(categoryId)));
+  api.addPost(token, categoryId, post).then(() => dispatch(fetchPosts(categoryId)));
 
 export const modifyPostAndRefetch = (token, categoryId, postId, post) => (dispatch) =>
-  modifyPostApi(token, categoryId, postId, post).then(() => dispatch(fetchPosts(categoryId)));
+  api.modifyPost(token, categoryId, postId, post).then(() => dispatch(fetchPosts(categoryId)));

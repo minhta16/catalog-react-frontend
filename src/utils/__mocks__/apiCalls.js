@@ -1,31 +1,52 @@
 /* eslint-disable no-unused-vars */
-export const responseCat = {
-  total_categories: 100,
-  categories: [
-    {
-      id: 21,
-      name: 'category name',
-      description: 'category description',
-      created: '2015-08-05T08:40:51.620Z',
-      updated: '2018-04-03T08:40:51.620Z',
-    },
-    {
-      id: 22,
-      name: 'category name',
-      description: 'category description',
-      created: '2015-08-05T08:40:51.620Z',
-      updated: '2018-04-03T08:40:51.620Z',
-    },
-  ],
-};
-export const fetchApiCategories = () =>
-  new Promise((resolve, reject) => {
-    process.nextTick(() => resolve(responseCat));
-  });
+class Api {
+  responseCat = {
+    total_categories: 100,
+    categories: [
+      {
+        id: 21,
+        name: 'category name',
+        description: 'category description',
+        created: '2015-08-05T08:40:51.620Z',
+        updated: '2018-04-03T08:40:51.620Z',
+      },
+      {
+        id: 22,
+        name: 'category name',
+        description: 'category description',
+        created: '2015-08-05T08:40:51.620Z',
+        updated: '2018-04-03T08:40:51.620Z',
+      },
+    ],
+  };
 
-export const responseItems = {
-  total_items: 100,
-  items: [
+  responseItems = {
+    total_items: 100,
+    items: [
+      {
+        id: 4,
+        name: 'item name 1',
+        description: 'item description 1',
+        price: 30.5,
+        user_id: 4,
+        category_id: 2,
+        created: '2015-08-05T08:40:51.620Z',
+        updated: '2018-04-03T08:40:51.620Z',
+      },
+      {
+        id: 8,
+        name: 'item name 2',
+        description: 'item description 2',
+        price: 32.7,
+        user_id: 18,
+        category_id: 2,
+        created: '2015-08-05T08:40:51.620Z',
+        updated: '2018-04-03T08:40:51.620Z',
+      },
+    ],
+  };
+
+  responseItemsArr = [
     {
       id: 4,
       name: 'item name 1',
@@ -46,82 +67,66 @@ export const responseItems = {
       created: '2015-08-05T08:40:51.620Z',
       updated: '2018-04-03T08:40:51.620Z',
     },
-  ],
-};
+  ];
 
-export const responseItemsArr = [
-  {
-    id: 4,
-    name: 'item name 1',
-    description: 'item description 1',
-    price: 30.5,
-    user_id: 4,
-    category_id: 2,
-    created: '2015-08-05T08:40:51.620Z',
-    updated: '2018-04-03T08:40:51.620Z',
-  },
-  {
-    id: 8,
-    name: 'item name 2',
-    description: 'item description 2',
-    price: 32.7,
-    user_id: 18,
-    category_id: 2,
-    created: '2015-08-05T08:40:51.620Z',
-    updated: '2018-04-03T08:40:51.620Z',
-  },
-];
+  responseToken = {
+    access_token: 'abc',
+  };
 
-export const responseToken = {
-  access_token: 'abc',
-};
+  fetchCategories = () =>
+    new Promise((resolve, reject) => {
+      process.nextTick(() => resolve(this.responseCat));
+    });
 
-export const fetchApiItems = (id) =>
-  new Promise((resolve) => {
-    process.nextTick(() => resolve(responseItems));
-  });
+  fetchItems = (id) =>
+    new Promise((resolve) => {
+      process.nextTick(() => resolve(this.responseItems));
+    });
 
-export const signInApi = (username, password) =>
-  new Promise((resolve, reject) => {
-    process.nextTick(() =>
-      username !== 'error'
-        ? resolve(responseToken)
-        : // eslint-disable-next-line prefer-promise-reject-errors
-          reject({
-            ok: false,
-          }),
-    );
-  });
+  signIn = (username, password) =>
+    new Promise((resolve, reject) => {
+      process.nextTick(() =>
+        username !== 'error'
+          ? resolve(this.responseToken)
+          : // eslint-disable-next-line prefer-promise-reject-errors
+            reject({
+              ok: false,
+            }),
+      );
+    });
 
-export const createUserAndSigninApi = (username, name, email, password) =>
-  new Promise((resolve) => {
-    process.nextTick(() => resolve(responseToken));
-  });
+  createUserAndSignin = (username, name, email, password) =>
+    new Promise((resolve) => {
+      process.nextTick(() => resolve(this.responseToken));
+    });
 
-export const fetchCurrentUserPostsApi = (token) =>
-  new Promise((resolve) => {
-    process.nextTick(() => resolve(responseItemsArr));
-  });
+  fetchCurrentUserPosts = (token) =>
+    new Promise((resolve) => {
+      process.nextTick(() => resolve(this.responseItemsArr));
+    });
 
-export const addPostApi = (token, categoryId, post) =>
-  new Promise((resolve) => {
-    process.nextTick(() =>
-      resolve({
-        message: 'meow',
-      }),
-    );
-  });
+  addPost = (token, categoryId, post) =>
+    new Promise((resolve) => {
+      process.nextTick(() =>
+        resolve({
+          message: 'meow',
+        }),
+      );
+    });
 
-export const modifyPostApi = (token, categoryId, post) =>
-  new Promise((resolve) => {
-    process.nextTick(() =>
-      resolve({
-        message: 'meow',
-      }),
-    );
-  });
+  modifyPost = (token, categoryId, post) =>
+    new Promise((resolve) => {
+      process.nextTick(() =>
+        resolve({
+          message: 'meow',
+        }),
+      );
+    });
 
-export const deletePostApi = (token, categoryId, postId) =>
-  new Promise((resolve) => {
-    process.nextTick(() => resolve(responseItemsArr));
-  });
+  deletePost = (token, categoryId, postId) =>
+    new Promise((resolve) => {
+      process.nextTick(() => resolve(this.responseItemsArr));
+    });
+}
+
+export default new Api();

@@ -1,12 +1,6 @@
 /* eslint-disable no-undef */
 import { usersReducer, currentUserReducer } from '../users';
-import {
-  FETCH_USERS,
-  SIGN_IN,
-  SIGN_OUT,
-  FETCH_CURRENT_USER_POST,
-  AUTH_ERROR,
-} from '../../actions/types';
+import { UsersType } from '../../actions/types';
 
 describe('reducers/users', () => {
   it('should return the initial state', () => {
@@ -15,7 +9,7 @@ describe('reducers/users', () => {
 
   it('should return the payload with FETCH_USERS', () => {
     const action = {
-      type: FETCH_USERS,
+      type: UsersType.FETCH_USERS,
       payload: 'yum',
     };
     expect(usersReducer({}, action)).toEqual(action.payload);
@@ -23,7 +17,7 @@ describe('reducers/users', () => {
 
   it('should return the payload with SIGN_IN', () => {
     const action = {
-      type: SIGN_IN,
+      type: UsersType.SIGN_IN,
       payload: { username: 'meomeo', token: 'abc' },
     };
     expect(currentUserReducer({}, action)).toEqual({
@@ -37,7 +31,7 @@ describe('reducers/users', () => {
 
   it('should return the payload with SIGN_OUT', () => {
     const action = {
-      type: SIGN_OUT,
+      type: UsersType.SIGN_OUT,
       payload: 'yum',
     };
     expect(currentUserReducer({}, action)).toEqual({
@@ -51,7 +45,7 @@ describe('reducers/users', () => {
 
   it('should return the payload in post with FETCH_CURRENT_USER_POST', () => {
     const action = {
-      type: FETCH_CURRENT_USER_POST,
+      type: UsersType.FETCH_CURRENT_USER_POST,
       payload: 'yum',
     };
     expect(currentUserReducer({}, action)).toEqual({ posts: action.payload });
@@ -59,7 +53,7 @@ describe('reducers/users', () => {
 
   it('should return the payload in post with  AUTH_ERROR', () => {
     const action = {
-      type: AUTH_ERROR,
+      type: UsersType.AUTH_ERROR,
       payload: 'yum',
     };
     expect(currentUserReducer({}, action)).toEqual({

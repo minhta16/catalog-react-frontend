@@ -8,7 +8,7 @@ import {
   fetchCurrentUserPost,
   deletePostAndRefetch,
 } from '../users';
-import { SIGN_IN, FETCH_USERS, FETCH_CURRENT_USER_POST, AUTH_ERROR } from '../types';
+import { UsersType } from '../types';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -26,7 +26,7 @@ describe('actions/users', () => {
     store.dispatch(fetchUsers());
     const actions = store.getActions();
     expect(actions[0]).toEqual({
-      type: FETCH_USERS,
+      type: UsersType.FETCH_USERS,
       payload: '',
     });
   });
@@ -35,7 +35,7 @@ describe('actions/users', () => {
     await store.dispatch(signIn('abc', 'abc')).then(() => {
       const actions = store.getActions();
       expect(actions[0]).toEqual({
-        type: SIGN_IN,
+        type: UsersType.SIGN_IN,
         payload: {
           username: 'abc',
           token: 'abc',
@@ -49,7 +49,7 @@ describe('actions/users', () => {
     await store.dispatch(signIn('error', 'abc')).then(() => {
       const actions = store.getActions();
       expect(actions[0]).toEqual({
-        type: AUTH_ERROR,
+        type: UsersType.AUTH_ERROR,
         payload: {
           ok: false,
         },
@@ -61,7 +61,7 @@ describe('actions/users', () => {
     await store.dispatch(createUserAndSignIn('abc', 'abc', 'abc', 'abc')).then(() => {
       const actions = store.getActions();
       expect(actions[0]).toEqual({
-        type: SIGN_IN,
+        type: UsersType.SIGN_IN,
         payload: {
           username: 'abc',
           token: 'abc',
@@ -75,7 +75,7 @@ describe('actions/users', () => {
     await store.dispatch(fetchCurrentUserPost('abcxyz')).then(() => {
       const actions = store.getActions();
       expect(actions[0]).toMatchObject({
-        type: FETCH_CURRENT_USER_POST,
+        type: UsersType.FETCH_CURRENT_USER_POST,
         payload: {
           4: {
             id: 4,
@@ -106,7 +106,7 @@ describe('actions/users', () => {
     await store.dispatch(deletePostAndRefetch('abcxyz', 1, 2)).then(() => {
       const actions = store.getActions();
       expect(actions[0]).toMatchObject({
-        type: FETCH_CURRENT_USER_POST,
+        type: UsersType.FETCH_CURRENT_USER_POST,
         payload: {
           4: {
             id: 4,

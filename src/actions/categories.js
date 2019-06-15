@@ -1,11 +1,11 @@
-import { fetchApiCategories } from 'utils/apiCalls';
-import { FETCH_CATEGORIES } from './types';
+import api from 'utils/apiCalls';
+import { CategoriesType } from './types';
 
 // eslint-disable-next-line import/prefer-default-export
 export const fetchCategories = () => (dispatch) =>
-  fetchApiCategories().then((fetchedCategories) =>
+  api.fetchCategories().then((fetchedCategories) =>
     dispatch({
-      type: FETCH_CATEGORIES,
+      type: CategoriesType.FETCH_CATEGORIES,
       payload: fetchedCategories,
     }),
   );

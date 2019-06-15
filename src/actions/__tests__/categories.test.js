@@ -1,9 +1,9 @@
 /* eslint-disable no-undef */
-import { responseCat } from 'utils/__mocks__/apiCalls';
+import api from 'utils/__mocks__/apiCalls';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { fetchCategories } from '../categories';
-import { FETCH_CATEGORIES } from '../types';
+import { CategoriesType } from '../types';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -17,8 +17,8 @@ describe('actions/categories', () => {
     await store.dispatch(fetchCategories()).then(() => {
       const actions = store.getActions();
       expect(actions[0]).toEqual({
-        type: FETCH_CATEGORIES,
-        payload: responseCat,
+        type: CategoriesType.FETCH_CATEGORIES,
+        payload: api.responseCat,
       });
     });
   });

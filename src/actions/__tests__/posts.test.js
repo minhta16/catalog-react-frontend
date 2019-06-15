@@ -1,9 +1,9 @@
 /* eslint-disable no-undef */
-import { responseItems } from 'utils/__mocks__/apiCalls';
+import api from 'utils/__mocks__/apiCalls';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import { PostsType } from 'actions/types';
 import { fetchPosts, addPostAndRefetch, modifyPostAndRefetch } from '../posts';
-import { FETCH_POSTS } from '../types';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -23,8 +23,8 @@ describe('actions/posts', () => {
       .then(() => {
         const actions = store.getActions();
         expect(actions[0]).toMatchObject({
-          type: FETCH_POSTS,
-          payload: responseItems,
+          type: PostsType.FETCH_POSTS,
+          payload: api.responseItems,
         });
       })
       .catch(console.log);
@@ -38,8 +38,8 @@ describe('actions/posts', () => {
     store.dispatch(addPostAndRefetch(post)).then(() => {
       const actions = store.getActions();
       expect(actions[0]).toMatchObject({
-        type: FETCH_POSTS,
-        payload: responseItems,
+        type: PostsType.FETCH_POSTS,
+        payload: api.responseItems,
       });
     });
   });
@@ -52,8 +52,8 @@ describe('actions/posts', () => {
     store.dispatch(modifyPostAndRefetch(post)).then(() => {
       const actions = store.getActions();
       expect(actions[0]).toMatchObject({
-        type: FETCH_POSTS,
-        payload: responseItems,
+        type: PostsType.FETCH_POSTS,
+        payload: api.responseItems,
       });
     });
   });

@@ -1,19 +1,15 @@
-import {
-  signInApi,
-  createUserAndSigninApi,
-  fetchCurrentUserPostsApi,
-  deletePostApi,
-} from 'utils/apiCalls';
-import { FETCH_USERS, SIGN_IN, SIGN_OUT, FETCH_CURRENT_USER_POST, AUTH_ERROR } from './types';
+import api from 'utils/apiCalls';
+import { UsersType } from './types';
 
 export const fetchUsers = () => (dispatch) =>
   dispatch({
-    type: FETCH_USERS,
+    type: UsersType.FETCH_USERS,
     payload: '',
   });
 
 export const signIn = (username, password) => (dispatch) =>
-  signInApi(username, password)
+  api
+    .signIn(username, password)
     .then((data) => {
       const currentUser = {
         username,
@@ -21,24 +17,25 @@ export const signIn = (username, password) => (dispatch) =>
         posts: {},
       };
       return dispatch({
-        type: SIGN_IN,
+        type: UsersType.SIGN_IN,
         payload: currentUser,
       });
     })
     .catch((error) =>
       dispatch({
-        type: AUTH_ERROR,
+        type: UsersType.AUTH_ERROR,
         payload: error,
       }),
     );
 
 export const signOut = () => ({
-  type: SIGN_OUT,
+  type: UsersType.SIGN_OUT,
   payload: {},
 });
 
 export const createUserAndSignIn = (username, password, email, name) => (dispatch) =>
-  createUserAndSigninApi(username, password, email, name)
+  api
+    .createUserAndSignin(username, password, email, name)
     .then((data) => {
       const currentUser = {
         username,
@@ -46,28 +43,28 @@ export const createUserAndSignIn = (username, password, email, name) => (dispatc
         posts: {},
       };
       return dispatch({
-        type: SIGN_IN,
+        type: UsersType.SIGN_IN,
         payload: currentUser,
       });
     })
     .catch((error) =>
       dispatch({
-        type: AUTH_ERROR,
+        type: UsersType.AUTH_ERROR,
         payload: error,
       }),
     );
 
 export const fetchCurrentUserPost = (token) => (dispatch) =>
-  fetchCurrentUserPostsApi(token).then((data) => {
+  api.fetchCurrentUserPosts(token).then((data) => {
     let posts = {};
     data.forEach((post) => {
       posts = { ...posts, [post.id]: post };
     });
     return dispatch({
-      type: FETCH_CURRENT_USER_POST,
+      type: UsersType.FETCH_CURRENT_USER_POST,
       payload: posts,
     });
   });
 
 export const deletePostAndRefetch = (token, categoryId, postId) => (dispatch) =>
-  deletePostApi(token, categoryId, postId).then(() => dispatch(fetchCurrentUserPost(token)));
+  api.deletePost(token, categoryId, postId).then(() => dispatch(fetchCurrentUserPost(token)));
