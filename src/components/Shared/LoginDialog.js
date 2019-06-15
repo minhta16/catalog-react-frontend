@@ -31,13 +31,13 @@ export class LoginDialog extends Component {
   };
 
   render() {
-    const { open, onClose, error, errorMessage } = this.props;
+    const { open, onClose, errorMessage } = this.props;
     const { username, password } = this.state;
     return (
       <Dialog open={open} onClose={onClose}>
         <DialogTitle>Login</DialogTitle>
         <DialogContent>
-          {error && (
+          {errorMessage && (
             <Typography variant="body1" color="error">
               {`${errorMessage}`}
             </Typography>
@@ -86,7 +86,6 @@ LoginDialog.propTypes = {
   open: PropTypes.bool,
   onClose: PropTypes.func,
   onClick: PropTypes.func,
-  error: PropTypes.bool,
   errorMessage: PropTypes.string,
 };
 
@@ -94,7 +93,6 @@ LoginDialog.defaultProps = {
   onClose: () => {},
   onClick: async (username, password) => `${username}_${password}`,
   open: true,
-  error: false,
   errorMessage: '',
 };
 export default LoginDialog;

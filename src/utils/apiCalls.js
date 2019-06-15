@@ -16,15 +16,21 @@ class ApiCalls {
       `${process.env.REACT_APP_API_PATH}/categories?offset=0&limit=100`,
       params,
     )
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) return this.handleError(res);
+
+        return res.json();
+      })
       .then((data) => {
+        if (data instanceof Promise) {
+          return data;
+        }
         let returnData = {};
         data.categories.forEach((category) => {
           returnData = { ...returnData, [category.id]: category };
         });
         return returnData;
-      })
-      .catch(console.log);
+      });
     return fetchedData;
   };
 
@@ -40,15 +46,20 @@ class ApiCalls {
       `${process.env.REACT_APP_API_PATH}/categories/${categoryId}/items?offset=0&limit=100`,
       params,
     )
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) return this.handleError(res);
+        return res.json();
+      })
       .then((data) => {
+        if (data instanceof Promise) {
+          return data;
+        }
         let returnData = {};
-        data.items.forEach((item) => {
-          returnData = { ...returnData, [item.id]: item };
+        data.items.forEach((category) => {
+          returnData = { ...returnData, [category.id]: category };
         });
         return returnData;
-      })
-      .catch(console.log);
+      });
     return fetchedItems;
   };
 
@@ -70,7 +81,7 @@ class ApiCalls {
     return userData;
   };
 
-  createUserAndSignin = async (username, password, email, name) => {
+  createUser = async (username, password, email, name) => {
     const params = {
       headers: {
         'Content-Type': 'application/json',
@@ -84,9 +95,10 @@ class ApiCalls {
       }),
     };
 
-    const userData = await fetch(`${process.env.REACT_APP_API_PATH}/users`, params)
-      .then(() => this.signInApi(username, password))
-      .catch(console.log);
+    const userData = await fetch(`${process.env.REACT_APP_API_PATH}/users`, params).then((res) => {
+      if (!res.ok) return this.handleError(res);
+      return res.json();
+    });
 
     return userData;
   };
@@ -100,9 +112,12 @@ class ApiCalls {
       method: 'GET',
     };
 
-    const fetchedItems = await fetch(`${process.env.REACT_APP_API_PATH}/me/post`, params)
-      .then((res) => res.json())
-      .catch(console.log);
+    const fetchedItems = await fetch(`${process.env.REACT_APP_API_PATH}/me/post`, params).then(
+      (res) => {
+        if (!res.ok) return this.handleError(res);
+        return res.json();
+      },
+    );
     return fetchedItems;
   };
 
@@ -118,9 +133,10 @@ class ApiCalls {
     const message = await fetch(
       `${process.env.REACT_APP_API_PATH}/categories/${categoryId}/items/${postId}`,
       params,
-    )
-      .then((res) => res.json())
-      .catch(console.log);
+    ).then((res) => {
+      if (!res.ok) return this.handleError(res);
+      return res.json();
+    });
     return message;
   };
 
@@ -141,9 +157,10 @@ class ApiCalls {
     const message = await fetch(
       `${process.env.REACT_APP_API_PATH}/categories/${categoryId}/items`,
       params,
-    )
-      .then((res) => res.json())
-      .catch(console.log);
+    ).then((res) => {
+      if (!res.ok) return this.handleError(res);
+      return res.json();
+    });
     return message;
   };
 
@@ -164,9 +181,10 @@ class ApiCalls {
     const message = await fetch(
       `${process.env.REACT_APP_API_PATH}/categories/${categoryId}/items/${itemId}`,
       params,
-    )
-      .then((res) => res.json())
-      .catch(console.log);
+    ).then((res) => {
+      if (!res.ok) return this.handleError(res);
+      return res.json();
+    });
     return message;
   };
 }

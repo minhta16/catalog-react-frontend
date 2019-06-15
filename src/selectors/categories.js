@@ -1,11 +1,11 @@
 export const selectCategories = (state) => {
-  let categories = [];
-  Object.keys(state.categories).forEach((key) => {
-    categories = [...categories, state.categories[key]];
-  });
-  return categories;
+  return Object.values(state.categoriesReducer.categories).slice();
 };
 
 export const selectCategory = (state, id) => {
-  return state.categories[id];
+  return state.categoriesReducer.categories[id];
+};
+
+export const selectCategoriesLoading = (state) => {
+  return state.categoriesReducer.loading;
 };

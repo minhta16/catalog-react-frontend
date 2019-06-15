@@ -1,14 +1,20 @@
 import api from 'utils/apiCalls';
 import { CategoriesType } from './types';
 
-// eslint-disable-next-line import/prefer-default-export
-export const fetchCategories = () => (dispatch) =>
+export const oldFetchCategories = () => (dispatch) =>
   api.fetchCategories().then((fetchedCategories) =>
     dispatch({
       type: CategoriesType.FETCH_CATEGORIES,
       payload: fetchedCategories,
     }),
   );
+
+export const fetchCategories = () => (dispatch) => {
+  dispatch({
+    type: CategoriesType.FETCH_CATEGORIES,
+    promise: api.fetchCategories(),
+  });
+};
 
 // export const addCategory = (category, token) => (dispatch) => {
 //   createApiCategories(category, token);

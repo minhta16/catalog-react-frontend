@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { signIn as signInRedux, signOut as signOutRedux } from 'actions/users';
-import { selectCurrentUser } from 'selectors/users';
+import { selectCurrentUser, selectLoginErrorMessage } from 'selectors/users';
 import LoginButton from './LoginButton';
 import LoginDialog from './LoginDialog';
 
@@ -21,11 +21,9 @@ export class CustomAppBar extends Component {
   };
 
   handleCloseDialog = () => {
-    const { signOut } = this.props;
     this.setState({
       open: false,
     });
-    signOut();
   };
 
   componentDidUpdate = (prevProps) => {
@@ -37,7 +35,7 @@ export class CustomAppBar extends Component {
 
   render() {
     const { open } = this.state;
-    const { color, currentUser, signIn, signOut } = this.props;
+    const { color, currentUser, signIn, signOut, errorMessage } = this.props;
     return (
       <AppBar color={color}>
         <Toolbar>
@@ -57,8 +55,7 @@ export class CustomAppBar extends Component {
             open={open}
             onClose={this.handleCloseDialog}
             onClick={signIn}
-            error={currentUser.error}
-            errorMessage={currentUser.errorMessage}
+            errorMessage={errorMessage}
           />
         </Toolbar>
       </AppBar>
@@ -71,6 +68,7 @@ CustomAppBar.propTypes = {
   currentUser: PropTypes.object,
   signIn: PropTypes.func.isRequired,
   signOut: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string.isRequired,
 };
 
 CustomAppBar.defaultProps = {
@@ -79,6 +77,7 @@ CustomAppBar.defaultProps = {
 
 export const mapSelectorToProps = (state) => ({
   currentUser: selectCurrentUser(state),
+  errorMessage: selectLoginErrorMessage(state),
 });
 
 export const mapDispatchToProps = {

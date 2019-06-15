@@ -1,29 +1,19 @@
-class Posts {
-  ADD_POST = 'ADD_POST';
+export const PostsType = {
+  ADD_POST: 'ADD_POST',
+  MODIFY_POST: 'MODIFY_POST',
+  FETCH_POSTS: 'FETCH_POSTS',
+};
 
-  FETCH_POSTS = 'FETCH_POSTS';
-}
+export const CategoriesType = {
+  FETCH_CATEGORIES: 'FETCH_CATEGORIES',
+  ADD_CATEGORY: 'ADD_CATEGORY',
+};
 
-class Categories {
-  FETCH_CATEGORIES = 'FETCH_CATEGORIES';
-
-  ADD_CATEGORY = 'ADD_CATEGORY';
-}
-
-class Users {
-  FETCH_USERS = 'FETCH_USERS';
-
-  FETCH_CURRENT_USER = 'FETCH_CURRENT_USER';
-
-  SIGN_IN = 'SIGN_IN';
-
-  SIGN_OUT = 'SIGN_OUT';
-
-  FETCH_CURRENT_USER_POST = 'FETCH_CURRENT_USER_POST';
-
-  AUTH_ERROR = 'AUTH_ERROR';
-}
-
-export const PostsType = new Posts();
-export const CategoriesType = new Categories();
-export const UsersType = new Users();
+export const UsersType = {
+  FETCH_USERS: 'FETCH_USERS',
+  FETCH_CURRENT_USER: 'FETCH_CURRENT_USER',
+  SIGN_IN: 'SIGN_IN',
+  SIGN_OUT: 'SIGN_OUT',
+  CREATE_USER: 'CREATE_USER',
+  FETCH_CURRENT_USER_POST: 'FETCH_CURRENT_USER_POST',
+};

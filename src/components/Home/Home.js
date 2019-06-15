@@ -8,7 +8,7 @@ import CategoriesTable from 'components/Home/CategoriesTable';
 import { fetchCategories as fetchCategoriesRedux } from 'actions/categories';
 import { fetchPosts as fetchPostsRedux } from 'actions/posts';
 import { selectAllPosts } from 'selectors/posts';
-import { selectCategories, selectCategory } from 'selectors/categories';
+import { selectCategories, selectCategory, selectCategoriesLoading } from 'selectors/categories';
 import InfoSnackbar from 'components/Shared/InfoSnackbar';
 
 export class Home extends Component {
@@ -41,17 +41,20 @@ export class Home extends Component {
       fetchPosts,
       selectedCategory,
       location,
+      categoriesLoading,
     } = this.props;
     const { openSnackbar } = this.state;
     return (
       <Container maxWidth="lg">
-        <CategoriesTable
-          categories={categories}
-          selectedCatId={match.params.id}
-          selectedCat={selectedCategory}
-          selectedCatItems={selectedCatItems}
-          fetchPosts={fetchPosts}
-        />
+        {!categoriesLoading && (
+          <CategoriesTable
+            categories={categories}
+            selectedCatId={match.params.id}
+            selectedCat={selectedCategory}
+            selectedCatItems={selectedCatItems}
+            fetchPosts={fetchPosts}
+          />
+        )}
         <InfoSnackbar
           open={openSnackbar}
           onClose={this.closeSnackbar(true)}
@@ -70,6 +73,7 @@ Home.propTypes = {
   selectedCatItems: PropTypes.array,
   selectedCategory: PropTypes.object,
   location: PropTypes.object.isRequired,
+  categoriesLoading: PropTypes.bool.isRequired,
 };
 
 Home.defaultProps = {
@@ -82,6 +86,7 @@ Home.defaultProps = {
 const mapSelectorToProps = (state, ownProps) => ({
   selectedCatItems: selectAllPosts(state, 'reverse'),
   categories: selectCategories(state),
+  categoriesLoading: selectCategoriesLoading(state),
   selectedCategory: selectCategory(state, ownProps.match.params.id),
 });
 

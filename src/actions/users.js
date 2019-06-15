@@ -8,63 +8,37 @@ export const fetchUsers = () => (dispatch) =>
   });
 
 export const signIn = (username, password) => (dispatch) =>
-  api
-    .signIn(username, password)
-    .then((data) => {
-      const currentUser = {
-        username,
-        token: data.access_token,
-        posts: {},
-      };
-      return dispatch({
-        type: UsersType.SIGN_IN,
-        payload: currentUser,
-      });
-    })
-    .catch((error) =>
-      dispatch({
-        type: UsersType.AUTH_ERROR,
-        payload: error,
-      }),
-    );
+  dispatch({
+    type: UsersType.SIGN_IN,
+    promise: api.signIn(username, password),
+    username,
+  });
 
 export const signOut = () => ({
   type: UsersType.SIGN_OUT,
   payload: {},
 });
 
-export const createUserAndSignIn = (username, password, email, name) => (dispatch) =>
-  api
-    .createUserAndSignin(username, password, email, name)
-    .then((data) => {
-      const currentUser = {
-        username,
-        token: data.access_token,
-        posts: {},
-      };
-      return dispatch({
-        type: UsersType.SIGN_IN,
-        payload: currentUser,
-      });
-    })
-    .catch((error) =>
-      dispatch({
-        type: UsersType.AUTH_ERROR,
-        payload: error,
-      }),
-    );
+export const createUserAndSignIn = (username, password, email, name) => (dispatch) => {
+  dispatch({
+    type: UsersType.CREATE_USER,
+    promise: api.createUser(username, password, email, name),
+  });
+  Promise.resolve(1).then(() => {
+    dispatch(signIn(username, password));
+  });
+};
 
 export const fetchCurrentUserPost = (token) => (dispatch) =>
-  api.fetchCurrentUserPosts(token).then((data) => {
-    let posts = {};
-    data.forEach((post) => {
-      posts = { ...posts, [post.id]: post };
-    });
-    return dispatch({
-      type: UsersType.FETCH_CURRENT_USER_POST,
-      payload: posts,
-    });
+  dispatch({
+    type: UsersType.FETCH_CURRENT_USER_POST,
+    promise: api.fetchCurrentUserPosts(token),
   });
 
-export const deletePostAndRefetch = (token, categoryId, postId) => (dispatch) =>
-  api.deletePost(token, categoryId, postId).then(() => dispatch(fetchCurrentUserPost(token)));
+export const deletePostAndRefetch = (token, categoryId, postId) => (dispatch) => {
+  dispatch({
+    type: UsersType.DELETE_POST,
+    promise: api.deletePost(token, categoryId, postId),
+  });
+  Promise.resolve(1).then(() => dispatch(fetchCurrentUserPost(token)));
+};
