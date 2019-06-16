@@ -61,8 +61,8 @@ describe('components/Shared/LoginDialog', () => {
     });
   });
 
-  it('should render error Typography when error is true', () => {
-    props.error = true;
+  it('should render error Typography when errorMessage is true', () => {
+    props.errorMessage = 'this is an error!';
     setup();
     expect(wrapper.find('[color="error"]').length).toBe(1);
   });

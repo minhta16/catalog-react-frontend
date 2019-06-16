@@ -1,4 +1,4 @@
-export const selectPost = (state, id) => state.posts[id];
+export const selectPost = (state, id) => state.postsReducer.posts[id];
 
 export const selectAllPosts = (state, order) => {
   switch (order) {

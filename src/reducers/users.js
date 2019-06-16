@@ -1,15 +1,6 @@
 import { actionNameUtil } from 'middlewares/automate-async-action';
 import { UsersType } from '../actions/types';
 
-export const usersReducer = (state = {}, action) => {
-  switch (action.type) {
-    case UsersType.FETCH_USERS:
-      return action.payload;
-    default:
-      return state;
-  }
-};
-
 const initialState = {
   currentUser: {
     username: '',
@@ -20,6 +11,8 @@ const initialState = {
   error: {},
   errorMessage: '',
 };
+
+// eslint-disable-next-line import/prefer-default-export
 export const currentUserReducer = (state = initialState, action) => {
   switch (action.type) {
     case UsersType.SIGN_IN:
@@ -36,7 +29,7 @@ export const currentUserReducer = (state = initialState, action) => {
       };
     case actionNameUtil.createFailure(UsersType.SIGN_IN):
       return {
-        ...initialState,
+        ...state,
         error: action.payload,
         errorMessage: 'Invalid username or password. Try again.',
       };

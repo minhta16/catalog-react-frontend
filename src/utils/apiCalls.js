@@ -18,7 +18,6 @@ class ApiCalls {
     )
       .then((res) => {
         if (!res.ok) return this.handleError(res);
-
         return res.json();
       })
       .then((data) => {

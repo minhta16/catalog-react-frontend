@@ -4,6 +4,7 @@ import {
   selectCurrentUserPosts,
   selectCurrentUserPost,
   selectCurrentUserProp,
+  selectCurrentUserLoading,
 } from '../users';
 
 describe('selectors/users', () => {
@@ -34,12 +35,15 @@ describe('selectors/users', () => {
   const currentUser = {
     name: 'abc',
     token: 'abc',
-    posts,
   };
 
   beforeEach(() => {
     state = {
-      currentUser,
+      currentUserReducer: {
+        currentUser,
+        posts,
+        loading: true,
+      },
     };
   });
 
@@ -51,8 +55,6 @@ describe('selectors/users', () => {
     expect(selectCurrentUserProp(state, 'name')).toBe('abc');
 
     expect(selectCurrentUserProp(state, 'token')).toBe('abc');
-
-    expect(selectCurrentUserProp(state, 'posts')).toBe(posts);
   });
 
   it('should select the correct post', () => {
@@ -63,9 +65,10 @@ describe('selectors/users', () => {
     expect(selectCurrentUserPosts(state, 'reverse')).toMatchObject(postsArr.slice().reverse());
   });
 
-  it('should return empty if state.posts is emptyy', () => {
-    expect(selectCurrentUserPosts({ currentUser: {} })).toMatchObject({});
-    expect(selectCurrentUserPosts({ currentUser: {} }, 'reverse')).toMatchObject({});
+  it('should return empty if state.posts is empty', () => {
+    state.currentUserReducer.posts = {};
+    expect(selectCurrentUserPosts(state)).toMatchObject({});
+    expect(selectCurrentUserPosts(state, 'reverse')).toMatchObject({});
   });
 
   it('should select the correct post with id', () => {
@@ -73,5 +76,9 @@ describe('selectors/users', () => {
       name: 'one',
       id: '1',
     });
+  });
+
+  it('should select the correct post with id', () => {
+    expect(selectCurrentUserLoading(state)).toBe(true);
   });
 });

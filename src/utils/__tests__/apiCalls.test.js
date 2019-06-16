@@ -1,51 +1,64 @@
 /* eslint-disable no-undef */
-import {
-  fetchApiCategories,
-  fetchApiItems,
-  createUserAndSigninApi,
-  signInApi,
-  fetchCurrentUserPostsApi,
-  deletePostApi,
-  addPostApi,
-  modifyPostApi,
-} from '../apiCalls';
+import api from '../apiCalls';
 
 describe('utils/apiCalls', () => {
   beforeEach(() => {
     fetch.resetMocks();
   });
 
-  it('should call fetchApiCategories correctly', () => {
-    fetch.mockResponse(
-      JSON.stringify({
-        categories: [
-          {
-            id: '1',
-            name: 'one',
-            description: 'one',
-          },
-          {
-            id: '2',
-            name: 'two',
-            description: 'two',
-          },
-          {
-            id: '3',
-            name: 'three',
-            description: 'three',
-          },
-        ],
-      }),
-    );
-    fetchApiCategories()
-      .then((res) => {
+  it('should call handleError correctly', async () => {
+    expect(
+      await api
+        .handleError('error')
+        .then(() => 'then')
+        .catch(() => 'catch'),
+    ).toBe('catch');
+  });
+
+  describe('fetchApiCategories', () => {
+    it('should return data', () => {
+      fetch.mockResponse(
+        JSON.stringify({
+          categories: [
+            {
+              id: '1',
+              name: 'one',
+              description: 'one',
+            },
+            {
+              id: '2',
+              name: 'two',
+              description: 'two',
+            },
+            {
+              id: '3',
+              name: 'three',
+              description: 'three',
+            },
+          ],
+        }),
+      );
+      api.fetchCategories().then((res) => {
         expect(Object.keys(res).length).toBe(3);
-      })
-      .catch(console.log);
-    expect(fetch.mock.calls.length).toBe(1);
-    expect(fetch.mock.calls[0][0]).toBe(
-      `${process.env.REACT_APP_API_PATH}/categories?offset=0&limit=100`,
-    );
+      });
+      expect(fetch.mock.calls.length).toBe(1);
+      expect(fetch.mock.calls[0][0]).toBe(
+        `${process.env.REACT_APP_API_PATH}/categories?offset=0&limit=100`,
+      );
+    });
+
+    it('should return error promise if it has an error', async () => {
+      fetch.mockResponse(
+        JSON.stringify({
+          ok: false,
+        }),
+      );
+      const returnData = await api
+        .fetchCategories()
+        .then(() => 'then')
+        .catch(() => 'catch');
+      expect(returnData).toBe('catch');
+    });
   });
 
   it('should call fetchApiItems correctly', () => {
@@ -65,11 +78,9 @@ describe('utils/apiCalls', () => {
         ],
       }),
     );
-    fetchApiItems(1)
-      .then((res) => {
-        expect(Object.keys(res).length).toBe(2);
-      })
-      .catch(console.log);
+    api.fetchItems(1).then((res) => {
+      expect(Object.keys(res).length).toBe(2);
+    });
     expect(fetch.mock.calls.length).toBe(1);
     expect(fetch.mock.calls[0][0]).toBe(
       `${process.env.REACT_APP_API_PATH}/categories/1/items?offset=0&limit=100`,
@@ -81,19 +92,19 @@ describe('utils/apiCalls', () => {
       access_token: 'abc',
     };
     fetch.mockResponse(JSON.stringify(response));
-    signInApi('meo', 'meo').then((res) => {
+    api.signIn('meo', 'meo').then((res) => {
       expect(res).toMatchObject(response);
     });
     expect(fetch.mock.calls.length).toBe(1);
     expect(fetch.mock.calls[0][0]).toBe(`${process.env.REACT_APP_API_PATH}/auth`);
   });
 
-  it('should call createUserAndSigninApi correctly', () => {
+  it('should call createUser correctly', () => {
     const response = {
       access_token: 'abc',
     };
     fetch.mockResponse(JSON.stringify(response));
-    createUserAndSigninApi('meo', 'meo', 'meo', 'meo').then((res) => {
+    api.createUser('meo', 'meo', 'meo', 'meo').then((res) => {
       expect(res).toMatchObject(response);
     });
     expect(fetch.mock.calls.length).toBe(1);
@@ -110,7 +121,7 @@ describe('utils/apiCalls', () => {
       },
     ];
     fetch.mockResponse(JSON.stringify(response));
-    fetchCurrentUserPostsApi('meomeo').then((res) => {
+    api.fetchCurrentUserPosts('meomeo').then((res) => {
       expect(res).toMatchObject(response);
     });
     expect(fetch.mock.calls.length).toBe(1);
@@ -122,7 +133,7 @@ describe('utils/apiCalls', () => {
       message: 'post deleted',
     };
     fetch.mockResponse(JSON.stringify(response));
-    deletePostApi('meomeo', 1, 2).then((res) => {
+    api.deletePost('meomeo', 1, 2).then((res) => {
       expect(res).toMatchObject(response);
     });
     expect(fetch.mock.calls.length).toBe(1);
@@ -134,13 +145,15 @@ describe('utils/apiCalls', () => {
       message: 'mock',
     };
     fetch.mockResponse(JSON.stringify(response));
-    addPostApi('meomeo', 1, {
-      name: 'test',
-      description: 'test',
-      price: 0,
-    }).then((res) => {
-      expect(res).toMatchObject(response);
-    });
+    api
+      .addPost('meomeo', 1, {
+        name: 'test',
+        description: 'test',
+        price: 0,
+      })
+      .then((res) => {
+        expect(res).toMatchObject(response);
+      });
     expect(fetch.mock.calls.length).toBe(1);
     expect(fetch.mock.calls[0][0]).toBe(`${process.env.REACT_APP_API_PATH}/categories/1/items`);
   });
@@ -150,13 +163,15 @@ describe('utils/apiCalls', () => {
       message: 'mock',
     };
     fetch.mockResponse(JSON.stringify(response));
-    modifyPostApi('meomeo', 1, 2, {
-      name: 'test',
-      description: 'test',
-      price: 0,
-    }).then((res) => {
-      expect(res).toMatchObject(response);
-    });
+    api
+      .modifyPost('meomeo', 1, 2, {
+        name: 'test',
+        description: 'test',
+        price: 0,
+      })
+      .then((res) => {
+        expect(res).toMatchObject(response);
+      });
     expect(fetch.mock.calls.length).toBe(1);
     expect(fetch.mock.calls[0][0]).toBe(`${process.env.REACT_APP_API_PATH}/categories/1/items/2`);
   });

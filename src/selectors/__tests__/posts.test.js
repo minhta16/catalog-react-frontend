@@ -5,14 +5,16 @@ describe('selectors/posts', () => {
   let state;
   beforeEach(() => {
     state = {
-      posts: {
-        1: {
-          name: 'yo',
-          id: '1',
-        },
-        2: {
-          name: 'bro',
-          id: '2',
+      postsReducer: {
+        posts: {
+          1: {
+            name: 'yo',
+            id: '1',
+          },
+          2: {
+            name: 'bro',
+            id: '2',
+          },
         },
       },
     };
@@ -26,12 +28,6 @@ describe('selectors/posts', () => {
   it('should select all correct posts', () => {
     const posts = [{ name: 'yo', id: '1' }, { name: 'bro', id: '2' }];
     expect(selectAllPosts(state)).toMatchObject(posts);
-  });
-
-  it('should return empty if state.posts is undefined', () => {
-    expect(selectAllPosts({})).toMatchObject({});
-
-    expect(selectAllPosts({}, 'reverse')).toMatchObject({});
   });
 
   it('should reverse all posts if we use reverse', () => {

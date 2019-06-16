@@ -14,12 +14,11 @@ describe('actions/categories', () => {
   const store = mockStore({});
 
   it('should create FETCH_CATEGORIES when done fetching', async () => {
-    await store.dispatch(fetchCategories()).then(() => {
-      const actions = store.getActions();
-      expect(actions[0]).toEqual({
-        type: CategoriesType.FETCH_CATEGORIES,
-        payload: api.responseCat,
-      });
+    store.dispatch(fetchCategories());
+    const actions = store.getActions();
+    expect(actions[0]).toEqual({
+      type: CategoriesType.FETCH_CATEGORIES,
+      promise: api.fetchCategories(),
     });
   });
 });

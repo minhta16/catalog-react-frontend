@@ -1,13 +1,6 @@
+/* eslint-disable import/prefer-default-export */
 import api from 'utils/apiCalls';
 import { CategoriesType } from './types';
-
-export const oldFetchCategories = () => (dispatch) =>
-  api.fetchCategories().then((fetchedCategories) =>
-    dispatch({
-      type: CategoriesType.FETCH_CATEGORIES,
-      payload: fetchedCategories,
-    }),
-  );
 
 export const fetchCategories = () => (dispatch) => {
   dispatch({

@@ -39,6 +39,7 @@ describe('views/Home', () => {
         },
       ],
       selectedCatItems: [],
+      categoriesLoading: false,
     };
   });
 

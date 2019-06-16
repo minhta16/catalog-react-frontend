@@ -95,7 +95,7 @@ class Api {
       );
     });
 
-  createUserAndSignin = (username, name, email, password) =>
+  createUser = (username, name, email, password) =>
     new Promise((resolve) => {
       process.nextTick(() => resolve(this.responseToken));
     });

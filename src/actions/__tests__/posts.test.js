@@ -18,16 +18,12 @@ describe('actions/posts', () => {
   });
 
   it('should create FETCH_POSTS when done fetching', async () => {
-    await store
-      .dispatch(fetchPosts('1'))
-      .then(() => {
-        const actions = store.getActions();
-        expect(actions[0]).toMatchObject({
-          type: PostsType.FETCH_POSTS,
-          payload: api.responseItems,
-        });
-      })
-      .catch(console.log);
+    store.dispatch(fetchPosts('1'));
+    const actions = store.getActions();
+    expect(actions[0]).toMatchObject({
+      type: PostsType.FETCH_POSTS,
+      promise: api.fetchItems('1'),
+    });
   });
 
   it('should create FETCH_POST when done adding post and refetching', () => {
@@ -35,26 +31,36 @@ describe('actions/posts', () => {
       name: 'yo',
       id: '1',
     };
-    store.dispatch(addPostAndRefetch(post)).then(() => {
-      const actions = store.getActions();
-      expect(actions[0]).toMatchObject({
-        type: PostsType.FETCH_POSTS,
-        payload: api.responseItems,
-      });
+    store.dispatch(addPostAndRefetch('value', '1', post));
+    const actions = store.getActions();
+    expect(actions[0]).toMatchObject({
+      type: PostsType.ADD_POST,
+      promise: api.addPost('value', '1', post),
     });
+    Promise.resolve(1).then(() =>
+      expect(actions[1]).toMatchObject({
+        type: PostsType.FETCH_POSTS,
+        promise: api.fetchItems('1'),
+      }),
+    );
   });
 
-  it('should create FETCH_POST when done modifying post and refetching', () => {
+  it('should create FETCH_POST when done adding post and refetching', () => {
     const post = {
       name: 'yo',
       id: '1',
     };
-    store.dispatch(modifyPostAndRefetch(post)).then(() => {
-      const actions = store.getActions();
-      expect(actions[0]).toMatchObject({
-        type: PostsType.FETCH_POSTS,
-        payload: api.responseItems,
-      });
+    store.dispatch(modifyPostAndRefetch('value', '1', '1', post));
+    const actions = store.getActions();
+    expect(actions[0]).toMatchObject({
+      type: PostsType.MODIFY_POST,
+      promise: api.addPost('value', '1', '1', post),
     });
+    Promise.resolve(1).then(() =>
+      expect(actions[1]).toMatchObject({
+        type: PostsType.FETCH_POSTS,
+        promise: api.fetchItems('1'),
+      }),
+    );
   });
 });

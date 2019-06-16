@@ -29,6 +29,7 @@ describe('components/Shared/CustomAppBar', () => {
         password: 'minh',
         token: 'abc',
       },
+      errorMessage: '',
     };
   });
 
@@ -47,7 +48,6 @@ describe('components/Shared/CustomAppBar', () => {
     setup();
     wrapper.instance().handleCloseDialog();
     expect(wrapper.state().open).toBe(false);
-    expect(props.signOut).toHaveBeenCalled();
   });
 
   it('should call signIn when Dialog is clicked', () => {
