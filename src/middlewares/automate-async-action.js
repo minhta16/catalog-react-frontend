@@ -18,11 +18,13 @@ const automateAsyncAction = (store) => (next) => (action) => {
       }),
     )
     .catch((err) => {
-      console.log(err);
       Promise.resolve(1).then(() =>
         store.dispatch({
           type: actionNameUtil.createFailure(type),
-          payload: err,
+          payload: {
+            name: err.name,
+            message: err.message,
+          },
         }),
       );
     });

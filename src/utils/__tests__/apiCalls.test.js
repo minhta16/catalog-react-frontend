@@ -47,17 +47,16 @@ describe('utils/apiCalls', () => {
       );
     });
 
-    it('should return error promise if it has an error', async () => {
+    it('should return error promise if it has an error', () => {
       fetch.mockResponse(
         JSON.stringify({
           ok: false,
+          error: new Error('Broke'),
         }),
       );
-      const returnData = await api
-        .fetchCategories()
-        .then(() => 'then')
-        .catch(() => 'catch');
-      expect(returnData).toBe('catch');
+      expect(api.fetchCategories()).rejects.toEqual(
+        new TypeError("Cannot read property 'forEach' of undefined"),
+      );
     });
   });
 

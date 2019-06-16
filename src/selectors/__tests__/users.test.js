@@ -61,6 +61,11 @@ describe('selectors/users', () => {
     expect(selectCurrentUserPosts(state)).toMatchObject(postsArr);
   });
 
+  it('should select an empty array if posts is undefined', () => {
+    state.currentUserReducer.posts = undefined;
+    expect(selectCurrentUserPosts(state)).toEqual([]);
+  });
+
   it('should revsere the posts if "reverse" is passed', () => {
     expect(selectCurrentUserPosts(state, 'reverse')).toMatchObject(postsArr.slice().reverse());
   });
