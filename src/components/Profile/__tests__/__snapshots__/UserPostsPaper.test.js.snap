@@ -37,21 +37,23 @@ exports[`components/PostItem should render correctly 1`] = `
     <WithStyles(ForwardRef(Grid))
       item={true}
     >
-      <WithStyles(ForwardRef(IconButton))
+      <WithStyles(ForwardRef(Fab))
         color="primary"
         component={[Function]}
         exact="true"
+        style={
+          Object {
+            "boxShadow": "none",
+          }
+        }
         to="/new-item"
+        variant="extended"
       >
         <LibraryAddIcon
           className="icon-padding"
         />
-        <WithStyles(ForwardRef(Typography))
-          variant="button"
-        >
-          New item
-        </WithStyles(ForwardRef(Typography))>
-      </WithStyles(ForwardRef(IconButton))>
+        New item
+      </WithStyles(ForwardRef(Fab))>
     </WithStyles(ForwardRef(Grid))>
   </WithStyles(ForwardRef(Grid))>
   <WithStyles(ForwardRef(Divider)) />

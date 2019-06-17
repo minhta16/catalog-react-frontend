@@ -2,6 +2,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import CategoriesTable from 'components/Home/CategoriesTable';
+import { CircularProgress } from '@material-ui/core';
 
 describe('components/CategoriesTable', () => {
   let wrapper;
@@ -33,12 +34,26 @@ describe('components/CategoriesTable', () => {
       },
       selectedCatItems: [],
       fetchPosts: jest.fn(),
+      categoriesLoading: false,
+      postsLoading: false,
     };
   });
 
   it('should render correctly', () => {
     setup();
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render a CircularProgress if categoriesLoading is true', () => {
+    props.categoriesLoading = true;
+    setup();
+    expect(wrapper.find(CircularProgress).length).toBe(1);
+  });
+
+  it('should render a CircularProgress if postsLoading is true', () => {
+    props.postsLoading = true;
+    setup();
+    expect(wrapper.find(CircularProgress).length).toBe(1);
   });
 
   it('should display no names if selectedCat is not present', () => {

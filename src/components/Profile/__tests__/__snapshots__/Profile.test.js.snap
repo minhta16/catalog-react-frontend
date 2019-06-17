@@ -5,6 +5,7 @@ exports[`components/PostItem should render correctly 1`] = `
   maxWidth="lg"
 >
   <UserPostsPaper
+    loading={false}
     posts={
       Array [
         Object {

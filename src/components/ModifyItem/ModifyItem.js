@@ -19,7 +19,7 @@ export class ModifyItem extends Component {
     editing: false,
     redirect: false,
     // eslint-disable-next-line react/destructuring-assignment
-    selectedCategory: this.props.categories[0].id || 0,
+    selectedCategory: this.props.categories.length ? this.props.categories[0].id : '0',
   };
 
   handleChange = (e) => {

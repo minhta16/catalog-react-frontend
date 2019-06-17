@@ -40,6 +40,7 @@ describe('views/Home', () => {
       ],
       selectedCatItems: [],
       categoriesLoading: false,
+      postsLoading: false,
     };
   });
 
@@ -63,6 +64,18 @@ describe('views/Home', () => {
     it('should call fetchPosts if id is something', () => {
       setup();
       expect(props.fetchPosts).toHaveBeenCalled();
+    });
+
+    it('should close snackbar if snackbarMess is not present', () => {
+      props.location.snackbarMess = '';
+      setup();
+      expect(wrapper.state().openSnackbar).toBe(false);
+    });
+
+    it('should open snackbar if snackbarMess is present', () => {
+      props.location.snackbarMess = 'This is the message';
+      setup();
+      expect(wrapper.state().openSnackbar).toBe(true);
     });
   });
 });

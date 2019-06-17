@@ -25,6 +25,7 @@ describe('components/PostItem', () => {
       },
       fetchCurrentUserPost: jest.fn(),
       currentUserPosts: [{ name: 'meo', description: 'meo' }],
+      currentUserLoading: false,
     };
   });
 

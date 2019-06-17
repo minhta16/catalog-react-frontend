@@ -34,17 +34,19 @@ exports[`components/CategoriesTable should render correctly 1`] = `
       item={true}
       xs={9}
     >
-      <WithStyles(ForwardRef(Typography))
-        className="left-margin"
-        id="categories-table-name-typo"
-        variant="h4"
-      >
-        testName
-      </WithStyles(ForwardRef(Typography))>
-      <WithStyles(ForwardRef(Divider))
-        variant="middle"
-      />
-      <ForwardRef(MenuList) />
+      <div>
+        <WithStyles(ForwardRef(Typography))
+          className="left-margin"
+          id="categories-table-name-typo"
+          variant="h4"
+        >
+          testName
+        </WithStyles(ForwardRef(Typography))>
+        <WithStyles(ForwardRef(Divider))
+          variant="middle"
+        />
+        <ForwardRef(MenuList) />
+      </div>
     </WithStyles(ForwardRef(Grid))>
   </WithStyles(ForwardRef(Grid))>
 </WithStyles(ForwardRef(Paper))>

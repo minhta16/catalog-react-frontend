@@ -44,7 +44,7 @@ exports[`components/PostItem should render correctly 1`] = `
       <WithStyles(ForwardRef(Typography))
         variant="caption"
       >
-        ...
+        Description: bro
       </WithStyles(ForwardRef(Typography))>
     </WithStyles(ForwardRef(Grid))>
   </WithStyles(ForwardRef(Grid))>

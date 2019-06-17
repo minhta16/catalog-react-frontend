@@ -16,6 +16,7 @@ exports[`views/Home should render correctly 1`] = `
         },
       ]
     }
+    categoriesLoading={false}
     fetchPosts={
       [MockFunction] {
         "calls": Array [
@@ -31,6 +32,7 @@ exports[`views/Home should render correctly 1`] = `
         ],
       }
     }
+    postsLoading={false}
     selectedCat={Object {}}
     selectedCatId="1"
     selectedCatItems={Array []}

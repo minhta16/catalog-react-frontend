@@ -42,6 +42,29 @@ describe('components/PostItem', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should not render three dots if description is not lengthy', () => {
+    props.post.description = '10 characters';
+    setup();
+    expect(
+      wrapper
+        .find('[variant="caption"]')
+        .text()
+        .includes('...'),
+    ).toBe(false);
+  });
+
+  it('should render three dots if description is to lengthy', () => {
+    props.post.description =
+      '100 characters 100 characters 100 characters 100 characters 100 characters 100 characters 100 characters 100 characters 100 characters 100 characters 100 characters 100 characters 100 characters 100 characters 100 characters 100 characters 100 characters ';
+    setup();
+    expect(
+      wrapper
+        .find('[variant="caption"]')
+        .text()
+        .includes('...'),
+    ).toBe(true);
+  });
+
   describe('handleClick', () => {
     it('should set the anchorEl when button is clicked', () => {
       setup();

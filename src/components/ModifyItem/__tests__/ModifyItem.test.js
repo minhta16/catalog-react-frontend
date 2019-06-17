@@ -48,6 +48,15 @@ describe('components/ModifyItem', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  describe('state.selectedCategory', () => {
+    it('should be 0 when categories has no elements', () => {
+      props.match.params = {};
+      props.categories = [];
+      setup();
+      expect(wrapper.state().selectedCategory).toBe('0');
+    });
+  });
+
   it('should change state when a field is changed', () => {
     setup();
     const titleField = wrapper.find('#title');

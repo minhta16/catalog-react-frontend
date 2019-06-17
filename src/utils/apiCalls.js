@@ -60,14 +60,14 @@ class ApiCalls {
   };
 
   signIn = async (username, password) => {
-    const userData = await this.fetchRequest(
-      'POST',
-      `${process.env.REACT_APP_API_PATH}/auth`,
-      JSON.stringify({
+    const userData = await this.fetchRequest({
+      method: 'POST',
+      path: `${process.env.REACT_APP_API_PATH}/auth`,
+      data: JSON.stringify({
         username,
         password,
       }),
-    );
+    });
     return userData;
   };
 

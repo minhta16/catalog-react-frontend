@@ -17,10 +17,12 @@ exports[`components/ModifyItem should render correctly 1`] = `
       onSubmit={[Function]}
     >
       <WithStyles(ForwardRef(TextField))
+        className="left-margin"
         disabled={true}
         fullWidth={true}
         id="categories"
         label="Category"
+        margin="normal"
         name="selectedCategory"
         onChange={[Function]}
         required={true}
@@ -53,19 +55,32 @@ exports[`components/ModifyItem should render correctly 1`] = `
         required={true}
         value="haha"
       />
-      <WithStyles(ForwardRef(Button))
-        color="primary"
-        type="submit"
+      <WithStyles(ForwardRef(Grid))
+        container={true}
+        justify="space-evenly"
       >
-        Submit
-      </WithStyles(ForwardRef(Button))>
-      <WithStyles(ForwardRef(Button))
-        component={[Function]}
-        exact="true"
-        to="/profile"
-      >
-        Cancel
-      </WithStyles(ForwardRef(Button))>
+        <WithStyles(ForwardRef(Button))
+          color="primary"
+          type="submit"
+          variant="contained"
+        >
+          <BackupIcon
+            className="icon-padding"
+          />
+          Submit
+        </WithStyles(ForwardRef(Button))>
+        <WithStyles(ForwardRef(Button))
+          component={[Function]}
+          exact="true"
+          to="/profile"
+          variant="contained"
+        >
+          <CancelIcon
+            className="icon-padding"
+          />
+          Cancel
+        </WithStyles(ForwardRef(Button))>
+      </WithStyles(ForwardRef(Grid))>
     </form>
   </WithStyles(ForwardRef(Paper))>
 </WithStyles(ForwardRef(Container))>
