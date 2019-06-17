@@ -33,6 +33,6 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### Multiple environments deploying
+## Multiple environments deploying
 
 To change the setting for each environments, you can change the `REACT_APP_ENV` setting in `.env` to either `local` or `dev` depends on where you are deploying. You can edit these deploy settings in `src/envConfig/`. For now, only the `API_ROOT` attribute is available and you can change that to alter the URL of API requests.
