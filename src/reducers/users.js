@@ -28,7 +28,7 @@ export const currentUserReducer = (state = initialState, action) => {
           username: action.username,
         },
         loading: false,
-        error: {},
+        error: [],
       };
     case actionNameUtil.createFailure(UsersType.SIGN_IN):
       return {

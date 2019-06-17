@@ -29,10 +29,10 @@ describe('middlewares/automate-async-action', () => {
       store.dispatch(action);
       Promise.resolve().then(() => {
         const actions = store.getActions();
-        expect(actions[1]).toEqual({
+        expect(actions[0]).toEqual({
           type: 'EAT_PIZZA_REQUEST',
         });
-        expect(actions[2]).toEqual({
+        expect(actions[1]).toEqual({
           type: 'EAT_PIZZA_SUCCESS',
           payload: 'meomeo',
         });
@@ -42,17 +42,22 @@ describe('middlewares/automate-async-action', () => {
     it('should return correctly if Promise is rejected', () => {
       const action = {
         type: 'EAT_PIZZA',
-        promise: Promise.reject(new Error('meomeo')),
+        promise: Promise.resolve({
+          ok: false,
+          json: () => {
+            'error';
+          },
+        }),
       };
       store.dispatch(action);
-      Promise.resolve(1).catch(() => {
+      Promise.resolve().catch(() => {
         const actions = store.getActions();
-        expect(actions[1]).toEqual({
+        expect(actions[0]).toEqual({
           type: 'EAT_PIZZA_REQUEST',
         });
-        expect(actions[2]).toEqual({
+        expect(actions[1]).toEqual({
           type: 'EAT_PIZZA_FAILURE',
-          payload: { name: 'Error', message: 'meomeo' },
+          payload: { message: ['error'] },
         });
       });
     });

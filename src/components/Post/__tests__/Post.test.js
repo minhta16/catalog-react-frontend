@@ -48,6 +48,7 @@ describe('components/Post', () => {
       category: {
         name: 'name',
       },
+      fetchPosts: jest.fn(),
     };
   });
 

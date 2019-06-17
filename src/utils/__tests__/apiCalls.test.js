@@ -6,15 +6,6 @@ describe('utils/apiCalls', () => {
     fetch.resetMocks();
   });
 
-  it('should call handleError correctly', async () => {
-    expect(
-      await api
-        .handleError('error')
-        .then(() => 'then')
-        .catch(() => 'catch'),
-    ).toBe('catch');
-  });
-
   describe('fetchApiCategories', () => {
     it('should return data', () => {
       fetch.mockResponse(

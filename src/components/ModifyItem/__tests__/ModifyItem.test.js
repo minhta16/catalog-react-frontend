@@ -38,8 +38,11 @@ describe('components/ModifyItem', () => {
         },
       ],
       token: 'minh',
-      modifyPostAndRefetch: jest.fn(),
-      addPostAndRefetch: jest.fn(),
+      modifyPost: jest.fn(),
+      addPost: jest.fn(),
+      resetAddPostSuccess: jest.fn(),
+      clearPostError: jest.fn(),
+      addPostSuccess: false,
     };
   });
 
@@ -49,11 +52,11 @@ describe('components/ModifyItem', () => {
   });
 
   describe('state.selectedCategory', () => {
-    it('should be 0 when categories has no elements', () => {
+    it('should be empty when categories has no elements', () => {
       props.match.params = {};
       props.categories = [];
       setup();
-      expect(wrapper.state().selectedCategory).toBe('0');
+      expect(wrapper.state().selectedCategory).toBe('');
     });
   });
 
@@ -75,24 +78,24 @@ describe('components/ModifyItem', () => {
     expect(wrapper.state().editing).toBe(false);
   });
 
-  it('should call modifyPostAndRefetch() if editing', () => {
+  it('should call modifyPost() if editing', () => {
     setup();
     wrapper.setState({
       editing: true,
     });
     update();
     wrapper.instance().handleOnSubmit({ preventDefault: jest.fn() });
-    expect(props.modifyPostAndRefetch).toHaveBeenCalled();
+    expect(props.modifyPost).toHaveBeenCalled();
   });
 
-  it('should call addPostAndRefetch() if not editing', () => {
+  it('should call addPost() if not editing', () => {
     setup();
     wrapper.setState({
       editing: false,
     });
     update();
     wrapper.instance().handleOnSubmit({ preventDefault: jest.fn() });
-    expect(props.addPostAndRefetch).toHaveBeenCalled();
+    expect(props.addPost).toHaveBeenCalled();
   });
 
   it('should change state when handleCategoryChange() is called', () => {

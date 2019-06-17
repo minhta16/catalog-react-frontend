@@ -50,11 +50,6 @@ describe('views/Home', () => {
   });
 
   describe('When view mounts', () => {
-    it('should call fetchCategories', () => {
-      setup();
-      expect(props.fetchCategories).toHaveBeenCalled();
-    });
-
     it('should not call fetchPosts if id is blank', () => {
       props.match.params.id = '';
       setup();

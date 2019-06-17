@@ -18,8 +18,7 @@ describe('components/Shared/LoginDialog', () => {
       open: true,
       onClose: jest.fn(),
       onClick: jest.fn(),
-      error: false,
-      errorMessage: '',
+      errorMessage: [],
     };
   });
 
@@ -35,7 +34,7 @@ describe('components/Shared/LoginDialog', () => {
 
   it('should call onClickSubmit -> onClose when submitted', () => {
     setup();
-    wrapper.instance().onClickSubmit();
+    wrapper.instance().onClickSubmit({ preventDefault: jest.fn() });
     expect(props.onClick).toHaveBeenCalled();
   });
 
@@ -62,14 +61,8 @@ describe('components/Shared/LoginDialog', () => {
   });
 
   it('should render error Typography when errorMessage is true', () => {
-    props.errorMessage = 'this is an error!';
+    props.errorMessage = ['this is an error!'];
     setup();
     expect(wrapper.find('[color="error"]').length).toBe(1);
-  });
-
-  it('should not render error Typography when error is false', () => {
-    props.error = false;
-    setup();
-    expect(wrapper.find('[color="error"]').length).toBe(0);
   });
 });

@@ -5,7 +5,12 @@ import { PostsType } from '../../actions/types';
 
 describe('reducers/posts', () => {
   it('should return the initial state', () => {
-    expect(postsReducer(undefined, {})).toEqual({ error: {}, loading: false, posts: {} });
+    expect(postsReducer(undefined, {})).toEqual({
+      error: [],
+      addPostSuccess: false,
+      loading: false,
+      posts: {},
+    });
   });
 
   it('should return loading with FETCH_POSTS_REQUEST', () => {
@@ -20,10 +25,10 @@ describe('reducers/posts', () => {
       type: actionNameUtil.createSuccess(PostsType.FETCH_POSTS),
       payload: 'yum',
     };
-    expect(postsReducer({}, action)).toEqual({ posts: 'yum', error: '', loading: false });
+    expect(postsReducer({}, action)).toEqual({ posts: 'yum', error: [], loading: false });
   });
 
-  it('should return the errro with FETCH_POSTS_FAILURE', () => {
+  it('should return the error with FETCH_POSTS_FAILURE', () => {
     const action = {
       type: actionNameUtil.createFailure(PostsType.FETCH_POSTS),
       payload: 'error',

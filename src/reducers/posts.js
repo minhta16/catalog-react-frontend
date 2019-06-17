@@ -9,6 +9,8 @@ const initialState = {
 };
 export default (state = initialState, action) => {
   switch (action.type) {
+    case PostsType.CLEAR_ERROR:
+      return { ...state, error: [] };
     case PostsType.RESET_ADD_POST_SUCCESS:
       return { ...state, addPostSuccess: false };
     case actionNameUtil.createRequest(PostsType.ADD_POST):

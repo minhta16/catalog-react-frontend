@@ -10,19 +10,10 @@ describe('reducers/users', () => {
         username: '',
         token: '',
       },
-      posts: {},
       loading: false,
-      error: {},
-      errorMessage: '',
+      error: [],
+      createAccountSuccess: false,
     });
-  });
-
-  it('should return the username with SIGN_IN', () => {
-    const action = {
-      type: UsersType.SIGN_IN,
-      username: 'yum',
-    };
-    expect(currentUserReducer({}, action)).toEqual({ currentUser: { username: 'yum' } });
   });
 
   it('should return loading with SIGN_IN_REQUEST', () => {
@@ -40,10 +31,10 @@ describe('reducers/users', () => {
     expect(currentUserReducer({}, action)).toEqual({
       currentUser: {
         token: 'yum',
+        username: undefined,
       },
       loading: false,
-      error: {},
-      errorMessage: '',
+      error: [],
     });
   });
 
@@ -54,7 +45,6 @@ describe('reducers/users', () => {
     };
     expect(currentUserReducer({}, action)).toEqual({
       error: 'yum',
-      errorMessage: 'Invalid username or password. Try again.',
     });
   });
 
@@ -67,10 +57,9 @@ describe('reducers/users', () => {
         username: '',
         token: '',
       },
-      posts: {},
       loading: false,
-      error: {},
-      errorMessage: '',
+      error: [],
+      createAccountSuccess: false,
     });
   });
 
@@ -103,8 +92,7 @@ describe('reducers/users', () => {
           id: '2',
         },
       },
-      error: {},
-      errorMessage: '',
+      error: [],
     });
   });
 

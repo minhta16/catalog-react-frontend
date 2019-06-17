@@ -21,13 +21,11 @@ export const fetchPosts = (id) => (dispatch) =>
  * @param {string} categoryId category id that post needs to be added to
  * @param {object} post post information
  */
-export const addPostAndRefetch = (token, categoryId, post) => (dispatch) => {
+export const addPost = (token, categoryId, post) => (dispatch) => {
   dispatch({
     type: PostsType.ADD_POST,
     promise: api.addPost(token, categoryId, post),
   });
-  // Redux-promise or fix middleware
-  dispatch(fetchPosts(categoryId));
 };
 
 /**
@@ -38,19 +36,20 @@ export const addPostAndRefetch = (token, categoryId, post) => (dispatch) => {
  * @param {string} postId post id that needs to be modifed
  * @param {object} post post information
  */
-export const modifyPostAndRefetch = (token, categoryId, postId, post) => (dispatch) => {
+export const modifyPost = (token, categoryId, postId, post) => (dispatch) => {
   dispatch({
     type: PostsType.MODIFY_POST,
     promise: api.modifyPost(token, categoryId, postId, post),
   });
-  dispatch(fetchPosts(categoryId));
 };
 
 /**
+ * Set post errors to empty
+ */
+export const clearPostError = () => ({ type: PostsType.CLEAR_ERROR });
+/**
  * dispatch a resetAddPostSuccess action to reset addPostSuccess to false
  */
-export const resetAddPostSuccess = () => (dispatch) => {
-  dispatch({
-    type: PostsType.RESET_ADD_POST_SUCCESS,
-  });
-};
+export const resetAddPostSuccess = () => ({
+  type: PostsType.RESET_ADD_POST_SUCCESS,
+});

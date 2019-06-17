@@ -29,7 +29,8 @@ describe('components/Shared/CustomAppBar', () => {
         password: 'minh',
         token: 'abc',
       },
-      errorMessage: '',
+      errorMessage: [],
+      clearError: jest.fn(),
     };
   });
 

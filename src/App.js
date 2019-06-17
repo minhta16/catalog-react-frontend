@@ -39,7 +39,7 @@ const routing = (
   </Switch>
 );
 
-class App extends Component {
+export class App extends Component {
   componentDidMount() {
     const { fetchCategories } = this.props;
     fetchCategories();

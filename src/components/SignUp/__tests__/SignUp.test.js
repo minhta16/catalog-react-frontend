@@ -18,7 +18,10 @@ describe('components/SignUp/SignUp', () => {
 
   beforeEach(() => {
     props = {
-      createUserAndSignIn: jest.fn(),
+      createUser: jest.fn(),
+      clearError: jest.fn(),
+      createAccountSuccess: false,
+      signIn: jest.fn(),
     };
   });
 
@@ -59,15 +62,14 @@ describe('components/SignUp/SignUp', () => {
   // })
 
   describe('register() is called', () => {
-    it('should call createUserAndSignIn and set redirect when password is qualified', () => {
+    it('should call createUser and set redirect when password is qualified', () => {
       setup();
       wrapper.setState({
         passwordMatchWarning: false,
         passWarning: false,
       });
-      wrapper.instance().register();
-      expect(props.createUserAndSignIn).toHaveBeenCalled();
-      expect(wrapper.state().redirect).toBe(true);
+      wrapper.instance().register({ preventDefault: jest.fn() });
+      expect(props.createUser).toHaveBeenCalled();
     });
 
     it('should not do anything when password is not qualified', () => {
@@ -76,9 +78,8 @@ describe('components/SignUp/SignUp', () => {
         passwordMatchWarning: true,
         passWarning: true,
       });
-      wrapper.instance().register();
-      expect(props.createUserAndSignIn).not.toHaveBeenCalled();
-      expect(wrapper.state().redirect).toBe(false);
+      wrapper.instance().register({ preventDefault: jest.fn() });
+      expect(props.createUser).not.toHaveBeenCalled();
     });
   });
 
@@ -89,12 +90,12 @@ describe('components/SignUp/SignUp', () => {
       expect(qualifiedPassword('a')).toBe(false);
       expect(qualifiedPassword('azzzzzzzzzz')).toBe(false);
       expect(qualifiedPassword('123123123123')).toBe(false);
-      expect(qualifiedPassword('')).toBe(false);
     });
-    it('should return true with qualified passwords', () => {
+    it('should return true with qualified passwords and empty password', () => {
       setup();
       const { qualifiedPassword } = wrapper.instance();
       expect(qualifiedPassword('SuperSonic99')).toBe(true);
+      expect(qualifiedPassword('')).toBe(true);
     });
   });
 });

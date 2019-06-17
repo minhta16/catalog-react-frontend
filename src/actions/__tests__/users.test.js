@@ -5,7 +5,7 @@ import api from 'utils/apiCalls';
 import {
   signIn,
   fetchUsers,
-  createUserAndSignIn,
+  createUser,
   fetchCurrentUserPost,
   deletePostAndRefetch,
 } from '../users';
@@ -42,20 +42,13 @@ describe('actions/users', () => {
     });
   });
 
-  it('should create CREATE_USER and then SIGN_IN when done creating user and signing in', async () => {
-    store.dispatch(createUserAndSignIn('username', 'password', 'email', 'name'));
+  it('should create CREATE_USER when done creating user', async () => {
+    store.dispatch(createUser('username', 'password', 'email', 'name'));
     const actions = store.getActions();
     expect(actions[0]).toEqual({
       type: UsersType.CREATE_USER,
       promise: api.createUser('username', 'password'),
     });
-    Promise.resolve(1).then(() =>
-      expect(actions[1]).toEqual({
-        type: UsersType.SIGN_IN,
-        promise: api.signIn('username', 'password'),
-        username: 'username',
-      }),
-    );
   });
 
   it('should create FETCH_CURRENT_USER_POST when done fetching', async () => {

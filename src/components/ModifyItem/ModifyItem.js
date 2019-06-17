@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import { selectCurrentUserPost, selectCurrentUserProp } from 'selectors/users';
 import { selectCategories } from 'selectors/categories';
-import { selectAddPostSuccess } from 'selectors/posts';
+import { selectAddPostSuccess, selectAddPostError } from 'selectors/posts';
 import {
-  modifyPostAndRefetch as modifyPostAndRefetchRedux,
-  addPostAndRefetch as addPostAndRefetchRedux,
+  modifyPost as modifyPostRedux,
+  addPost as addPostRedux,
+  clearPostError as clearPostErrorRedux,
   resetAddPostSuccess as resetAddPostSuccessRedux,
 } from 'actions/posts';
 import { Typography, Container, Paper, TextField, Button, MenuItem, Grid } from '@material-ui/core';
@@ -21,7 +22,7 @@ export class ModifyItem extends Component {
     editing: false,
     redirect: false,
     // eslint-disable-next-line react/destructuring-assignment
-    selectedCategory: this.props.categories.length ? this.props.categories[0].id : '0',
+    selectedCategory: this.props.categories.length ? this.props.categories[0].id : '',
   };
 
   // Connecting the textfields to the state
@@ -47,17 +48,17 @@ export class ModifyItem extends Component {
   handleOnSubmit = (e) => {
     e.preventDefault();
 
-    const { token, match, modifyPostAndRefetch, addPostAndRefetch } = this.props;
+    const { token, match, modifyPost, addPost } = this.props;
     const { title, description, editing, selectedCategory } = this.state;
 
     if (editing) {
-      modifyPostAndRefetch(token, match.params.id, match.params.postId, {
+      modifyPost(token, match.params.id, match.params.postId, {
         name: title,
         description,
         price: 0,
       });
     } else {
-      addPostAndRefetch(token, selectedCategory, {
+      addPost(token, selectedCategory, {
         name: title,
         description,
         price: 0,
@@ -69,9 +70,10 @@ export class ModifyItem extends Component {
    * Setting editing to be true if category id exists on the link. Also set the title, description, and selectedCategory if category id exists
    */
   componentDidMount = () => {
-    const { match, post, resetAddPostSuccess } = this.props;
+    const { match, post, resetAddPostSuccess, clearPostError } = this.props;
 
     resetAddPostSuccess();
+    clearPostError();
     if (match.params.id) {
       this.setState(
         {
@@ -88,6 +90,9 @@ export class ModifyItem extends Component {
     }
   };
 
+  /**
+   * Redirect when addPostSuccess change from false to true
+   */
   componentDidUpdate = (prevProps) => {
     const { addPostSuccess } = this.props;
     if (!prevProps.addPostSuccess && addPostSuccess) {
@@ -99,13 +104,18 @@ export class ModifyItem extends Component {
 
   render() {
     const { title, description, editing, redirect, selectedCategory } = this.state;
-    const { match, categories } = this.props;
+    const { match, categories, errorMessage } = this.props;
 
+    /**
+     * If redirect then set the path and return a redirect component
+     */
     if (redirect) {
+      // If not editing, then return to the new post
       let path = {
         pathname: `/${match.params.id}/${match.params.postId}`,
         snackbarMess: 'Post edited!',
       };
+      // If editing, then return to the category
       if (!editing) {
         path = { pathname: `/${selectedCategory}`, snackbarMess: 'Post created!' };
       }
@@ -119,6 +129,13 @@ export class ModifyItem extends Component {
           ) : (
             <Typography variant="h4">New Post</Typography>
           )}
+          {/* Display the error message if an error occured */}
+          {errorMessage &&
+            errorMessage.map((message) => (
+              <Typography key={message} variant="body1" color="error">
+                {`${message}`}
+              </Typography>
+            ))}
           <form onSubmit={this.handleOnSubmit} autoComplete="off">
             <TextField
               id="categories"
@@ -180,14 +197,17 @@ ModifyItem.propTypes = {
   post: PropTypes.object,
   token: PropTypes.string.isRequired,
   categories: PropTypes.array.isRequired,
-  addPostAndRefetch: PropTypes.func.isRequired,
-  modifyPostAndRefetch: PropTypes.func.isRequired,
+  addPost: PropTypes.func.isRequired,
+  modifyPost: PropTypes.func.isRequired,
   resetAddPostSuccess: PropTypes.func.isRequired,
   addPostSuccess: PropTypes.bool.isRequired,
+  errorMessage: PropTypes.array,
+  clearPostError: PropTypes.func.isRequired,
 };
 
 ModifyItem.defaultProps = {
   post: {},
+  errorMessage: [],
 };
 
 const mapStateToProps = (state, ownProps) => ({
@@ -195,12 +215,14 @@ const mapStateToProps = (state, ownProps) => ({
   token: selectCurrentUserProp(state, 'token'),
   categories: selectCategories(state),
   addPostSuccess: selectAddPostSuccess(state),
+  errorMessage: selectAddPostError(state),
 });
 
 const mapDispatchToProps = {
-  modifyPostAndRefetch: modifyPostAndRefetchRedux,
-  addPostAndRefetch: addPostAndRefetchRedux,
+  modifyPost: modifyPostRedux,
+  addPost: addPostRedux,
   resetAddPostSuccess: resetAddPostSuccessRedux,
+  clearPostError: clearPostErrorRedux,
 };
 
 export default connect(

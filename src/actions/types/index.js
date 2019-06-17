@@ -3,6 +3,7 @@ export const PostsType = {
   MODIFY_POST: 'MODIFY_POST',
   FETCH_POSTS: 'FETCH_POSTS',
   RESET_ADD_POST_SUCCESS: 'RESET_ADD_POST_SUCCESS',
+  CLEAR_ERROR: 'POST_CLEAR_ERROR',
 };
 
 export const CategoriesType = {

@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/SignUp/SignUp should render correctly 1`] = `
+<WithStyles(ForwardRef(Container))
+  maxWidth="lg"
+>
+  <WithStyles(ForwardRef(Paper))
+    className="paper"
+  >
+    <WithStyles(ForwardRef(Typography))
+      variant="h4"
+    >
+      Register now!
+    </WithStyles(ForwardRef(Typography))>
+    <form
+      autoComplete="off"
+      onSubmit={[Function]}
+    >
+      <WithStyles(ForwardRef(TextField))
+        fullWidth={true}
+        id="username"
+        label="Username"
+        margin="normal"
+        onChange={[Function]}
+        required={true}
+        value=""
+        variant="outlined"
+      />
+      <WithStyles(ForwardRef(TextField))
+        fullWidth={true}
+        id="name"
+        label="Name"
+        margin="normal"
+        onChange={[Function]}
+        required={true}
+        value=""
+        variant="outlined"
+      />
+      <WithStyles(ForwardRef(TextField))
+        error={false}
+        fullWidth={true}
+        helperText=""
+        id="email"
+        label="Email Address"
+        margin="normal"
+        onChange={[Function]}
+        required={true}
+        value=""
+        variant="outlined"
+      />
+      <WithStyles(ForwardRef(TextField))
+        error={false}
+        fullWidth={true}
+        helperText=""
+        id="password"
+        label="Password"
+        margin="normal"
+        onChange={[Function]}
+        required={true}
+        type="password"
+        value=""
+        variant="outlined"
+      />
+      <WithStyles(ForwardRef(TextField))
+        error={false}
+        fullWidth={true}
+        helperText=""
+        id="confirmPassword"
+        label="Confirm Password"
+        margin="normal"
+        onChange={[Function]}
+        required={true}
+        type="password"
+        value=""
+        variant="outlined"
+      />
+      <WithStyles(ForwardRef(Typography))
+        variant="subtitle2"
+      >
+        By clicking Resgister, you agree with our 
+        <WithStyles(ForwardRef(Link))
+          id="sign-up-terms-and-condition"
+          onClick={[Function]}
+        >
+          Terms and Conditions
+        </WithStyles(ForwardRef(Link))>
+      </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Button))
+        color="primary"
+        disabled={false}
+        type="submit"
+        variant="contained"
+      >
+        Register
+      </WithStyles(ForwardRef(Button))>
+    </form>
+    <TermsAndConditionsDialog
+      onClose={[Function]}
+      open={false}
+    />
+  </WithStyles(ForwardRef(Paper))>
+</WithStyles(ForwardRef(Container))>
+`;

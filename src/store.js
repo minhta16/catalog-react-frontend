@@ -11,7 +11,6 @@ const initialState = {
     loading: false,
     error: {},
     createAccountSuccess: false,
-
     posts: {},
   },
 };

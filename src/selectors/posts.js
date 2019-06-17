@@ -16,6 +16,8 @@ export const selectAllPosts = (state, order) => {
   }
 };
 
+export const selectAddPostError = (state) => state.postsReducer.error.message;
+
 export const selectPostLoading = (state) => state.postsReducer.loading;
 
 export const selectAddPostSuccess = (state) => state.postsReducer.addPostSuccess;
