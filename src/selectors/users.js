@@ -4,6 +4,11 @@ export const selectLoginErrorMessage = (state) => state.currentUserReducer.error
 
 export const selectCurrentUserProp = (state, prop) => state.currentUserReducer.currentUser[prop];
 
+/**
+ * Return current user's posts
+ * @param {object} state current state
+ * @param {string} order reverse
+ */
 export const selectCurrentUserPosts = (state, order) => {
   switch (order) {
     case 'reverse':

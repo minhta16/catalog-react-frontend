@@ -2,6 +2,9 @@
 import api from 'utils/apiCalls';
 import { CategoriesType } from './types';
 
+/**
+ * dispatch a fetchCategories action whcih fetch all the available categories
+ */
 export const fetchCategories = () => (dispatch) => {
   dispatch({
     type: CategoriesType.FETCH_CATEGORIES,

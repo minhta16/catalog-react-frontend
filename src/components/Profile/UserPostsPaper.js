@@ -39,6 +39,7 @@ export function UserPostsPaper(props) {
         </Grid>
       </Grid>
       <Divider />
+      {/* Display an animation if loading is true */}
       {loading ? <CircularProgress /> : <PostList posts={posts} />}
     </Paper>
   );

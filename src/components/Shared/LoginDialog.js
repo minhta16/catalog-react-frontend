@@ -12,6 +12,9 @@ import {
 } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 
+/**
+ * This creates a basic login dialog where the user can login with an username and password and create an account if they haven't got one
+ */
 export class LoginDialog extends Component {
   state = {
     username: '',
@@ -35,14 +38,14 @@ export class LoginDialog extends Component {
     const { username, password } = this.state;
     return (
       <Dialog open={open} onClose={onClose}>
-        <DialogTitle>Login</DialogTitle>
-        <DialogContent>
-          {errorMessage && (
-            <Typography variant="body1" color="error">
-              {`${errorMessage}`}
-            </Typography>
-          )}
-          <form autoComplete="off">
+        <form autoComplete="off" onSubmit={this.onClickSubmit}>
+          <DialogTitle>Login</DialogTitle>
+          <DialogContent>
+            {errorMessage && (
+              <Typography variant="body1" color="error">
+                {`${errorMessage}`}
+              </Typography>
+            )}
             <TextField
               required
               id="username"
@@ -64,19 +67,19 @@ export class LoginDialog extends Component {
               fullWidth
               variant="outlined"
             />
-          </form>
-          <Link onClick={onClose} component={RouterLink} exact="true" to="/register">
-            Haven’t got an account yet? Register here!
-          </Link>
-        </DialogContent>
-        <DialogActions>
-          <Button id="login-dialog-login" onClick={this.onClickSubmit} color="primary">
-            Login
-          </Button>
-          <Button id="login-dialog-close" onClick={onClose}>
-            Cancel
-          </Button>
-        </DialogActions>
+            <Link onClick={onClose} component={RouterLink} exact="true" to="/register">
+              Haven’t got an account yet? Register here!
+            </Link>
+          </DialogContent>
+          <DialogActions>
+            <Button id="login-dialog-login" type="submit" color="primary">
+              Login
+            </Button>
+            <Button id="login-dialog-close" onClick={onClose}>
+              Cancel
+            </Button>
+          </DialogActions>
+        </form>
       </Dialog>
     );
   }

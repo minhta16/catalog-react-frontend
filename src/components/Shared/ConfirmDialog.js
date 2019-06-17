@@ -9,6 +9,9 @@ import {
   DialogActions,
 } from '@material-ui/core';
 
+/**
+ * This component creates a confirm dialog which calls onConfirm when the user clicks confirm and onCancel when the user clicks cancel
+ */
 export function ConfirmDialog(props) {
   const { title, contentText, open, onCancel, onClose, onConfirm } = props;
   return (

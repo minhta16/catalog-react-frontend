@@ -12,6 +12,9 @@ export class Post extends Component {
     openSnackbar: false,
   };
 
+  /**
+   * Open the snackbar if snackbarMess is available
+   */
   componentDidMount = () => {
     const { location } = this.props;
     if (location.snackbarMess) {
@@ -19,6 +22,10 @@ export class Post extends Component {
     }
   };
 
+  /**
+   * close: close snackbar
+   * !close: open snackbar
+   */
   closeSnackbar = (close) => () => {
     this.setState({
       openSnackbar: !close,

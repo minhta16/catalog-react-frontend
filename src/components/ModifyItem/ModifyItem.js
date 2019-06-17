@@ -22,12 +22,26 @@ export class ModifyItem extends Component {
     selectedCategory: this.props.categories.length ? this.props.categories[0].id : '0',
   };
 
+  // Connecting the textfields to the state
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value,
     });
   };
 
+  // Connect category to the state
+  handleCategoryChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  /**
+   * Handle two possible cases:
+   * when editing then dispatch a modify action to the current post
+   * when not editing then dispatch an add action
+   * when done: redirect
+   */
   handleOnSubmit = (e) => {
     e.preventDefault();
 
@@ -52,12 +66,9 @@ export class ModifyItem extends Component {
     });
   };
 
-  handleCategoryChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  };
-
+  /**
+   * Setting editing to be true if category id exists on the link. Also set the title, description, and selectedCategory if category id exists
+   */
   componentDidMount = () => {
     const { match, post } = this.props;
     if (match.params.id) {

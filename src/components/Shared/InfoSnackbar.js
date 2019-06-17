@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import { Snackbar, IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 
+/**
+ * This component creates a snackbar which display a message and a cancel button
+ */
 export function InfoSnackbar(props) {
   const { open, onClose, message } = props;
   return (

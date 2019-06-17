@@ -26,6 +26,9 @@ export class CustomAppBar extends Component {
     });
   };
 
+  /**
+   * close the login dialog if currentUser token exists, meaning that the user just logged in
+   */
   componentDidUpdate = (prevProps) => {
     const { currentUser } = this.props;
     if (!prevProps.currentUser.token && currentUser.token) {

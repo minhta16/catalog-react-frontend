@@ -30,12 +30,18 @@ export class PostItem extends Component {
     });
   };
 
+  /**
+   * dispatch a delete action when Confirm is clicked in the delete confirm dialog */
+
   handleConfirmDelete = async () => {
     const { deletePostAndRefetch, token, post, openSnackbar } = this.props;
     deletePostAndRefetch(token, post.category_id, post.id);
     openSnackbar();
   };
 
+  /**
+   * open the delete dialog when delete button is hit
+   */
   toggleDeleteDialog = () => {
     const { openConfirm } = this.state;
     this.setState({
@@ -47,6 +53,7 @@ export class PostItem extends Component {
     const { post, subtitleLength, category } = this.props;
     const { anchorEl, openConfirm } = this.state;
 
+    // A menu which contains an update and delete button
     const menu = (
       <Menu
         id="simple-menu"
@@ -105,6 +112,7 @@ export class PostItem extends Component {
             <Typography variant="subtitle1">{`Category: ${category.name}`}</Typography>
             <Typography variant="subtitle1">{`Created: ${post.created}`}</Typography>
             <Typography variant="caption">
+              {/* Add triple dots to the end of a description if description is longer than 100 characters */}
               {`Description: ${post.description.substr(0, subtitleLength)}`}
               {post.description.length > subtitleLength && `...`}
             </Typography>

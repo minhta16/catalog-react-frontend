@@ -33,6 +33,7 @@ export class LoginButton extends Component {
     const { onClick, variant, color, currentUser } = this.props;
     const { anchorEl } = this.state;
 
+    // A menu which contains a Profile button and Logout button. This menu will display when the user is logged in
     const menu = (
       <Menu
         id="simple-menu"
@@ -64,6 +65,7 @@ export class LoginButton extends Component {
     );
     return (
       <div>
+        {/* If userToken is available then show the username and avatar, else show the login button */}
         {currentUser.token ? (
           <Grid container alignItems="center">
             <Typography variant="body1">{`Welcome, ${currentUser.username}`}</Typography>

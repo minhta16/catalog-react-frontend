@@ -1,9 +1,18 @@
 class ApiCalls {
+  /**
+   * returns a reject promise to be resolved
+   */
   handleError = (err) =>
     new Promise((_resolve, reject) => {
       reject(err);
     });
 
+  /**
+   * create an api request which contains the following information:
+   * method: POST, GET, DELETE
+   * body:
+   * accessToken: JWT token
+   */
   fetchRequest = (requestParams) => {
     const params = {
       headers: {
@@ -63,7 +72,7 @@ class ApiCalls {
     const userData = await this.fetchRequest({
       method: 'POST',
       path: `${process.env.REACT_APP_API_PATH}/auth`,
-      data: JSON.stringify({
+      body: JSON.stringify({
         username,
         password,
       }),

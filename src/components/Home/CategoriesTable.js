@@ -28,6 +28,7 @@ class CategoriesTable extends Component {
     const selectedCatName = selectedCat ? selectedCat.name : '';
     return (
       <Paper>
+        {/* Create a loading animation if the categories are loading */}
         {categoriesLoading ? (
           <CircularProgress />
         ) : (
@@ -52,6 +53,7 @@ class CategoriesTable extends Component {
               </MenuList>
             </Grid>
             <Grid item xs={9}>
+              {/* Create a loading animation if the posts are loading */}
               {postsLoading ? (
                 <CircularProgress />
               ) : (
@@ -60,7 +62,9 @@ class CategoriesTable extends Component {
                     {selectedCatId ? selectedCatName : 'Choose a category'}
                   </Typography>
                   <Divider variant="middle" />
+                  {/* A list of items to be selected, click to redirect */}
                   <MenuList>
+                    {/* If selectedCatID is available then display the menu. If not, the right side will display a message telling the user to select a category */}
                     {selectedCatId ? (
                       selectedCatItems.map((item) => (
                         <MenuItem

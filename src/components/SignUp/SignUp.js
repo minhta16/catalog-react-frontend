@@ -21,6 +21,9 @@ export class SignUp extends Component {
     redirect: false,
   };
 
+  /**
+   * Connect components to state
+   */
   handleChange = (e) => {
     this.setState(
       {
@@ -30,6 +33,9 @@ export class SignUp extends Component {
     );
   };
 
+  /**
+   * Opens terms and conditions upon called
+   */
   handleTermsClick = () => {
     const { openTerms } = this.state;
     this.setState({
@@ -37,6 +43,9 @@ export class SignUp extends Component {
     });
   };
 
+  /**
+   * create an user and sign in
+   */
   register = () => {
     const { username, password, email, name, passwordMatchWarning, passWarning } = this.state;
     const { createUserAndSignIn } = this.props;
@@ -49,14 +58,26 @@ export class SignUp extends Component {
     // handle error here
   };
 
+  /**
+   * returns true if an email is qualified
+   */
   qualifiedEmail = (email) => {
-    return /\w+@\w+\.\w+/.test(email);
+    return /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/.test(email);
   };
 
+  /**
+   * returns true if password is 0 character long (user hasn't enter a password yet) or if the password is qualified (contains a number, character, and more than 8 chars long)
+   */
   qualifiedPassword = (password) => {
-    return password.length >= 8 && /\d/.test(password) && /[A-z]/.test(password);
+    return (
+      password.length === 0 ||
+      (password.length >= 8 && /\d/.test(password) && /[A-z]/.test(password))
+    );
   };
 
+  /**
+   * Create warnings if user has unqualified things in text fields
+   */
   handleCreateWarnings() {
     const { email, password, confirmPassword } = this.state;
 

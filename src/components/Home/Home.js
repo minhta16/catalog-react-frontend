@@ -16,6 +16,9 @@ export class Home extends Component {
     openSnackbar: false,
   };
 
+  /**
+   * always fetchCategories upon mount. if the user is viewing a category then fetch the posts in that category. If there is a snackbarMessage then open the snackbar
+   */
   componentDidMount() {
     const { fetchCategories, match, fetchPosts, location } = this.props;
     fetchCategories();
@@ -45,6 +48,7 @@ export class Home extends Component {
       postsLoading,
     } = this.props;
     const { openSnackbar } = this.state;
+    // Render a categories table and a snackbar to be displayed when needed
     return (
       <Container maxWidth="lg">
         <CategoriesTable

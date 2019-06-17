@@ -9,7 +9,7 @@ const automateAsyncAction = (store) => (next) => (action) => {
     return next(action);
   }
   const { type, promise } = action;
-  Promise.resolve(1).then(() => store.dispatch({ type: actionNameUtil.createRequest(type) }));
+  store.dispatch({ type: actionNameUtil.createRequest(type) });
   promise
     .then((data) =>
       store.dispatch({
@@ -18,15 +18,13 @@ const automateAsyncAction = (store) => (next) => (action) => {
       }),
     )
     .catch((err) => {
-      Promise.resolve(1).then(() =>
-        store.dispatch({
-          type: actionNameUtil.createFailure(type),
-          payload: {
-            name: err.name,
-            message: err.message,
-          },
-        }),
-      );
+      store.dispatch({
+        type: actionNameUtil.createFailure(type),
+        payload: {
+          name: err.name,
+          message: err.message,
+        },
+      });
     });
   return next(action);
 };
