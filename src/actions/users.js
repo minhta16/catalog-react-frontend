@@ -16,12 +16,13 @@ export const fetchUsers = () => (dispatch) =>
  * @param {string} username username
  * @param {string} password password
  */
-export const signIn = (username, password) => (dispatch) =>
+export const signIn = (username, password) => (dispatch) => {
   dispatch({
     type: UsersType.SIGN_IN,
     promise: api.signIn(username, password),
     username,
   });
+};
 
 /**
  * dispatch a signOut action which clears the current state
@@ -39,12 +40,11 @@ export const signOut = () => ({
  * @param {string} email email
  * @param {string} name name
  */
-export const createUserAndSignIn = (username, password, email, name) => (dispatch) => {
+export const createUser = (username, password, email, name) => (dispatch) => {
   dispatch({
     type: UsersType.CREATE_USER,
     promise: api.createUser(username, password, email, name),
   });
-  dispatch(signIn(username, password));
 };
 
 /**
@@ -73,3 +73,7 @@ export const deletePostAndRefetch = (token, categoryId, postId) => (dispatch) =>
   });
   dispatch(fetchCurrentUserPost(token));
 };
+
+export const clearError = () => ({
+  type: UsersType.CLEAR_ERROR,
+});

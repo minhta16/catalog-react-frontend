@@ -1,19 +1,11 @@
 class ApiCalls {
   /**
-   * returns a reject promise to be resolved
-   */
-  handleError = (err) =>
-    new Promise((_resolve, reject) => {
-      reject(err);
-    });
-
-  /**
    * create an api request which contains the following information:
    * method: POST, GET, DELETE
    * body:
    * accessToken: JWT token
    */
-  fetchRequest = (requestParams) => {
+  fetchRequest = async (requestParams) => {
     const params = {
       headers: {
         'Content-Type': 'application/json',
@@ -26,16 +18,19 @@ class ApiCalls {
       params.headers.Authorization = `JWT ${requestParams.accessToken}`;
     }
 
-    const data = fetch(requestParams.path, params).then((res) => {
-      if (!res.ok) return this.handleError(res);
+    const data = await fetch(requestParams.path, params).then((res) => {
+      if (!res.ok) {
+        throw res.json();
+      }
       return res.json();
     });
 
     return data;
   };
 
-  fetchCategories = async () => {
-    const fetchedData = await this.fetchRequest({
+  // Fetch all categories
+  fetchCategories = () => {
+    const fetchedData = this.fetchRequest({
       method: 'GET',
       path: `${process.env.REACT_APP_API_PATH}/categories?offset=0&limit=100`,
     }).then((data) => {
@@ -51,8 +46,11 @@ class ApiCalls {
     return fetchedData;
   };
 
-  fetchItems = async (categoryId) => {
-    const fetchedItems = await this.fetchRequest({
+  /**
+   * Fetch all items in a category, given the categoryId
+   */
+  fetchItems = (categoryId) => {
+    const fetchedItems = this.fetchRequest({
       method: 'GET',
       path: `${process.env.REACT_APP_API_PATH}/categories/${categoryId}/items?offset=0&limit=100`,
     }).then((data) => {
@@ -68,8 +66,11 @@ class ApiCalls {
     return fetchedItems;
   };
 
-  signIn = async (username, password) => {
-    const userData = await this.fetchRequest({
+  /**
+   * Sign in and get a user token
+   */
+  signIn = (username, password) => {
+    const userData = this.fetchRequest({
       method: 'POST',
       path: `${process.env.REACT_APP_API_PATH}/auth`,
       body: JSON.stringify({
@@ -80,8 +81,11 @@ class ApiCalls {
     return userData;
   };
 
-  createUser = async (username, password, email, name) => {
-    const userData = await this.fetchRequest({
+  /**
+   * Create a new user in the database
+   */
+  createUser = (username, password, email, name) => {
+    const userData = this.fetchRequest({
       method: 'POST',
       path: `${process.env.REACT_APP_API_PATH}/users`,
       body: JSON.stringify({
@@ -94,8 +98,11 @@ class ApiCalls {
     return userData;
   };
 
-  fetchCurrentUserPosts = async (token) => {
-    const fetchedItems = await this.fetchRequest({
+  /**
+   * Fetch posts from the current user
+   */
+  fetchCurrentUserPosts = (token) => {
+    const fetchedItems = this.fetchRequest({
       method: 'GET',
       path: `${process.env.REACT_APP_API_PATH}/me/post`,
       accessToken: token,
@@ -103,8 +110,11 @@ class ApiCalls {
     return fetchedItems;
   };
 
-  deletePost = async (token, categoryId, postId) => {
-    const message = await this.fetchRequest({
+  /**
+   * Delete post of the current user
+   */
+  deletePost = (token, categoryId, postId) => {
+    const message = this.fetchRequest({
       method: 'DELETE',
       path: `${process.env.REACT_APP_API_PATH}/categories/${categoryId}/items/${postId}`,
       accessToken: token,
@@ -112,8 +122,11 @@ class ApiCalls {
     return message;
   };
 
-  addPost = async (token, categoryId, post) => {
-    const message = await this.fetchRequest({
+  /**
+   * Add a post, given the current user token and categoryId that need to be added to
+   */
+  addPost = (token, categoryId, post) => {
+    const message = this.fetchRequest({
       method: 'POST',
       path: `${process.env.REACT_APP_API_PATH}/categories/${categoryId}/items`,
       accessToken: token,
@@ -126,8 +139,11 @@ class ApiCalls {
     return message;
   };
 
-  modifyPost = async (token, categoryId, itemId, post) => {
-    const message = await this.fetchRequest({
+  /**
+   * Modify a post, given the categoryId and itemId of that post
+   */
+  modifyPost = (token, categoryId, itemId, post) => {
+    const message = this.fetchRequest({
       method: 'PUT',
       path: `${process.env.REACT_APP_API_PATH}/categories/${categoryId}/items/${itemId}`,
       accessToken: token,

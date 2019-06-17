@@ -4,7 +4,11 @@ import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { signIn as signInRedux, signOut as signOutRedux } from 'actions/users';
+import {
+  signIn as signInRedux,
+  signOut as signOutRedux,
+  clearError as clearErrorRedux,
+} from 'actions/users';
 import { selectCurrentUser, selectLoginErrorMessage } from 'selectors/users';
 import LoginButton from './LoginButton';
 import LoginDialog from './LoginDialog';
@@ -21,6 +25,8 @@ export class CustomAppBar extends Component {
   };
 
   handleCloseDialog = () => {
+    const { clearError } = this.props;
+    clearError();
     this.setState({
       open: false,
     });
@@ -32,6 +38,7 @@ export class CustomAppBar extends Component {
   componentDidUpdate = (prevProps) => {
     const { currentUser } = this.props;
     if (!prevProps.currentUser.token && currentUser.token) {
+      console.log(currentUser);
       this.handleCloseDialog();
     }
   };
@@ -71,11 +78,13 @@ CustomAppBar.propTypes = {
   currentUser: PropTypes.object,
   signIn: PropTypes.func.isRequired,
   signOut: PropTypes.func.isRequired,
-  errorMessage: PropTypes.string.isRequired,
+  errorMessage: PropTypes.string,
+  clearError: PropTypes.func.isRequired,
 };
 
 CustomAppBar.defaultProps = {
   currentUser: {},
+  errorMessage: '',
 };
 
 export const mapSelectorToProps = (state) => ({
@@ -86,6 +95,7 @@ export const mapSelectorToProps = (state) => ({
 export const mapDispatchToProps = {
   signIn: signInRedux,
   signOut: signOutRedux,
+  clearError: clearErrorRedux,
 };
 
 export default connect(

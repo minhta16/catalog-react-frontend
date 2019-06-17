@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 
 import { Container } from '@material-ui/core';
 import CategoriesTable from 'components/Home/CategoriesTable';
-
-import { fetchCategories as fetchCategoriesRedux } from 'actions/categories';
 import { fetchPosts as fetchPostsRedux } from 'actions/posts';
 import { selectAllPosts, selectPostLoading } from 'selectors/posts';
 import { selectCategories, selectCategory, selectCategoriesLoading } from 'selectors/categories';
@@ -20,8 +18,7 @@ export class Home extends Component {
    * always fetchCategories upon mount. if the user is viewing a category then fetch the posts in that category. If there is a snackbarMessage then open the snackbar
    */
   componentDidMount() {
-    const { fetchCategories, match, fetchPosts, location } = this.props;
-    fetchCategories();
+    const { match, fetchPosts, location } = this.props;
     if (match.params.id) {
       fetchPosts(match.params.id);
     }
@@ -74,7 +71,6 @@ export class Home extends Component {
 Home.propTypes = {
   match: PropTypes.object,
   categories: PropTypes.array,
-  fetchCategories: PropTypes.func.isRequired,
   fetchPosts: PropTypes.func.isRequired,
   selectedCatItems: PropTypes.array,
   selectedCategory: PropTypes.object,
@@ -99,7 +95,6 @@ const mapSelectorToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = {
-  fetchCategories: fetchCategoriesRedux,
   fetchPosts: fetchPostsRedux,
 };
 

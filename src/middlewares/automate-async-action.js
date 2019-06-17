@@ -4,29 +4,47 @@ export const actionNameUtil = {
   createFailure: (actionName) => `${actionName}_FAILURE`,
 };
 
+/**
+ * A middleware which handles async api calls. This will automatically dispatch 3 actions: _REQUEST at first, _SUCCESS when success, and _FAIILURE when fail
+ */
 const automateAsyncAction = (store) => (next) => (action) => {
+  // If action doesn't contain a promise attribute then skip
   if (!Object.prototype.hasOwnProperty.call(action, 'promise')) {
     return next(action);
   }
-  const { type, promise } = action;
+  const { type, promise, ...restAction } = action;
+  // Dispatch the first action, _REQUEST
   store.dispatch({ type: actionNameUtil.createRequest(type) });
-  promise
+  return promise
     .then((data) =>
-      store.dispatch({
+      // If promise resolves then dispatch _SUCCESS
+      next({
         type: actionNameUtil.createSuccess(type),
         payload: data,
+        ...restAction,
       }),
     )
     .catch((err) => {
-      store.dispatch({
-        type: actionNameUtil.createFailure(type),
-        payload: {
-          name: err.name,
-          message: err.message,
-        },
+      // If promise fails then dispatch _FAILURE
+      return err.then((error) => {
+        // This block is to handle mismatch error responses by the API
+        let message = '';
+        if (error.description) {
+          message = error.description;
+        } else {
+          Object.keys(error.message).forEach((key) => {
+            message += `${error.message[key]}\n`;
+          });
+        }
+        // Return a _FAILURE, along with an error object which has the error message
+        return next({
+          type: actionNameUtil.createFailure(type),
+          payload: {
+            message,
+          },
+        });
       });
     });
-  return next(action);
 };
 
 export default automateAsyncAction;

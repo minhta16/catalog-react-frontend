@@ -1,13 +1,14 @@
-import React from 'react';
-import { Provider } from 'react-redux';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { CssBaseline, Toolbar } from '@material-ui/core';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import CustomAppBar from 'components/Shared/CustomAppBar';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import 'App.css';
+import { fetchCategories as fetchCategoriesRedux } from 'actions/categories';
 
 import routes from 'routes';
-import store from 'store';
 
 const theme = createMuiTheme({
   palette: {
@@ -38,17 +39,30 @@ const routing = (
   </Switch>
 );
 
-const App = () => (
-  <Provider store={store}>
-    <MuiThemeProvider theme={theme}>
-      <Router>
-        <CssBaseline />
-        <CustomAppBar color="secondary" />
-        <Toolbar style={{ minHeight: '6em' }} />
-        <div className="App">{routing}</div>
-      </Router>
-    </MuiThemeProvider>
-  </Provider>
-);
+class App extends Component {
+  componentDidMount() {
+    const { fetchCategories } = this.props;
+    fetchCategories();
+  }
 
-export default App;
+  render() {
+    return (
+      <MuiThemeProvider theme={theme}>
+        <Router>
+          <CssBaseline />
+          <CustomAppBar color="secondary" />
+          <Toolbar style={{ minHeight: '6em' }} />
+          <div className="App">{routing}</div>
+        </Router>
+      </MuiThemeProvider>
+    );
+  }
+}
+
+App.propTypes = {
+  fetchCategories: PropTypes.func.isRequired,
+};
+export default connect(
+  null,
+  { fetchCategories: fetchCategoriesRedux },
+)(App);

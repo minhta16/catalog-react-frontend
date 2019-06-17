@@ -5,7 +5,12 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { TextField, Paper, Container, Typography, Button, Link } from '@material-ui/core';
 import TermsAndConditionsDialog from 'components/SignUp/TermsAndConditionsDialog';
-import { createUserAndSignIn as createUserAndSignInRedux } from 'actions/users';
+import {
+  createUser as createUserRedux,
+  signIn as signInRedux,
+  clearError as clearErrorRedux,
+} from 'actions/users';
+import { selectLoginErrorMessage, selectCreateAccountSuccess } from 'selectors/users';
 
 export class SignUp extends Component {
   state = {
@@ -14,11 +19,18 @@ export class SignUp extends Component {
     email: '',
     password: '',
     confirmPassword: '',
-    emailWarning: true,
-    passWarning: true,
-    passwordMatchWarning: true,
+    emailWarning: false,
+    passWarning: false,
+    passwordMatchWarning: false,
     openTerms: false,
-    redirect: false,
+  };
+
+  /**
+   * Clear all errors when mount sign up
+   */
+  componentDidMount = () => {
+    const { clearError } = this.props;
+    clearError();
   };
 
   /**
@@ -46,14 +58,12 @@ export class SignUp extends Component {
   /**
    * create an user and sign in
    */
-  register = () => {
+  register = (e) => {
+    e.preventDefault();
     const { username, password, email, name, passwordMatchWarning, passWarning } = this.state;
-    const { createUserAndSignIn } = this.props;
+    const { createUser } = this.props;
     if (!passwordMatchWarning && !passWarning) {
-      createUserAndSignIn(username, password, email, name);
-      this.setState({
-        redirect: true,
-      });
+      createUser(username, password, email, name);
     }
     // handle error here
   };
@@ -62,7 +72,7 @@ export class SignUp extends Component {
    * returns true if an email is qualified
    */
   qualifiedEmail = (email) => {
-    return /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/.test(email);
+    return email.length === 0 || /^\S+@[A-z]+\.[A-z]+$/.test(email);
   };
 
   /**
@@ -93,6 +103,7 @@ export class SignUp extends Component {
   }
 
   render() {
+    const { errorMessage, createAccountSuccess, signIn } = this.props;
     const {
       username,
       name,
@@ -103,17 +114,22 @@ export class SignUp extends Component {
       emailWarning,
       passWarning,
       passwordMatchWarning,
-      redirect,
     } = this.state;
     const termsText = 'By clicking Resgister, you agree with our ';
-    if (redirect) {
+    if (createAccountSuccess) {
+      signIn(username, password);
       return <Redirect exact to="/" />;
     }
     return (
       <Container maxWidth="lg">
         <Paper className="paper">
           <Typography variant="h4">Register now!</Typography>
-          <form autoComplete="off">
+          {errorMessage && (
+            <Typography variant="body1" color="error">
+              {`${errorMessage}`}
+            </Typography>
+          )}
+          <form autoComplete="off" onSubmit={this.register}>
             <TextField
               required
               id="username"
@@ -185,7 +201,7 @@ export class SignUp extends Component {
             <Button
               variant="contained"
               color="primary"
-              onClick={this.register}
+              type="submit"
               disabled={passWarning || passwordMatchWarning}
             >
               Register
@@ -199,13 +215,24 @@ export class SignUp extends Component {
 }
 
 SignUp.propTypes = {
-  createUserAndSignIn: PropTypes.func.isRequired,
+  createUser: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string.isRequired,
+  createAccountSuccess: PropTypes.bool.isRequired,
+  signIn: PropTypes.func.isRequired,
+  clearError: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  errorMessage: selectLoginErrorMessage(state),
+  createAccountSuccess: selectCreateAccountSuccess(state),
+});
 const mapDispatchToProps = {
-  createUserAndSignIn: createUserAndSignInRedux,
+  createUser: createUserRedux,
+  signIn: signInRedux,
+  clearError: clearErrorRedux,
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(SignUp);

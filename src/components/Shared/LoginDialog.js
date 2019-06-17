@@ -21,12 +21,17 @@ export class LoginDialog extends Component {
     password: '',
   };
 
-  onClickSubmit = () => {
+  /**
+   * Register when submit
+   */
+  onClickSubmit = (e) => {
+    e.preventDefault();
     const { onClick } = this.props;
     const { username, password } = this.state;
     onClick(username, password);
   };
 
+  // Connect component with state
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value,
@@ -41,6 +46,7 @@ export class LoginDialog extends Component {
         <form autoComplete="off" onSubmit={this.onClickSubmit}>
           <DialogTitle>Login</DialogTitle>
           <DialogContent>
+            {/* Display the error message if an error occured */}
             {errorMessage && (
               <Typography variant="body1" color="error">
                 {`${errorMessage}`}

@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import PostPaper from 'components/Post/PostPaper';
-import { Container } from '@material-ui/core';
+import { Container, CircularProgress } from '@material-ui/core';
 import { selectPost } from 'selectors/posts';
 import { selectCategory } from 'selectors/categories';
+import { fetchPosts as fetchPostsRedux } from 'actions/posts';
 import InfoSnackbar from 'components/Shared/InfoSnackbar';
 
 export class Post extends Component {
@@ -16,7 +17,8 @@ export class Post extends Component {
    * Open the snackbar if snackbarMess is available
    */
   componentDidMount = () => {
-    const { location } = this.props;
+    const { location, match, fetchPosts } = this.props;
+    fetchPosts(match.params.id);
     if (location.snackbarMess) {
       this.closeSnackbar(false)();
     }
@@ -38,13 +40,17 @@ export class Post extends Component {
     const { openSnackbar } = this.state;
     return (
       <Container maxWidth="lg">
-        <PostPaper
-          header={currentPost.name}
-          created={currentPost.created}
-          body={currentPost.description}
-          categoryName={category.name}
-          categoryId={match.params.id}
-        />
+        {currentPost && category ? (
+          <PostPaper
+            header={currentPost.name}
+            created={currentPost.created}
+            body={currentPost.description}
+            categoryName={category.name}
+            categoryId={match.params.id}
+          />
+        ) : (
+          <CircularProgress />
+        )}
 
         <InfoSnackbar
           open={openSnackbar}
@@ -58,15 +64,27 @@ export class Post extends Component {
 
 Post.propTypes = {
   match: PropTypes.object.isRequired,
-  currentPost: PropTypes.object.isRequired,
-  category: PropTypes.object.isRequired,
+  currentPost: PropTypes.object,
+  category: PropTypes.object,
   location: PropTypes.object.isRequired,
+  fetchPosts: PropTypes.func.isRequired,
+};
+
+Post.defaultProps = {
+  currentPost: undefined,
+  category: undefined,
 };
 
 const mapStateToProps = (state, ownProps) => ({
   currentPost: selectPost(state, ownProps.match.params.postId),
   category: selectCategory(state, ownProps.match.params.id),
 });
-Post.propTypes = {};
 
-export default connect(mapStateToProps)(Post);
+const mapDispatchToProps = {
+  fetchPosts: fetchPostsRedux,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Post);
