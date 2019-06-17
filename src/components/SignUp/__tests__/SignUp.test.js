@@ -2,6 +2,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { SignUp } from 'components/SignUp/SignUp';
+import { Redirect } from 'react-router-dom';
 
 describe('components/SignUp/SignUp', () => {
   let wrapper;
@@ -53,6 +54,19 @@ describe('components/SignUp/SignUp', () => {
     expect(wrapper.instance().handleChange).toHaveBeenCalled();
   });
 
+  it('should contain a redirect with createAccountSuccess', () => {
+    props.createAccountSuccess = true;
+    setup();
+    expect(props.signIn).toHaveBeenCalled();
+    expect(wrapper.find(Redirect).length).toBe(1);
+  });
+
+  it('should display errors when errorMessage is viable', () => {
+    props.errorMessage = ['meomeo', 'row fow'];
+    setup();
+    expect(wrapper.find('[color="error"]').length).toBe(2);
+  });
+
   // it('should display error if emailWarning', () => {
   //   setup();
   //   wrapper.setState({
@@ -96,6 +110,24 @@ describe('components/SignUp/SignUp', () => {
       const { qualifiedPassword } = wrapper.instance();
       expect(qualifiedPassword('SuperSonic99')).toBe(true);
       expect(qualifiedPassword('')).toBe(true);
+    });
+  });
+
+  describe('qualifiedEmail() is called', () => {
+    it('should return false with unqualified passwords', () => {
+      setup();
+      const { qualifiedEmail } = wrapper.instance();
+      expect(qualifiedEmail('a')).toBe(false);
+      expect(qualifiedEmail('azzzzzzzzzz')).toBe(false);
+      expect(qualifiedEmail('123123123123')).toBe(false);
+      expect(qualifiedEmail('123123123123@123.com')).toBe(false);
+      expect(qualifiedEmail('minh@minh.123')).toBe(false);
+    });
+    it('should return true with qualified passwords and empty password', () => {
+      setup();
+      const { qualifiedEmail } = wrapper.instance();
+      expect(qualifiedEmail('SuperSonic99@gmail.com')).toBe(true);
+      expect(qualifiedEmail('normal@sample.com')).toBe(true);
     });
   });
 });

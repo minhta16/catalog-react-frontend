@@ -73,7 +73,7 @@ describe('selectors/users', () => {
   });
 
   it('should return empty if state.posts is empty', () => {
-    state.currentUserReducer.posts = {};
+    state.currentUserReducer.posts = undefined;
     expect(selectCurrentUserPosts(state)).toMatchObject({});
     expect(selectCurrentUserPosts(state, 'reverse')).toMatchObject({});
   });

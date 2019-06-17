@@ -37,20 +37,7 @@ describe('utils/apiCalls', () => {
         `${process.env.REACT_APP_API_PATH}/categories?offset=0&limit=100`,
       );
     });
-
-    it('should return error promise if it has an error', () => {
-      fetch.mockResponse(
-        JSON.stringify({
-          ok: false,
-          error: new Error('Broke'),
-        }),
-      );
-      expect(api.fetchCategories()).rejects.toEqual(
-        new TypeError("Cannot read property 'forEach' of undefined"),
-      );
-    });
   });
-
   it('should call fetchApiItems correctly', () => {
     fetch.mockResponse(
       JSON.stringify({

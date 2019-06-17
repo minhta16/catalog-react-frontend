@@ -42,12 +42,12 @@ describe('middlewares/automate-async-action', () => {
     it('should return correctly if Promise is rejected', () => {
       const action = {
         type: 'EAT_PIZZA',
-        promise: Promise.resolve({
-          ok: false,
-          json: () => {
-            'error';
-          },
-        }),
+        // eslint-disable-next-line prefer-promise-reject-errors
+        promise: Promise.reject(
+          Promise.resolve({
+            message: { 1: ['meomeo'] },
+          }),
+        ),
       };
       store.dispatch(action);
       Promise.resolve().catch(() => {
@@ -57,7 +57,30 @@ describe('middlewares/automate-async-action', () => {
         });
         expect(actions[1]).toEqual({
           type: 'EAT_PIZZA_FAILURE',
-          payload: { message: ['error'] },
+          payload: { message: ['meomeo'] },
+        });
+      });
+    });
+
+    it('should return correctly if Promise is rejected with default error type', () => {
+      const action = {
+        type: 'EAT_PIZZA',
+        // eslint-disable-next-line prefer-promise-reject-errors
+        promise: Promise.reject(
+          Promise.resolve({
+            description: 'meomeo',
+          }),
+        ),
+      };
+      store.dispatch(action);
+      Promise.resolve().catch(() => {
+        const actions = store.getActions();
+        expect(actions[0]).toEqual({
+          type: 'EAT_PIZZA_REQUEST',
+        });
+        expect(actions[1]).toEqual({
+          type: 'EAT_PIZZA_FAILURE',
+          payload: { message: ['meomeo'] },
         });
       });
     });

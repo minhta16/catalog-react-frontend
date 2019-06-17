@@ -16,6 +16,13 @@ describe('reducers/users', () => {
     });
   });
 
+  it('should clear error with CLEAR_ERROR', () => {
+    const action = {
+      type: UsersType.CLEAR_ERROR,
+    };
+    expect(currentUserReducer({}, action)).toEqual({ error: [] });
+  });
+
   it('should return loading with SIGN_IN_REQUEST', () => {
     const action = {
       type: actionNameUtil.createRequest(UsersType.SIGN_IN),
@@ -59,6 +66,31 @@ describe('reducers/users', () => {
       },
       loading: false,
       error: [],
+      createAccountSuccess: false,
+    });
+  });
+
+  it('should return loading with CREATE_USER_PROGRESS', () => {
+    const action = {
+      type: actionNameUtil.createRequest(UsersType.CREATE_USER),
+    };
+    expect(currentUserReducer({}, action)).toEqual({ loading: true, createAccountSuccess: false });
+  });
+
+  it('should return createAccountSuccess with CREATE_USER_SUCCESS', () => {
+    const action = {
+      type: actionNameUtil.createSuccess(UsersType.CREATE_USER),
+    };
+    expect(currentUserReducer({}, action)).toEqual({ createAccountSuccess: true });
+  });
+
+  it('should return createAccountSuccess with CREATE_USER_FAILURE', () => {
+    const action = {
+      type: actionNameUtil.createFailure(UsersType.CREATE_USER),
+      payload: 'meomeo',
+    };
+    expect(currentUserReducer({}, action)).toEqual({
+      error: 'meomeo',
       createAccountSuccess: false,
     });
   });

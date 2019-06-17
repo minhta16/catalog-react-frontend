@@ -1,5 +1,11 @@
 /* eslint-disable no-undef */
-import { selectPost, selectAllPosts, selectPostLoading } from '../posts';
+import {
+  selectPost,
+  selectAllPosts,
+  selectPostLoading,
+  selectAddPostError,
+  selectAddPostSuccess,
+} from '../posts';
 
 describe('selectors/posts', () => {
   let state;
@@ -17,6 +23,10 @@ describe('selectors/posts', () => {
           },
         },
         loading: false,
+        addPostSuccess: false,
+        error: {
+          message: 'meomeo',
+        },
       },
     };
   });
@@ -38,5 +48,13 @@ describe('selectors/posts', () => {
 
   it('should select the correct loading', () => {
     expect(selectPostLoading(state)).toBe(false);
+  });
+
+  it('should select the correct post error', () => {
+    expect(selectAddPostError(state)).toBe('meomeo');
+  });
+
+  it('should select the correct addPostSuccess', () => {
+    expect(selectAddPostSuccess(state)).toBe(false);
   });
 });

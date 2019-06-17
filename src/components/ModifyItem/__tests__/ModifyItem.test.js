@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import { shallow } from 'enzyme';
+import { Redirect } from 'react-router-dom';
 import { ModifyItem } from '../ModifyItem';
 
 describe('components/ModifyItem', () => {
@@ -108,5 +109,44 @@ describe('components/ModifyItem', () => {
       },
     });
     expect(wrapper.state().selectedCategory).toBe(99);
+  });
+
+  it('should redirect to correct path if editing', () => {
+    setup();
+    wrapper.setState({
+      editing: true,
+      redirect: true,
+    });
+    expect(wrapper.find(Redirect).prop('to')).toEqual({
+      pathname: '/1/1',
+      snackbarMess: 'Post edited!',
+    });
+  });
+
+  it('should redirect to correct path if not editing', () => {
+    setup();
+    wrapper.setState({
+      editing: false,
+      redirect: true,
+      selectedCategory: '0',
+    });
+    expect(wrapper.find(Redirect).prop('to')).toEqual({
+      pathname: '/0',
+      snackbarMess: 'Post created!',
+    });
+  });
+
+  it('should set redirect if componentDidUpdate satisfies', () => {
+    props.addPostSuccess = true;
+    setup();
+    expect(wrapper.state().redirect).toBe(false);
+    wrapper.instance().componentDidUpdate({ addPostSuccess: false });
+    expect(wrapper.state().redirect).toBe(true);
+  });
+
+  it('should map out error if errorMessage exists', () => {
+    props.errorMessage = ['meomeo', 'mini'];
+    setup();
+    expect(wrapper.find('[color="error"]').length).toBe(2);
   });
 });
