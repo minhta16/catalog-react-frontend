@@ -1,4 +1,8 @@
+import config from 'envConfig';
+
 class ApiCalls {
+  apiPath = config.API_ROOT;
+
   /**
    * create an api request which contains the following information:
    * method: POST, GET, DELETE
@@ -32,7 +36,7 @@ class ApiCalls {
   fetchCategories = () => {
     const fetchedData = this.fetchRequest({
       method: 'GET',
-      path: `${process.env.REACT_APP_API_PATH}/categories?offset=0&limit=100`,
+      path: `${this.apiPath}/categories?offset=0&limit=100`,
     }).then((data) => {
       if (data instanceof Promise) {
         return data;
@@ -52,7 +56,7 @@ class ApiCalls {
   fetchItems = (categoryId) => {
     const fetchedItems = this.fetchRequest({
       method: 'GET',
-      path: `${process.env.REACT_APP_API_PATH}/categories/${categoryId}/items?offset=0&limit=100`,
+      path: `${this.apiPath}/categories/${categoryId}/items?offset=0&limit=100`,
     }).then((data) => {
       if (data instanceof Promise) {
         return data;
@@ -72,7 +76,7 @@ class ApiCalls {
   signIn = (username, password) => {
     const userData = this.fetchRequest({
       method: 'POST',
-      path: `${process.env.REACT_APP_API_PATH}/auth`,
+      path: `${this.apiPath}/auth`,
       body: JSON.stringify({
         username,
         password,
@@ -87,7 +91,7 @@ class ApiCalls {
   createUser = (username, password, email, name) => {
     const userData = this.fetchRequest({
       method: 'POST',
-      path: `${process.env.REACT_APP_API_PATH}/users`,
+      path: `${this.apiPath}/users`,
       body: JSON.stringify({
         username,
         password,
@@ -104,7 +108,7 @@ class ApiCalls {
   fetchCurrentUserPosts = (token) => {
     const fetchedItems = this.fetchRequest({
       method: 'GET',
-      path: `${process.env.REACT_APP_API_PATH}/me/post`,
+      path: `${this.apiPath}/me/post`,
       accessToken: token,
     });
     return fetchedItems;
@@ -116,7 +120,7 @@ class ApiCalls {
   deletePost = (token, categoryId, postId) => {
     const message = this.fetchRequest({
       method: 'DELETE',
-      path: `${process.env.REACT_APP_API_PATH}/categories/${categoryId}/items/${postId}`,
+      path: `${this.apiPath}/categories/${categoryId}/items/${postId}`,
       accessToken: token,
     });
     return message;
@@ -128,7 +132,7 @@ class ApiCalls {
   addPost = (token, categoryId, post) => {
     const message = this.fetchRequest({
       method: 'POST',
-      path: `${process.env.REACT_APP_API_PATH}/categories/${categoryId}/items`,
+      path: `${this.apiPath}/categories/${categoryId}/items`,
       accessToken: token,
       body: JSON.stringify({
         name: post.name,
@@ -145,7 +149,7 @@ class ApiCalls {
   modifyPost = (token, categoryId, itemId, post) => {
     const message = this.fetchRequest({
       method: 'PUT',
-      path: `${process.env.REACT_APP_API_PATH}/categories/${categoryId}/items/${itemId}`,
+      path: `${this.apiPath}/categories/${categoryId}/items/${itemId}`,
       accessToken: token,
       body: JSON.stringify({
         name: post.name,
@@ -167,5 +171,5 @@ export default new ApiCalls();
 //     body: category,
 //     method: 'POST',
 //   };
-//   fetch(`${process.env.REACT_APP_API_PATH}/categories/`, params);
+//   fetch(`${this.apiPath}/categories/`, params);
 // };
