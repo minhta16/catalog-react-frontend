@@ -33,6 +33,16 @@ class LocalStorageMock {
 global.localStorage = new LocalStorageMock();
 
 describe('src/localStorage', () => {
+  beforeEach(() => {
+    global.localStorage.clear();
+  });
+
+  describe('loadCurrentUser', () => {
+    it('should return undefined if an error is thrown', () => {
+      expect(loadCurrentUser()).toBe(undefined);
+    });
+  });
+
   it('should save user correctly', () => {
     const user = {
       username: 'minh',
@@ -42,6 +52,13 @@ describe('src/localStorage', () => {
     saveCurrentUser(user);
     expect(loadCurrentUser()).toMatchObject(user);
   });
+
+  describe('loadCategories', () => {
+    it('should return undefined if an error is thrown', () => {
+      expect(loadCategories()).toBe(undefined);
+    });
+  });
+
   it('should save categories correctly', () => {
     const categories = {
       1: { name: 'meo' },
@@ -51,6 +68,12 @@ describe('src/localStorage', () => {
     };
     saveCategories(categories);
     expect(loadCategories()).toMatchObject(categories);
+  });
+
+  describe('loadPosts', () => {
+    it('should return undefined if an error is thrown', () => {
+      expect(loadPosts()).toBe(undefined);
+    });
   });
 
   it('should save posts correctly', () => {

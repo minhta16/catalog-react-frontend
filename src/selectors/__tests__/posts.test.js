@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { selectPost, selectAllPosts } from '../posts';
+import { selectPost, selectAllPosts, selectPostLoading } from '../posts';
 
 describe('selectors/posts', () => {
   let state;
@@ -16,6 +16,7 @@ describe('selectors/posts', () => {
             id: '2',
           },
         },
+        loading: false,
       },
     };
   });
@@ -33,5 +34,9 @@ describe('selectors/posts', () => {
   it('should reverse all posts if we use reverse', () => {
     const posts = [{ name: 'yo', id: '1' }, { name: 'bro', id: '2' }];
     expect(selectAllPosts(state, 'reverse')).toMatchObject(posts.reverse());
+  });
+
+  it('should select the correct loading', () => {
+    expect(selectPostLoading(state)).toBe(false);
   });
 });

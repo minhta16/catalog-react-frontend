@@ -5,6 +5,7 @@ import {
   selectCurrentUserPost,
   selectCurrentUserProp,
   selectCurrentUserLoading,
+  selectLoginErrorMessage,
 } from '../users';
 
 describe('selectors/users', () => {
@@ -43,6 +44,7 @@ describe('selectors/users', () => {
         currentUser,
         posts,
         loading: true,
+        errorMessage: 'error',
       },
     };
   });
@@ -83,7 +85,11 @@ describe('selectors/users', () => {
     });
   });
 
-  it('should select the correct post with id', () => {
+  it('should select the correct loading', () => {
     expect(selectCurrentUserLoading(state)).toBe(true);
+  });
+
+  it('should select the correct error message', () => {
+    expect(selectLoginErrorMessage(state)).toBe('error');
   });
 });

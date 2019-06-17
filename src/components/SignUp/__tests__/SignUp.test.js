@@ -3,7 +3,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { SignUp } from 'components/SignUp/SignUp';
 
-describe('views/SignUp', () => {
+describe('components/SignUp/SignUp', () => {
   let wrapper;
   let props;
 
@@ -49,6 +49,14 @@ describe('views/SignUp', () => {
     });
     expect(wrapper.instance().handleChange).toHaveBeenCalled();
   });
+
+  // it('should display error if emailWarning', () => {
+  //   setup();
+  //   wrapper.setState({
+  //     emailWarning: true,
+  //   });
+  //   expect(wrapper.find("#email").)
+  // })
 
   describe('register() is called', () => {
     it('should call createUserAndSignIn and set redirect when password is qualified', () => {
