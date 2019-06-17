@@ -124,11 +124,12 @@ export class SignUp extends Component {
       <Container maxWidth="lg">
         <Paper className="paper">
           <Typography variant="h4">Register now!</Typography>
-          {errorMessage && (
-            <Typography variant="body1" color="error">
-              {`${errorMessage}`}
-            </Typography>
-          )}
+          {errorMessage &&
+            errorMessage.map((message) => (
+              <Typography key={message} variant="body1" color="error">
+                {`${message}`}
+              </Typography>
+            ))}
           <form autoComplete="off" onSubmit={this.register}>
             <TextField
               required
@@ -216,10 +217,14 @@ export class SignUp extends Component {
 
 SignUp.propTypes = {
   createUser: PropTypes.func.isRequired,
-  errorMessage: PropTypes.string.isRequired,
+  errorMessage: PropTypes.array,
   createAccountSuccess: PropTypes.bool.isRequired,
   signIn: PropTypes.func.isRequired,
   clearError: PropTypes.func.isRequired,
+};
+
+SignUp.defaultProps = {
+  errorMessage: [],
 };
 
 const mapStateToProps = (state) => ({

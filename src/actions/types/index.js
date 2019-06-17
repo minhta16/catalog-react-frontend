@@ -2,6 +2,7 @@ export const PostsType = {
   ADD_POST: 'ADD_POST',
   MODIFY_POST: 'MODIFY_POST',
   FETCH_POSTS: 'FETCH_POSTS',
+  RESET_ADD_POST_SUCCESS: 'RESET_ADD_POST_SUCCESS',
 };
 
 export const CategoriesType = {

@@ -45,3 +45,12 @@ export const modifyPostAndRefetch = (token, categoryId, postId, post) => (dispat
   });
   dispatch(fetchPosts(categoryId));
 };
+
+/**
+ * dispatch a resetAddPostSuccess action to reset addPostSuccess to false
+ */
+export const resetAddPostSuccess = () => (dispatch) => {
+  dispatch({
+    type: PostsType.RESET_ADD_POST_SUCCESS,
+  });
+};

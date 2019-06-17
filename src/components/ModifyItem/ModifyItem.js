@@ -4,9 +4,11 @@ import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import { selectCurrentUserPost, selectCurrentUserProp } from 'selectors/users';
 import { selectCategories } from 'selectors/categories';
+import { selectAddPostSuccess } from 'selectors/posts';
 import {
   modifyPostAndRefetch as modifyPostAndRefetchRedux,
   addPostAndRefetch as addPostAndRefetchRedux,
+  resetAddPostSuccess as resetAddPostSuccessRedux,
 } from 'actions/posts';
 import { Typography, Container, Paper, TextField, Button, MenuItem, Grid } from '@material-ui/core';
 import BackupIcon from '@material-ui/icons/Backup';
@@ -61,16 +63,15 @@ export class ModifyItem extends Component {
         price: 0,
       });
     }
-    this.setState({
-      redirect: true,
-    });
   };
 
   /**
    * Setting editing to be true if category id exists on the link. Also set the title, description, and selectedCategory if category id exists
    */
   componentDidMount = () => {
-    const { match, post } = this.props;
+    const { match, post, resetAddPostSuccess } = this.props;
+
+    resetAddPostSuccess();
     if (match.params.id) {
       this.setState(
         {
@@ -84,6 +85,15 @@ export class ModifyItem extends Component {
           });
         },
       );
+    }
+  };
+
+  componentDidUpdate = (prevProps) => {
+    const { addPostSuccess } = this.props;
+    if (!prevProps.addPostSuccess && addPostSuccess) {
+      this.setState({
+        redirect: true,
+      });
     }
   };
 
@@ -172,6 +182,8 @@ ModifyItem.propTypes = {
   categories: PropTypes.array.isRequired,
   addPostAndRefetch: PropTypes.func.isRequired,
   modifyPostAndRefetch: PropTypes.func.isRequired,
+  resetAddPostSuccess: PropTypes.func.isRequired,
+  addPostSuccess: PropTypes.bool.isRequired,
 };
 
 ModifyItem.defaultProps = {
@@ -182,11 +194,13 @@ const mapStateToProps = (state, ownProps) => ({
   post: selectCurrentUserPost(state, ownProps.match.params.postId),
   token: selectCurrentUserProp(state, 'token'),
   categories: selectCategories(state),
+  addPostSuccess: selectAddPostSuccess(state),
 });
 
 const mapDispatchToProps = {
   modifyPostAndRefetch: modifyPostAndRefetchRedux,
   addPostAndRefetch: addPostAndRefetchRedux,
+  resetAddPostSuccess: resetAddPostSuccessRedux,
 };
 
 export default connect(

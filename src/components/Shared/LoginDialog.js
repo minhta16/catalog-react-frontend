@@ -47,11 +47,12 @@ export class LoginDialog extends Component {
           <DialogTitle>Login</DialogTitle>
           <DialogContent>
             {/* Display the error message if an error occured */}
-            {errorMessage && (
-              <Typography variant="body1" color="error">
-                {`${errorMessage}`}
-              </Typography>
-            )}
+            {errorMessage &&
+              errorMessage.map((message) => (
+                <Typography key={message} variant="body1" color="error">
+                  {`${message}`}
+                </Typography>
+              ))}
             <TextField
               required
               id="username"
@@ -95,13 +96,13 @@ LoginDialog.propTypes = {
   open: PropTypes.bool,
   onClose: PropTypes.func,
   onClick: PropTypes.func,
-  errorMessage: PropTypes.string,
+  errorMessage: PropTypes.array,
 };
 
 LoginDialog.defaultProps = {
   onClose: () => {},
   onClick: async (username, password) => `${username}_${password}`,
   open: true,
-  errorMessage: '',
+  errorMessage: [],
 };
 export default LoginDialog;

@@ -10,6 +10,9 @@ const initialState = {
     currentUser: loadCurrentUser(),
     loading: false,
     error: {},
+    createAccountSuccess: false,
+
+    posts: {},
   },
 };
 // eslint-disable-next-line no-underscore-dangle

@@ -38,7 +38,6 @@ export class CustomAppBar extends Component {
   componentDidUpdate = (prevProps) => {
     const { currentUser } = this.props;
     if (!prevProps.currentUser.token && currentUser.token) {
-      console.log(currentUser);
       this.handleCloseDialog();
     }
   };
@@ -78,13 +77,13 @@ CustomAppBar.propTypes = {
   currentUser: PropTypes.object,
   signIn: PropTypes.func.isRequired,
   signOut: PropTypes.func.isRequired,
-  errorMessage: PropTypes.string,
+  errorMessage: PropTypes.array,
   clearError: PropTypes.func.isRequired,
 };
 
 CustomAppBar.defaultProps = {
   currentUser: {},
-  errorMessage: '',
+  errorMessage: [],
 };
 
 export const mapSelectorToProps = (state) => ({

@@ -30,11 +30,9 @@ const automateAsyncAction = (store) => (next) => (action) => {
         // This block is to handle mismatch error responses by the API
         let message = '';
         if (error.description) {
-          message = error.description;
+          message = [error.description];
         } else {
-          Object.keys(error.message).forEach((key) => {
-            message += `${error.message[key]}\n`;
-          });
+          message = Object.values(error.message);
         }
         // Return a _FAILURE, along with an error object which has the error message
         return next({

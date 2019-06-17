@@ -6,9 +6,8 @@ const initialState = {
     username: '',
     token: '',
   },
-  posts: {},
   loading: false,
-  error: {},
+  error: [],
   createAccountSuccess: false,
 };
 
@@ -16,7 +15,7 @@ const initialState = {
 export const currentUserReducer = (state = initialState, action) => {
   switch (action.type) {
     case UsersType.CLEAR_ERROR:
-      return { ...state, error: {} };
+      return { ...state, error: [] };
     case actionNameUtil.createRequest(UsersType.SIGN_IN):
       return { ...state, loading: true };
     // Format the state of currentUser when SIGN_IN_SUCCESS
@@ -64,7 +63,7 @@ export const currentUserReducer = (state = initialState, action) => {
       action.payload.forEach((post) => {
         posts = { ...posts, [post.id]: post };
       });
-      return { ...state, posts, loading: false, error: {} };
+      return { ...state, posts, loading: false, error: [] };
     }
     case actionNameUtil.createFailure(UsersType.FETCH_CURRENT_USER_POST):
       return { ...state, loading: false, error: action.payload };
