@@ -4,185 +4,129 @@ class ApiCalls {
       reject(err);
     });
 
-  fetchCategories = async () => {
+  fetchRequest = (requestParams) => {
     const params = {
       headers: {
         'Content-Type': 'application/json',
       },
-      method: 'GET',
+      method: requestParams.method,
+      body: requestParams.body,
     };
 
-    const fetchedData = await fetch(
-      `${process.env.REACT_APP_API_PATH}/categories?offset=0&limit=100`,
-      params,
-    )
-      .then((res) => {
-        if (!res.ok) return this.handleError(res);
-        return res.json();
-      })
-      .then((data) => {
-        if (data instanceof Promise) {
-          return data;
-        }
-        let returnData = {};
-        data.categories.forEach((category) => {
-          returnData = { ...returnData, [category.id]: category };
-        });
-        return returnData;
+    if (requestParams.accessToken) {
+      params.headers.Authorization = `JWT ${requestParams.accessToken}`;
+    }
+
+    const data = fetch(requestParams.path, params).then((res) => {
+      if (!res.ok) return this.handleError(res);
+      return res.json();
+    });
+
+    return data;
+  };
+
+  fetchCategories = async () => {
+    const fetchedData = await this.fetchRequest({
+      method: 'GET',
+      path: `${process.env.REACT_APP_API_PATH}/categories?offset=0&limit=100`,
+    }).then((data) => {
+      if (data instanceof Promise) {
+        return data;
+      }
+      let returnData = {};
+      data.categories.forEach((category) => {
+        returnData = { ...returnData, [category.id]: category };
       });
+      return returnData;
+    });
     return fetchedData;
   };
 
   fetchItems = async (categoryId) => {
-    const params = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    const fetchedItems = await this.fetchRequest({
       method: 'GET',
-    };
-
-    const fetchedItems = await fetch(
-      `${process.env.REACT_APP_API_PATH}/categories/${categoryId}/items?offset=0&limit=100`,
-      params,
-    )
-      .then((res) => {
-        if (!res.ok) return this.handleError(res);
-        return res.json();
-      })
-      .then((data) => {
-        if (data instanceof Promise) {
-          return data;
-        }
-        let returnData = {};
-        data.items.forEach((category) => {
-          returnData = { ...returnData, [category.id]: category };
-        });
-        return returnData;
+      path: `${process.env.REACT_APP_API_PATH}/categories/${categoryId}/items?offset=0&limit=100`,
+    }).then((data) => {
+      if (data instanceof Promise) {
+        return data;
+      }
+      let returnData = {};
+      data.items.forEach((category) => {
+        returnData = { ...returnData, [category.id]: category };
       });
+      return returnData;
+    });
     return fetchedItems;
   };
 
   signIn = async (username, password) => {
-    const params = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      body: JSON.stringify({
+    const userData = await this.fetchRequest(
+      'POST',
+      `${process.env.REACT_APP_API_PATH}/auth`,
+      JSON.stringify({
         username,
         password,
       }),
-    };
-    const userData = await fetch(`${process.env.REACT_APP_API_PATH}/auth`, params).then((res) => {
-      if (!res.ok) return this.handleError(res);
-      return res.json();
-    });
+    );
     return userData;
   };
 
   createUser = async (username, password, email, name) => {
-    const params = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    const userData = await this.fetchRequest({
       method: 'POST',
+      path: `${process.env.REACT_APP_API_PATH}/users`,
       body: JSON.stringify({
         username,
         password,
         email,
         name,
       }),
-    };
-
-    const userData = await fetch(`${process.env.REACT_APP_API_PATH}/users`, params).then((res) => {
-      if (!res.ok) return this.handleError(res);
-      return res.json();
     });
-
     return userData;
   };
 
   fetchCurrentUserPosts = async (token) => {
-    const params = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `JWT ${token}`,
-      },
+    const fetchedItems = await this.fetchRequest({
       method: 'GET',
-    };
-
-    const fetchedItems = await fetch(`${process.env.REACT_APP_API_PATH}/me/post`, params).then(
-      (res) => {
-        if (!res.ok) return this.handleError(res);
-        return res.json();
-      },
-    );
+      path: `${process.env.REACT_APP_API_PATH}/me/post`,
+      accessToken: token,
+    });
     return fetchedItems;
   };
 
   deletePost = async (token, categoryId, postId) => {
-    const params = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `JWT ${token}`,
-      },
+    const message = await this.fetchRequest({
       method: 'DELETE',
-    };
-
-    const message = await fetch(
-      `${process.env.REACT_APP_API_PATH}/categories/${categoryId}/items/${postId}`,
-      params,
-    ).then((res) => {
-      if (!res.ok) return this.handleError(res);
-      return res.json();
+      path: `${process.env.REACT_APP_API_PATH}/categories/${categoryId}/items/${postId}`,
+      accessToken: token,
     });
     return message;
   };
 
   addPost = async (token, categoryId, post) => {
-    const params = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `JWT ${token}`,
-      },
+    const message = await this.fetchRequest({
       method: 'POST',
+      path: `${process.env.REACT_APP_API_PATH}/categories/${categoryId}/items`,
+      accessToken: token,
       body: JSON.stringify({
         name: post.name,
         description: post.description,
         price: post.price,
       }),
-    };
-
-    const message = await fetch(
-      `${process.env.REACT_APP_API_PATH}/categories/${categoryId}/items`,
-      params,
-    ).then((res) => {
-      if (!res.ok) return this.handleError(res);
-      return res.json();
     });
     return message;
   };
 
   modifyPost = async (token, categoryId, itemId, post) => {
-    const params = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `JWT ${token}`,
-      },
+    const message = await this.fetchRequest({
       method: 'PUT',
+      path: `${process.env.REACT_APP_API_PATH}/categories/${categoryId}/items/${itemId}`,
+      accessToken: token,
       body: JSON.stringify({
         name: post.name,
         description: post.description,
         price: post.price,
       }),
-    };
-
-    const message = await fetch(
-      `${process.env.REACT_APP_API_PATH}/categories/${categoryId}/items/${itemId}`,
-      params,
-    ).then((res) => {
-      if (!res.ok) return this.handleError(res);
-      return res.json();
     });
     return message;
   };

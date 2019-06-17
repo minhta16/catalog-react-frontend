@@ -105,7 +105,8 @@ export class PostItem extends Component {
             <Typography variant="subtitle1">{`Category: ${category.name}`}</Typography>
             <Typography variant="subtitle1">{`Created: ${post.created}`}</Typography>
             <Typography variant="caption">
-              {`${post.description.substring(subtitleLength)}...`}
+              {`Description: ${post.description.substr(0, subtitleLength)}`}
+              {post.description.length > subtitleLength && `...`}
             </Typography>
           </Grid>
         </Grid>

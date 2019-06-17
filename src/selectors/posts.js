@@ -10,3 +10,5 @@ export const selectAllPosts = (state, order) => {
       return Object.values(state.postsReducer.posts);
   }
 };
+
+export const selectPostLoading = (state) => state.postsReducer.loading;

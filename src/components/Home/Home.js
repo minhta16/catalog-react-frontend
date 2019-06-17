@@ -7,7 +7,7 @@ import CategoriesTable from 'components/Home/CategoriesTable';
 
 import { fetchCategories as fetchCategoriesRedux } from 'actions/categories';
 import { fetchPosts as fetchPostsRedux } from 'actions/posts';
-import { selectAllPosts } from 'selectors/posts';
+import { selectAllPosts, selectPostLoading } from 'selectors/posts';
 import { selectCategories, selectCategory, selectCategoriesLoading } from 'selectors/categories';
 import InfoSnackbar from 'components/Shared/InfoSnackbar';
 
@@ -42,19 +42,21 @@ export class Home extends Component {
       selectedCategory,
       location,
       categoriesLoading,
+      postsLoading,
     } = this.props;
     const { openSnackbar } = this.state;
     return (
       <Container maxWidth="lg">
-        {!categoriesLoading && (
-          <CategoriesTable
-            categories={categories}
-            selectedCatId={match.params.id}
-            selectedCat={selectedCategory}
-            selectedCatItems={selectedCatItems}
-            fetchPosts={fetchPosts}
-          />
-        )}
+        <CategoriesTable
+          categories={categories}
+          selectedCatId={match.params.id}
+          selectedCat={selectedCategory}
+          selectedCatItems={selectedCatItems}
+          fetchPosts={fetchPosts}
+          categoriesLoading={categoriesLoading}
+          postsLoading={postsLoading}
+        />
+
         <InfoSnackbar
           open={openSnackbar}
           onClose={this.closeSnackbar(true)}
@@ -74,6 +76,7 @@ Home.propTypes = {
   selectedCategory: PropTypes.object,
   location: PropTypes.object.isRequired,
   categoriesLoading: PropTypes.bool.isRequired,
+  postsLoading: PropTypes.bool.isRequired,
 };
 
 Home.defaultProps = {
@@ -86,8 +89,9 @@ Home.defaultProps = {
 const mapSelectorToProps = (state, ownProps) => ({
   selectedCatItems: selectAllPosts(state, 'reverse'),
   categories: selectCategories(state),
-  categoriesLoading: selectCategoriesLoading(state),
   selectedCategory: selectCategory(state, ownProps.match.params.id),
+  categoriesLoading: selectCategoriesLoading(state),
+  postsLoading: selectPostLoading(state),
 });
 
 const mapDispatchToProps = {

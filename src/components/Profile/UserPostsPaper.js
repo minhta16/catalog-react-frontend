@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Typography, Divider, Paper, Avatar, Grid, IconButton } from '@material-ui/core';
+import { Typography, Divider, Paper, Avatar, Grid, Fab, CircularProgress } from '@material-ui/core';
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import PostList from './PostList';
 
 export function UserPostsPaper(props) {
-  const { username, posts } = props;
+  const { username, posts, loading } = props;
   return (
     <Paper className="left-margin">
       <Grid container alignItems="center" justify="space-between">
@@ -25,14 +25,21 @@ export function UserPostsPaper(props) {
           </Grid>
         </Grid>
         <Grid item>
-          <IconButton color="primary" component={Link} exact="true" to="/new-item">
+          <Fab
+            variant="extended"
+            style={{ boxShadow: 'none' }}
+            color="primary"
+            component={Link}
+            exact="true"
+            to="/new-item"
+          >
             <LibraryAddIcon className="icon-padding" />
-            <Typography variant="button">New item</Typography>
-          </IconButton>
+            New item
+          </Fab>
         </Grid>
       </Grid>
       <Divider />
-      <PostList posts={posts} />
+      {loading ? <CircularProgress /> : <PostList posts={posts} />}
     </Paper>
   );
 }
@@ -40,6 +47,7 @@ export function UserPostsPaper(props) {
 UserPostsPaper.propTypes = {
   username: PropTypes.string.isRequired,
   posts: PropTypes.array,
+  loading: PropTypes.bool.isRequired,
 };
 
 UserPostsPaper.defaultProps = {

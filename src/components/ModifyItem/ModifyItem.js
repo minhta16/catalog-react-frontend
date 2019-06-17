@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import { selectCurrentUserPost, selectCurrentUserProp } from 'selectors/users';
+import { selectCategories } from 'selectors/categories';
 import {
   modifyPostAndRefetch as modifyPostAndRefetchRedux,
   addPostAndRefetch as addPostAndRefetchRedux,
 } from 'actions/posts';
-import { Typography, Container, Paper, TextField, Button, MenuItem } from '@material-ui/core';
-import { selectCategories } from 'selectors/categories';
+import { Typography, Container, Paper, TextField, Button, MenuItem, Grid } from '@material-ui/core';
+import BackupIcon from '@material-ui/icons/Backup';
+import CancelIcon from '@material-ui/icons/Cancel';
 
 export class ModifyItem extends Component {
   state = {
@@ -16,7 +18,8 @@ export class ModifyItem extends Component {
     description: '',
     editing: false,
     redirect: false,
-    selectedCategory: 0,
+    // eslint-disable-next-line react/destructuring-assignment
+    selectedCategory: this.props.categories[0].id || 0,
   };
 
   handleChange = (e) => {
@@ -100,12 +103,14 @@ export class ModifyItem extends Component {
               id="categories"
               name="selectedCategory"
               select
+              className="left-margin"
               label="Category"
               fullWidth
               value={selectedCategory}
               onChange={this.handleCategoryChange}
               disabled={editing}
               required
+              margin="normal"
             >
               {categories.map((category) => (
                 <MenuItem key={category.id} value={category.id}>
@@ -132,12 +137,16 @@ export class ModifyItem extends Component {
               fullWidth
               multiline
             />
-            <Button color="primary" type="submit">
-              Submit
-            </Button>
-            <Button component={Link} exact="true" to="/profile">
-              Cancel
-            </Button>
+            <Grid container justify="space-evenly">
+              <Button variant="contained" color="primary" type="submit">
+                <BackupIcon className="icon-padding" />
+                Submit
+              </Button>
+              <Button variant="contained" component={Link} exact="true" to="/profile">
+                <CancelIcon className="icon-padding" />
+                Cancel
+              </Button>
+            </Grid>
           </form>
         </Paper>
       </Container>
