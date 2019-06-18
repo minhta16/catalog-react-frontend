@@ -47,6 +47,7 @@ export const modifyPost = (token, categoryId, postId, post) => (dispatch) => {
  * Set post errors to empty
  */
 export const clearPostError = () => ({ type: PostsType.CLEAR_ERROR });
+
 /**
  * dispatch a resetAddPostSuccess action to reset addPostSuccess to false
  */

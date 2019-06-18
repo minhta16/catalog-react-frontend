@@ -5,11 +5,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { TextField, Paper, Container, Typography, Button, Link } from '@material-ui/core';
 import TermsAndConditionsDialog from 'components/SignUp/TermsAndConditionsDialog';
-import {
-  createUser as createUserRedux,
-  signIn as signInRedux,
-  clearError as clearErrorRedux,
-} from 'actions/users';
+import { createUser as createUserRedux, clearError as clearErrorRedux } from 'actions/users';
 import { openSnackbar as openSnackbarRedux } from 'actions/misc';
 import { selectLoginErrorMessage, selectCreateAccountSuccess } from 'selectors/users';
 
@@ -33,14 +29,6 @@ export class SignUp extends Component {
   componentDidMount = () => {
     const { clearError } = this.props;
     clearError();
-  };
-
-  componentDidUpdate = (prevProps) => {
-    const { createAccountSuccess, signIn } = this.props;
-    const { username, password } = this.state;
-    if (!prevProps.createAccountSuccess && createAccountSuccess) {
-      signIn(username, password);
-    }
   };
 
   /**
@@ -237,7 +225,6 @@ SignUp.propTypes = {
   createUser: PropTypes.func.isRequired,
   errorMessage: PropTypes.array,
   createAccountSuccess: PropTypes.bool.isRequired,
-  signIn: PropTypes.func.isRequired,
   clearError: PropTypes.func.isRequired,
 };
 
@@ -251,7 +238,6 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = {
   createUser: createUserRedux,
-  signIn: signInRedux,
   clearError: clearErrorRedux,
   openSnackbar: openSnackbarRedux,
 };

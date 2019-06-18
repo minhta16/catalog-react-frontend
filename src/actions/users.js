@@ -1,4 +1,5 @@
 import api from 'utils/apiCalls';
+import { actionNameUtil } from 'middlewares/automate-async-action';
 import { UsersType } from './types';
 
 /**
@@ -40,22 +41,27 @@ export const signOut = () => ({
  * @param {string} email email
  * @param {string} name name
  */
-export const createUser = (username, password, email, name) => (dispatch) =>
-  dispatch({
+export const createUser = (username, password, email, name) => async (dispatch) => {
+  const dispatchValue = await dispatch({
     type: UsersType.CREATE_USER,
     promise: api.createUser(username, password, email, name),
   });
+  if (dispatchValue.type === actionNameUtil.createSuccess(UsersType.CREATE_USER)) {
+    dispatch(signIn(username, password));
+  }
+};
 
 /**
  * dispatch a fetchCurrentUserPosts action which fetches all the posts by the current user
  *
  * @param {string} token valid user token
  */
-export const fetchCurrentUserPost = (token) => (dispatch) =>
+export const fetchCurrentUserPost = (token) => (dispatch) => {
   dispatch({
     type: UsersType.FETCH_CURRENT_USER_POST,
     promise: api.fetchCurrentUserPosts(token),
   });
+};
 
 /**
  *
