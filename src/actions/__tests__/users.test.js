@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import automateAsync, { actionNameUtil } from 'middlewares/automate-async-action';
 import api from 'utils/apiCalls';
 import {
   signIn,
@@ -54,11 +55,15 @@ describe('actions/users', () => {
   });
 
   it('should create CREATE_USER when done creating user', async () => {
-    store.dispatch(createUser('username', 'password', 'email', 'name'));
-    const actions = store.getActions();
+    const otherStore = configureStore([thunk, automateAsync])({});
+    await otherStore.dispatch(createUser('username', 'password', 'email', 'name'));
+    const actions = otherStore.getActions();
     expect(actions[0]).toEqual({
-      type: UsersType.CREATE_USER,
-      promise: api.createUser('username', 'password'),
+      type: actionNameUtil.createRequest(UsersType.CREATE_USER),
+    });
+
+    expect(actions[2]).toEqual({
+      type: actionNameUtil.createRequest(UsersType.SIGN_IN),
     });
   });
 
