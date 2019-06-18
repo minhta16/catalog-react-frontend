@@ -42,11 +42,11 @@ export const signOut = () => ({
  * @param {string} name name
  */
 export const createUser = (username, password, email, name) => async (dispatch) => {
-  const dispatchValue = await dispatch({
+  const response = await dispatch({
     type: UsersType.CREATE_USER,
     promise: api.createUser(username, password, email, name),
   });
-  if (dispatchValue.type === actionNameUtil.createSuccess(UsersType.CREATE_USER)) {
+  if (response.type === actionNameUtil.createSuccess(UsersType.CREATE_USER)) {
     dispatch(signIn(username, password));
   }
 };
