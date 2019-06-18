@@ -20,9 +20,13 @@ export class PostList extends Component {
         <Typography variant="h4" className="center-margin">
           Your Posts
         </Typography>
-        {posts.map((post) => (
-          <PostItem key={post.id} post={post} />
-        ))}
+        {posts.length > 0 ? (
+          posts.map((post) => <PostItem key={post.id} post={post} />)
+        ) : (
+          <Typography variant="body1">
+            You have no post. Go ahead and create some. Our community would appreciate your posts!
+          </Typography>
+        )}
       </div>
     );
   }

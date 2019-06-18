@@ -1,7 +1,9 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import { shallow } from 'enzyme';
+import { Typography } from '@material-ui/core';
 import { PostList } from '../PostList';
+import { PostItem } from '../PostItem';
 
 describe('components/Profile/PostList', () => {
   let wrapper;
@@ -35,6 +37,13 @@ describe('components/Profile/PostList', () => {
   it('should render correctly', () => {
     setup();
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should prompt if user has no posts', () => {
+    props.posts = [];
+    setup();
+    expect(wrapper.find(PostItem).length).toBe(0);
+    expect(wrapper.find(Typography).length).toBe(2);
   });
 
   it('should call handleOpenSnackbar correctly', () => {
