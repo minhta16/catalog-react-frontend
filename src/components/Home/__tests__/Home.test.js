@@ -50,6 +50,18 @@ describe('components/Home/Home', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should openSnackbar if snackbarMess is available', () => {
+    props.location.snackbarMess = 'meomeo';
+    setup();
+    expect(props.openSnackbar).toHaveBeenCalled();
+  });
+
+  it('should not openSnackbar if snackbarMess is not available', () => {
+    props.location.snackbarMess = '';
+    setup();
+    expect(props.openSnackbar).not.toHaveBeenCalled();
+  });
+
   describe('When view mounts', () => {
     it('should not call fetchPosts if id is blank', () => {
       props.match.params.id = '';

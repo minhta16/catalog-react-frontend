@@ -16,7 +16,6 @@ exports[`components/Profile/PostList should render correctly 1`] = `
   </WithStyles(ForwardRef(Typography))>
   <Connect(PostItem)
     key="1"
-    openSnackbar={[Function]}
     post={
       Object {
         "category_id": "1",

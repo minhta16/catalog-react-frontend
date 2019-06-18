@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
+import { Redirect } from 'react-router-dom';
 import { configure, shallow } from 'enzyme';
 import { Post } from 'components/Post/Post';
 import { CircularProgress } from '@material-ui/core';
@@ -57,6 +58,20 @@ describe('components/Post', () => {
   it('should render correctly', () => {
     setup();
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should redirect if state.redirect', () => {
+    setup();
+    wrapper.setState({
+      redirect: true,
+    });
+    expect(wrapper.find(Redirect).length).toBe(1);
+  });
+
+  it('should not openSnackbar if snackbarMess is not present', () => {
+    props.location.snackbarMess = '';
+    setup();
+    expect(props.openSnackbar).not.toHaveBeenCalled();
   });
 
   it('should openSnackbar if snackbarMess is present', () => {
