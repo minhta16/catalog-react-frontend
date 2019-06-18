@@ -74,15 +74,28 @@ describe('components/CategoriesTable', () => {
     expect(fetchPosts).toBeCalled();
   });
 
+  it('should call getShortDescription correctly', () => {
+    setup();
+    const shortString = 'short string';
+    expect(wrapper.instance().getShortDescription(shortString)).toEqual(shortString);
+    const longString =
+      'longggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg string';
+    expect(wrapper.instance().getShortDescription(longString)).toEqual(
+      'longgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg...',
+    );
+  });
+
   it('should display items if selectedCatId is provided', () => {
     props.selectedCatItems = [
       {
         name: 'hihi',
         id: '1',
+        description: 'meomeo',
       },
       {
         name: 'hihi',
         id: '2',
+        description: 'gaugau',
       },
     ];
     props.selectedCatId = '1';

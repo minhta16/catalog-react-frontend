@@ -3,17 +3,28 @@ import PropTypes from 'prop-types';
 import {
   Paper,
   Grid,
-  MenuItem,
   MenuList,
+  MenuItem,
+  ListItem,
+  List,
   Typography,
   Divider,
   CircularProgress,
+  ListItemText,
+  ListItemAvatar,
+  Avatar,
 } from '@material-ui/core';
 
 import { Link } from 'react-router-dom';
 
 class CategoriesTable extends Component {
   state = {};
+
+  getShortDescription = (description) => {
+    let retString = description.substr(0, 100);
+    retString += description.length > 100 ? '...' : '';
+    return retString;
+  };
 
   render() {
     const {
@@ -63,25 +74,32 @@ class CategoriesTable extends Component {
                   </Typography>
                   <Divider variant="middle" />
                   {/* A list of items to be selected, click to redirect */}
-                  <MenuList>
+                  <List>
                     {/* If selectedCatID is available then display the menu. If not, the right side will display a message telling the user to select a category */}
                     {selectedCatId ? (
                       selectedCatItems.map((item) => (
-                        <MenuItem
+                        <ListItem
+                          button
                           className="itemsMenuItem"
                           key={item.id}
                           component={Link}
                           to={`/${selectedCatId}/${item.id}`}
                         >
-                          {item.name}
-                        </MenuItem>
+                          <ListItemAvatar>
+                            <Avatar color="primary">{item.name.charAt(0).toUpperCase()}</Avatar>
+                          </ListItemAvatar>
+                          <ListItemText
+                            primary={item.name}
+                            secondary={this.getShortDescription(item.description)}
+                          />
+                        </ListItem>
                       ))
                     ) : (
                       <Typography className="itemTypography" variant="body1">
                         Please select a category on the left to view its items.
                       </Typography>
                     )}
-                  </MenuList>
+                  </List>
                 </div>
               )}
             </Grid>

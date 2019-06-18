@@ -45,7 +45,7 @@ exports[`components/CategoriesTable should render correctly 1`] = `
         <WithStyles(ForwardRef(Divider))
           variant="middle"
         />
-        <ForwardRef(MenuList) />
+        <WithStyles(ForwardRef(List)) />
       </div>
     </WithStyles(ForwardRef(Grid))>
   </WithStyles(ForwardRef(Grid))>

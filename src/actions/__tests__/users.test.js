@@ -67,6 +67,16 @@ describe('actions/users', () => {
     });
   });
 
+  it('should not SIGN_IN if CREATE_USER_FAILURE', async () => {
+    const mockDispatch = jest.fn();
+    mockDispatch.mockReturnValue({
+      type: 'EAT_PIZZA',
+    });
+    createUser('username', 'password', 'email', 'name')(mockDispatch);
+    // expect dispatch to be called only once => not dispatching signIn
+    expect(mockDispatch.mock.calls.length).toBe(1);
+  });
+
   it('should create FETCH_CURRENT_USER_POST when done fetching', async () => {
     store.dispatch(fetchCurrentUserPost('abcxyz'));
     const actions = store.getActions();
