@@ -6,6 +6,7 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import CustomAppBar from 'components/Shared/CustomAppBar';
 import InfoSnackbar from 'components/Shared/InfoSnackbar';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { indigo } from '@material-ui/core/colors';
 import 'App.css';
 import { fetchCategories as fetchCategoriesRedux } from 'actions/categories';
 import {
@@ -19,7 +20,7 @@ import { selectMiscSnackbarOpen, selectMiscSnackbarMessage } from 'selectors/mis
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#411bd0',
+      main: indigo[500],
     },
     secondary: {
       main: '#fff',

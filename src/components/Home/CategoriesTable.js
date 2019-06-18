@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import randomMC from 'random-material-color';
 import {
   Paper,
   Grid,
@@ -45,9 +46,9 @@ class CategoriesTable extends Component {
         ) : (
           <Grid container spacing={2}>
             <Grid item xs={3} className="vertical-divider">
-              <Typography variant="h4" className="mainmenu-categories-header">
-                Categories
-              </Typography>
+              <Grid className="mainmenu-categories-header">
+                <Typography variant="h4">Categories</Typography>
+              </Grid>
               <MenuList>
                 {categories.map((category) => (
                   <MenuItem
@@ -70,7 +71,7 @@ class CategoriesTable extends Component {
               ) : (
                 <div>
                   <Typography id="categories-table-name-typo" className="left-margin" variant="h4">
-                    {selectedCatId ? selectedCatName : 'Choose a category'}
+                    {selectedCatId ? selectedCatName : 'Choose a Category'}
                   </Typography>
                   <Divider variant="middle" />
                   {/* A list of items to be selected, click to redirect */}
@@ -86,7 +87,17 @@ class CategoriesTable extends Component {
                           to={`/${selectedCatId}/${item.id}`}
                         >
                           <ListItemAvatar>
-                            <Avatar color="primary">{item.name.charAt(0).toUpperCase()}</Avatar>
+                            <Avatar
+                              style={{
+                                backgroundColor: randomMC.getColor({
+                                  shades: ['300'],
+                                  text: item.name,
+                                }),
+                                color: '#fff',
+                              }}
+                            >
+                              {item.name.charAt(0)}
+                            </Avatar>
                           </ListItemAvatar>
                           <ListItemText
                             primary={item.name}

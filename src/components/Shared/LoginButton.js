@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import randomMC from 'random-material-color';
 
 import { Button, Avatar, Menu, MenuItem, Grid, Typography } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
@@ -73,7 +74,11 @@ export class LoginButton extends Component {
           <Grid container alignItems="center">
             <Typography variant="body1">{`Welcome, ${currentUser.username}`}</Typography>
             <Avatar
-              style={{ backgroundColor: '#fdb600', color: '#fff', margin: '0.5rem' }}
+              style={{
+                backgroundColor: randomMC.getColor({ text: currentUser.username }),
+                color: '#fff',
+                margin: '0.5rem',
+              }}
               onClick={this.handleClickAvatar}
             >
               {currentUser.username.charAt(0)}
