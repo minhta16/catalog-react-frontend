@@ -35,48 +35,38 @@ class ApiCalls {
   /**
    * Fetch all categories
    */
-  fetchCategories = () => {
-    const fetchedData = this.fetchRequest({
+  fetchCategories = () =>
+    this.fetchRequest({
       method: 'GET',
       path: `${this.apiPath}/categories?offset=0&limit=100`,
     }).then((data) => {
-      if (data instanceof Promise) {
-        return data;
-      }
       let returnData = {};
       data.categories.forEach((category) => {
         returnData = { ...returnData, [category.id]: category };
       });
       return returnData;
     });
-    return fetchedData;
-  };
 
   /**
    * Fetch all items in a category, given the categoryId
    */
-  fetchItems = (categoryId) => {
-    const fetchedItems = this.fetchRequest({
+  fetchItems = (categoryId) =>
+    this.fetchRequest({
       method: 'GET',
       path: `${this.apiPath}/categories/${categoryId}/items?offset=0&limit=100`,
     }).then((data) => {
-      if (data instanceof Promise) {
-        return data;
-      }
       let returnData = {};
       data.items.forEach((category) => {
         returnData = { ...returnData, [category.id]: category };
       });
       return returnData;
     });
-    return fetchedItems;
-  };
 
   /**
    * Sign in and get a user token
    */
-  signIn = (username, password) => {
-    const userData = this.fetchRequest({
+  signIn = (username, password) =>
+    this.fetchRequest({
       method: 'POST',
       path: `${this.apiPath}/auth`,
       body: JSON.stringify({
@@ -84,14 +74,12 @@ class ApiCalls {
         password,
       }),
     });
-    return userData;
-  };
 
   /**
    * Create a new user in the database
    */
-  createUser = (username, password, email, name) => {
-    const userData = this.fetchRequest({
+  createUser = (username, password, email, name) =>
+    this.fetchRequest({
       method: 'POST',
       path: `${this.apiPath}/users`,
       body: JSON.stringify({
@@ -101,38 +89,32 @@ class ApiCalls {
         name,
       }),
     });
-    return userData;
-  };
 
   /**
    * Fetch posts from the current user
    */
-  fetchCurrentUserPosts = (token) => {
-    const fetchedItems = this.fetchRequest({
+  fetchCurrentUserPosts = (token) =>
+    this.fetchRequest({
       method: 'GET',
       path: `${this.apiPath}/me/post`,
       accessToken: token,
     });
-    return fetchedItems;
-  };
 
   /**
    * Delete post of the current user
    */
-  deletePost = (token, categoryId, postId) => {
-    const message = this.fetchRequest({
+  deletePost = (token, categoryId, postId) =>
+    this.fetchRequest({
       method: 'DELETE',
       path: `${this.apiPath}/categories/${categoryId}/items/${postId}`,
       accessToken: token,
     });
-    return message;
-  };
 
   /**
    * Add a post, given the current user token and categoryId that need to be added to
    */
-  addPost = (token, categoryId, post) => {
-    const message = this.fetchRequest({
+  addPost = (token, categoryId, post) =>
+    this.fetchRequest({
       method: 'POST',
       path: `${this.apiPath}/categories/${categoryId}/items`,
       accessToken: token,
@@ -142,14 +124,12 @@ class ApiCalls {
         price: post.price,
       }),
     });
-    return message;
-  };
 
   /**
    * Modify a post, given the categoryId and itemId of that post
    */
-  modifyPost = (token, categoryId, itemId, post) => {
-    const message = this.fetchRequest({
+  modifyPost = (token, categoryId, itemId, post) =>
+    this.fetchRequest({
       method: 'PUT',
       path: `${this.apiPath}/categories/${categoryId}/items/${itemId}`,
       accessToken: token,
@@ -159,8 +139,6 @@ class ApiCalls {
         price: post.price,
       }),
     });
-    return message;
-  };
 }
 
 export default new ApiCalls();

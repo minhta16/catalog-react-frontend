@@ -393,6 +393,10 @@ exports[`src/App should render App without crashing 1`] = `
           key="[object Object]"
           path="/:id/:postId"
         />
+        <Route
+          component={[Function]}
+          key="[object Object]"
+        />
       </Switch>
     </div>
   </BrowserRouter>

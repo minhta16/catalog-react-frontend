@@ -9,6 +9,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { red } from '@material-ui/core/colors';
 import { selectCategory } from 'selectors/categories';
 import { selectCurrentUserProp } from 'selectors/users';
+import { openSnackbar as openSnackbarRedux } from 'actions/misc';
 import { deletePostAndRefetch as deletePostAndRefetchRedux } from 'actions/users';
 import ConfirmDialog from 'components/Shared/ConfirmDialog';
 
@@ -36,7 +37,7 @@ export class PostItem extends Component {
   handleConfirmDelete = async () => {
     const { deletePostAndRefetch, token, post, openSnackbar } = this.props;
     deletePostAndRefetch(token, post.category_id, post.id);
-    openSnackbar();
+    openSnackbar('Item deleted!');
   };
 
   /**
@@ -152,6 +153,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = {
   deletePostAndRefetch: deletePostAndRefetchRedux,
+  openSnackbar: openSnackbarRedux,
 };
 export default connect(
   mapStateToProps,

@@ -72,8 +72,8 @@ export const fetchCurrentUserPost = (token) => (dispatch) => {
  * @param {string} categoryId category id of the post to be deleted
  * @param {string} postId post if of the post to be deleted
  */
-export const deletePostAndRefetch = (token, categoryId, postId) => (dispatch) => {
-  dispatch({
+export const deletePostAndRefetch = (token, categoryId, postId) => async (dispatch) => {
+  await dispatch({
     type: UsersType.DELETE_POST,
     promise: api.deletePost(token, categoryId, postId),
   });

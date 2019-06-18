@@ -35,5 +35,7 @@ describe('src/App', () => {
   it('should call fetchCategories when render', () => {
     setup();
     expect(props.fetchCategories).toHaveBeenCalled();
+    wrapper.instance().componentDidMount();
+    expect(props.fetchCategories.mock.calls.length).toBe(2);
   });
 });

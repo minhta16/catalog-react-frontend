@@ -21,7 +21,7 @@ export class PostList extends Component {
           Your Posts
         </Typography>
         {posts.map((post) => (
-          <PostItem key={post.id} post={post} openSnackbar={this.handleOpenSnackbar} />
+          <PostItem key={post.id} post={post} />
         ))}
       </div>
     );

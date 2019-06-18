@@ -89,7 +89,6 @@ exports[`components/SignUp/SignUp should render correctly 1`] = `
       </WithStyles(ForwardRef(Typography))>
       <WithStyles(ForwardRef(Button))
         color="primary"
-        disabled={false}
         type="submit"
         variant="contained"
       >

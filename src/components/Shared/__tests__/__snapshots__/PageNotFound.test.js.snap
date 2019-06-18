@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/LoginDialog should render correctly 1`] = `
+<div>
+  <WithStyles(ForwardRef(Typography))
+    variant="h3"
+  >
+    404: Page Not Found!
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Typography))
+    variant="body1"
+  >
+    Please check your URL. We could not find where you are trying to go!
+  </WithStyles(ForwardRef(Typography))>
+</div>
+`;
