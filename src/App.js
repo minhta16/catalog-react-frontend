@@ -7,6 +7,8 @@ import CustomAppBar from 'components/Shared/CustomAppBar';
 import InfoSnackbar from 'components/Shared/InfoSnackbar';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import 'App.css';
+
+import Home from 'components/Home/Home';
 import { fetchCategories as fetchCategoriesRedux } from 'actions/categories';
 import {
   openSnackbar as openSnackbarRedux,
@@ -42,6 +44,7 @@ const routing = (
     {routes.map((route) => (
       <Route key={route} exact={route.exact} path={route.path} component={route.view} />
     ))}
+    <Route component={Home} />
   </Switch>
 );
 

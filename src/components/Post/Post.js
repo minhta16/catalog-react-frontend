@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PostPaper from 'components/Post/PostPaper';
 import { Container, CircularProgress } from '@material-ui/core';
 import { selectPost } from 'selectors/posts';
@@ -9,6 +10,10 @@ import { fetchPosts as fetchPostsRedux } from 'actions/posts';
 import { openSnackbar as openSnackbarRedux } from 'actions/misc';
 
 export class Post extends Component {
+  state = {
+    redirect: false,
+  };
+
   /**
    * Open the snackbar if snackbarMess is available
    */
@@ -22,7 +27,11 @@ export class Post extends Component {
 
   render() {
     const { match, currentPost, category } = this.props;
+    const { redirect } = this.state;
 
+    if (redirect) {
+      return <Redirect exact="true" to="/" />;
+    }
     return (
       <Container maxWidth="lg">
         {/* Only display post paper if currentPost and category is available */}
