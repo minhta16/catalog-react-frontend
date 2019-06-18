@@ -32,7 +32,9 @@ class ApiCalls {
     return data;
   };
 
-  // Fetch all categories
+  /**
+   * Fetch all categories
+   */
   fetchCategories = () => {
     const fetchedData = this.fetchRequest({
       method: 'GET',

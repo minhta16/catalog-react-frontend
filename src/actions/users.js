@@ -74,6 +74,9 @@ export const deletePostAndRefetch = (token, categoryId, postId) => (dispatch) =>
   dispatch(fetchCurrentUserPost(token));
 };
 
+/**
+ * Dispatch a clearError action which reset error messages to an empty array
+ */
 export const clearError = () => ({
   type: UsersType.CLEAR_ERROR,
 });

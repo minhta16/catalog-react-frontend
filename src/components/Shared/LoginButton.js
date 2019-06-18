@@ -23,6 +23,9 @@ export class LoginButton extends Component {
     });
   };
 
+  /**
+   * Sign out and close the menu
+   */
   handleSignOut = () => {
     const { signOut } = this.props;
     signOut();

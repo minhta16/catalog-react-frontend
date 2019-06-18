@@ -11,6 +11,7 @@ import {
 } from 'selectors/users';
 
 export class Profile extends Component {
+  // Always refetch post if Profile is mounted
   componentDidMount() {
     const { fetchCurrentUserPost, currentUser } = this.props;
     fetchCurrentUserPost(currentUser.token);

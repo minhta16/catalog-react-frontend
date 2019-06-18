@@ -10,6 +10,9 @@ import Adapter from 'enzyme-adapter-react-16';
 import toJson from 'enzyme-to-json';
 import App from 'App';
 
+/**
+ * Sample test file for reference
+ */
 configure({ adapter: new Adapter() });
 
 describe('<App /> shallow rendering', () => {

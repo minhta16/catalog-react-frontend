@@ -10,6 +10,9 @@ import {
   DialogContentText,
 } from '@material-ui/core';
 
+/**
+ * This component renders a mock terms and conditions dialog
+ */
 export function TermsAndConditionsDialog(props) {
   const { open, onClose } = props;
   const terms = `Cras mattis consectetur purus sit amet fermentum.

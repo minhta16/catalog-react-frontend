@@ -124,6 +124,7 @@ export class SignUp extends Component {
       <Container maxWidth="lg">
         <Paper className="paper">
           <Typography variant="h4">Register now!</Typography>
+          {/* Display error messages if they are available */}
           {errorMessage &&
             errorMessage.map((message) => (
               <Typography key={message} variant="body1" color="error">

@@ -40,6 +40,7 @@ export class Post extends Component {
     const { openSnackbar } = this.state;
     return (
       <Container maxWidth="lg">
+        {/* Only display post paper if currentPost and category is available */}
         {currentPost && category ? (
           <PostPaper
             header={currentPost.name}

@@ -65,6 +65,7 @@ export class PostItem extends Component {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
+        {/* Redirect to edit page if user clicks edit */}
         <MenuItem
           onClick={this.handleClose}
           component={Link}
@@ -99,6 +100,7 @@ export class PostItem extends Component {
         />
         <Grid item>
           <Grid container direction="column">
+            {/* Redirect to the post page when user clicked on the name */}
             <MUILink
               variant="h4"
               color="inherit"

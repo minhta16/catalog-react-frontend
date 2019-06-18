@@ -24,6 +24,9 @@ export class CustomAppBar extends Component {
     });
   };
 
+  /**
+   * Clear the error logs when window is closed. This is done to prevent user seeing the error again when dialog is reopened
+   */
   handleCloseDialog = () => {
     const { clearError } = this.props;
     clearError();
