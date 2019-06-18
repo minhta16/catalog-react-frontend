@@ -6,38 +6,23 @@ import { Container, CircularProgress } from '@material-ui/core';
 import { selectPost } from 'selectors/posts';
 import { selectCategory } from 'selectors/categories';
 import { fetchPosts as fetchPostsRedux } from 'actions/posts';
-import InfoSnackbar from 'components/Shared/InfoSnackbar';
+import { openSnackbar as openSnackbarRedux } from 'actions/misc';
 
 export class Post extends Component {
-  state = {
-    openSnackbar: false,
-  };
-
   /**
    * Open the snackbar if snackbarMess is available
    */
   componentDidMount = () => {
-    const { location, match, fetchPosts } = this.props;
+    const { location, match, fetchPosts, openSnackbar } = this.props;
     fetchPosts(match.params.id);
     if (location.snackbarMess) {
-      this.closeSnackbar(false)();
+      openSnackbar(location.snackbarMess);
     }
   };
 
-  /**
-   * close: close snackbar
-   * !close: open snackbar
-   */
-  closeSnackbar = (close) => () => {
-    this.setState({
-      openSnackbar: !close,
-    });
-  };
-
   render() {
-    const { match, currentPost, category, location } = this.props;
+    const { match, currentPost, category } = this.props;
 
-    const { openSnackbar } = this.state;
     return (
       <Container maxWidth="lg">
         {/* Only display post paper if currentPost and category is available */}
@@ -52,12 +37,6 @@ export class Post extends Component {
         ) : (
           <CircularProgress />
         )}
-
-        <InfoSnackbar
-          open={openSnackbar}
-          onClose={this.closeSnackbar(true)}
-          message={location.snackbarMess}
-        />
       </Container>
     );
   }
@@ -69,6 +48,7 @@ Post.propTypes = {
   category: PropTypes.object,
   location: PropTypes.object.isRequired,
   fetchPosts: PropTypes.func.isRequired,
+  openSnackbar: PropTypes.func.isRequired,
 };
 
 Post.defaultProps = {
@@ -83,6 +63,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = {
   fetchPosts: fetchPostsRedux,
+  openSnackbar: openSnackbarRedux,
 };
 
 export default connect(

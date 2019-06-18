@@ -21,3 +21,8 @@ export const UsersType = {
   DELETE_POST: 'DELETE_POST',
   CLEAR_ERROR: 'CLEAR_ERROR',
 };
+
+export const MiscType = {
+  OPEN_SNACKBAR: 'OPEN_SNACKBAR',
+  CLOSE_SNACKBAR: 'CLOSE_SNACKBAR',
+};

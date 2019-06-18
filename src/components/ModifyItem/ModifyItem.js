@@ -23,13 +23,30 @@ export class ModifyItem extends Component {
     redirect: false,
     // eslint-disable-next-line react/destructuring-assignment
     selectedCategory: this.props.categories.length ? this.props.categories[0].id : '',
+    nameWarning: false,
+    descriptionWarning: false,
+  };
+
+  qualifiedName = (name) => name.length === 0 || name.length >= 5;
+
+  qualifiedDescription = (description) => description.length === 0 || description.length <= 200;
+
+  handleCreateWarnings = () => {
+    const { title, description } = this.state;
+    this.setState({
+      nameWarning: !this.qualifiedName(title),
+      descriptionWarning: !this.qualifiedDescription(description),
+    });
   };
 
   // Connecting the textfields to the state
   handleChange = (e) => {
-    this.setState({
-      [e.target.id]: e.target.value,
-    });
+    this.setState(
+      {
+        [e.target.id]: e.target.value,
+      },
+      this.handleCreateWarnings,
+    );
   };
 
   // Connect category to the state
@@ -103,7 +120,15 @@ export class ModifyItem extends Component {
   };
 
   render() {
-    const { title, description, editing, redirect, selectedCategory } = this.state;
+    const {
+      title,
+      description,
+      editing,
+      redirect,
+      selectedCategory,
+      nameWarning,
+      descriptionWarning,
+    } = this.state;
     const { match, categories, errorMessage } = this.props;
 
     /**
@@ -163,6 +188,8 @@ export class ModifyItem extends Component {
               value={title}
               onChange={this.handleChange}
               margin="normal"
+              error={nameWarning}
+              helperText="Name needs to be at least 5 characters"
               fullWidth
             />
             <TextField
@@ -172,11 +199,18 @@ export class ModifyItem extends Component {
               value={description}
               onChange={this.handleChange}
               margin="normal"
+              error={descriptionWarning}
+              helperText={`Description needs to be less than 200 characters. Current characters: ${description.length}`}
               fullWidth
               multiline
             />
             <Grid container justify="space-evenly">
-              <Button variant="contained" color="primary" type="submit">
+              <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                disabled={nameWarning || descriptionWarning}
+              >
                 <BackupIcon className="icon-padding" />
                 Submit
               </Button>

@@ -1,3 +1,5 @@
+import isPromise from 'is-promise';
+
 export const actionNameUtil = {
   createRequest: (actionName) => `${actionName}_REQUEST`,
   createSuccess: (actionName) => `${actionName}_SUCCESS`,
@@ -16,32 +18,41 @@ const automateAsyncAction = (store) => (next) => (action) => {
   // Dispatch the first action, _REQUEST
   store.dispatch({ type: actionNameUtil.createRequest(type) });
   return promise
-    .then((data) =>
-      // If promise resolves then dispatch _SUCCESS
-      next({
-        type: actionNameUtil.createSuccess(type),
-        payload: data,
-        ...restAction,
-      }),
-    )
+    .then((data) => {
+      return isPromise(data)
+        ? data.then((data1) =>
+            next({
+              type: actionNameUtil.createSuccess(type),
+              payload: data1,
+              ...restAction,
+            }),
+          )
+        : next({
+            type: actionNameUtil.createSuccess(type),
+            payload: data,
+            ...restAction,
+          });
+    })
     .catch((err) => {
       // If promise fails then dispatch _FAILURE
-      return err.then((error) => {
-        // This block is to handle mismatch error responses by the API
-        let message = '';
-        if (error.description) {
-          message = [error.description];
-        } else {
-          message = Object.values(error.message);
-        }
-        // Return a _FAILURE, along with an error object which has the error message
-        return next({
-          type: actionNameUtil.createFailure(type),
-          payload: {
-            message,
-          },
-        });
-      });
+      return isPromise(err)
+        ? err.then((error) => {
+            // This block is to handle mismatch error responses by the API
+            let message = '';
+            if (error.description) {
+              message = [error.description];
+            } else {
+              message = Object.values(error.message);
+            }
+            // Return a _FAILURE, along with an error object which has the error message
+            return next({
+              type: actionNameUtil.createFailure(type),
+              payload: {
+                message,
+              },
+            });
+          })
+        : err;
     });
 };
 

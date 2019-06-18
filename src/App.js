@@ -4,11 +4,17 @@ import { connect } from 'react-redux';
 import { CssBaseline, Toolbar } from '@material-ui/core';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import CustomAppBar from 'components/Shared/CustomAppBar';
+import InfoSnackbar from 'components/Shared/InfoSnackbar';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import 'App.css';
 import { fetchCategories as fetchCategoriesRedux } from 'actions/categories';
+import {
+  openSnackbar as openSnackbarRedux,
+  closeSnackbar as closeSnackbarRedux,
+} from 'actions/misc';
 
 import routes from 'routes';
+import { selectMiscSnackbarOpen, selectMiscSnackbarMessage } from 'selectors/misc';
 
 const theme = createMuiTheme({
   palette: {
@@ -46,6 +52,7 @@ export class App extends Component {
   }
 
   render() {
+    const { snackbarOpen, snackbarMess, closeSnackbar } = this.props;
     return (
       <MuiThemeProvider theme={theme}>
         <Router>
@@ -54,6 +61,8 @@ export class App extends Component {
           <Toolbar style={{ minHeight: '6em' }} />
           <div className="App">{routing}</div>
         </Router>
+
+        <InfoSnackbar open={snackbarOpen} onClose={closeSnackbar} message={snackbarMess} />
       </MuiThemeProvider>
     );
   }
@@ -61,8 +70,20 @@ export class App extends Component {
 
 App.propTypes = {
   fetchCategories: PropTypes.func.isRequired,
+  snackbarOpen: PropTypes.bool.isRequired,
+  snackbarMess: PropTypes.bool.isRequired,
+  closeSnackbar: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  snackbarOpen: selectMiscSnackbarOpen(state),
+  snackbarMess: selectMiscSnackbarMessage(state),
+});
 export default connect(
-  null,
-  { fetchCategories: fetchCategoriesRedux },
+  mapStateToProps,
+  {
+    fetchCategories: fetchCategoriesRedux,
+    openSnackbar: openSnackbarRedux,
+    closeSnackbar: closeSnackbarRedux,
+  },
 )(App);

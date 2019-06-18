@@ -10,6 +10,7 @@ import {
   signIn as signInRedux,
   clearError as clearErrorRedux,
 } from 'actions/users';
+import { openSnackbar as openSnackbarRedux } from 'actions/misc';
 import { selectLoginErrorMessage, selectCreateAccountSuccess } from 'selectors/users';
 
 export class SignUp extends Component {
@@ -19,6 +20,7 @@ export class SignUp extends Component {
     email: '',
     password: '',
     confirmPassword: '',
+    usernameWarning: false,
     emailWarning: false,
     passWarning: false,
     passwordMatchWarning: false,
@@ -31,6 +33,14 @@ export class SignUp extends Component {
   componentDidMount = () => {
     const { clearError } = this.props;
     clearError();
+  };
+
+  componentDidUpdate = (prevProps) => {
+    const { createAccountSuccess, signIn } = this.props;
+    const { username, password } = this.state;
+    if (!prevProps.createAccountSuccess && createAccountSuccess) {
+      signIn(username, password);
+    }
   };
 
   /**
@@ -71,6 +81,13 @@ export class SignUp extends Component {
   /**
    * returns true if an email is qualified
    */
+  qualifiedUsername = (username) => {
+    return username.length === 0 || username.length >= 5;
+  };
+
+  /**
+   * returns true if an email is qualified
+   */
   qualifiedEmail = (email) => {
     return email.length === 0 || /^\S+@[A-z]+\.[A-z]+$/.test(email);
   };
@@ -89,21 +106,18 @@ export class SignUp extends Component {
    * Create warnings if user has unqualified things in text fields
    */
   handleCreateWarnings() {
-    const { email, password, confirmPassword } = this.state;
+    const { username, email, password, confirmPassword } = this.state;
 
     this.setState({
+      usernameWarning: !this.qualifiedUsername(username),
       emailWarning: !this.qualifiedEmail(email),
-    });
-    this.setState({
       passWarning: !this.qualifiedPassword(password),
-    });
-    this.setState({
       passwordMatchWarning: password !== confirmPassword,
     });
   }
 
   render() {
-    const { errorMessage, createAccountSuccess, signIn } = this.props;
+    const { errorMessage, createAccountSuccess } = this.props;
     const {
       username,
       name,
@@ -111,15 +125,16 @@ export class SignUp extends Component {
       password,
       confirmPassword,
       openTerms,
+      usernameWarning,
       emailWarning,
       passWarning,
       passwordMatchWarning,
     } = this.state;
     const termsText = 'By clicking Resgister, you agree with our ';
     if (createAccountSuccess) {
-      signIn(username, password);
       return <Redirect exact to="/" />;
     }
+
     return (
       <Container maxWidth="lg">
         <Paper className="paper">
@@ -134,6 +149,8 @@ export class SignUp extends Component {
           <form autoComplete="off" onSubmit={this.register}>
             <TextField
               required
+              error={usernameWarning}
+              helperText={usernameWarning ? `Username needs to be at least 5 characters` : ''}
               id="username"
               label="Username"
               value={username}
@@ -236,6 +253,7 @@ const mapDispatchToProps = {
   createUser: createUserRedux,
   signIn: signInRedux,
   clearError: clearErrorRedux,
+  openSnackbar: openSnackbarRedux,
 };
 
 export default connect(

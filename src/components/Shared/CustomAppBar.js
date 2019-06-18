@@ -9,6 +9,7 @@ import {
   signOut as signOutRedux,
   clearError as clearErrorRedux,
 } from 'actions/users';
+import { openSnackbar as openSnackbarRedux } from 'actions/misc';
 import { selectCurrentUser, selectLoginErrorMessage } from 'selectors/users';
 import LoginButton from './LoginButton';
 import LoginDialog from './LoginDialog';
@@ -39,8 +40,9 @@ export class CustomAppBar extends Component {
    * close the login dialog if currentUser token exists, meaning that the user just logged in
    */
   componentDidUpdate = (prevProps) => {
-    const { currentUser } = this.props;
+    const { currentUser, openSnackbar } = this.props;
     if (!prevProps.currentUser.token && currentUser.token) {
+      openSnackbar(`Welcome, ${currentUser.username}!`);
       this.handleCloseDialog();
     }
   };
@@ -82,6 +84,7 @@ CustomAppBar.propTypes = {
   signOut: PropTypes.func.isRequired,
   errorMessage: PropTypes.array,
   clearError: PropTypes.func.isRequired,
+  openSnackbar: PropTypes.func.isRequired,
 };
 
 CustomAppBar.defaultProps = {
@@ -98,6 +101,7 @@ export const mapDispatchToProps = {
   signIn: signInRedux,
   signOut: signOutRedux,
   clearError: clearErrorRedux,
+  openSnackbar: openSnackbarRedux,
 };
 
 export default connect(

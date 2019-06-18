@@ -1,37 +1,28 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Typography } from '@material-ui/core';
-import InfoSnackbar from 'components/Shared/InfoSnackbar';
+import { openSnackbar as openSnackbarRedux } from 'actions/misc';
 import PostItem from './PostItem';
 
 export class PostList extends Component {
-  state = {
-    openSnackbar: false,
-  };
+  state = {};
 
-  closeSnackbar = (close) => () => {
-    this.setState({
-      openSnackbar: !close,
-    });
+  handleOpenSnackbar = () => {
+    const { openSnackbar } = this.props;
+    openSnackbar('Post created!');
   };
 
   render() {
     const { posts } = this.props;
-    const { openSnackbar } = this.state;
     return (
       <div style={{ margin: '.5rem' }}>
         <Typography variant="h4" className="center-margin">
           Your Posts
         </Typography>
         {posts.map((post) => (
-          <PostItem key={post.id} post={post} openSnackbar={this.closeSnackbar(false)} />
+          <PostItem key={post.id} post={post} openSnackbar={this.handleOpenSnackbar} />
         ))}
-
-        <InfoSnackbar
-          open={openSnackbar}
-          onClose={this.closeSnackbar(true)}
-          message="Post Deleted!"
-        />
       </div>
     );
   }
@@ -39,6 +30,10 @@ export class PostList extends Component {
 
 PostList.propTypes = {
   posts: PropTypes.array.isRequired,
+  openSnackbar: PropTypes.func.isRequired,
 };
 
-export default PostList;
+export default connect(
+  null,
+  { openSnackbar: openSnackbarRedux },
+)(PostList);

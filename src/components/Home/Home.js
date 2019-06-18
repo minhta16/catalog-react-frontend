@@ -7,31 +7,21 @@ import CategoriesTable from 'components/Home/CategoriesTable';
 import { fetchPosts as fetchPostsRedux } from 'actions/posts';
 import { selectAllPosts, selectPostLoading } from 'selectors/posts';
 import { selectCategories, selectCategory, selectCategoriesLoading } from 'selectors/categories';
-import InfoSnackbar from 'components/Shared/InfoSnackbar';
+import { openSnackbar as openSnackbarRedux } from 'actions/misc';
 
 export class Home extends Component {
-  state = {
-    openSnackbar: false,
-  };
-
   /**
    * always fetchCategories upon mount. if the user is viewing a category then fetch the posts in that category. If there is a snackbarMessage then open the snackbar
    */
   componentDidMount() {
-    const { match, fetchPosts, location } = this.props;
+    const { match, fetchPosts, location, openSnackbar } = this.props;
     if (match.params.id) {
       fetchPosts(match.params.id);
     }
     if (location.snackbarMess) {
-      this.closeSnackbar(false)();
+      openSnackbar(location.snackbarMess);
     }
   }
-
-  closeSnackbar = (close) => () => {
-    this.setState({
-      openSnackbar: !close,
-    });
-  };
 
   render() {
     const {
@@ -40,11 +30,9 @@ export class Home extends Component {
       selectedCatItems,
       fetchPosts,
       selectedCategory,
-      location,
       categoriesLoading,
       postsLoading,
     } = this.props;
-    const { openSnackbar } = this.state;
     // Render a categories table and a snackbar to be displayed when needed
     return (
       <Container maxWidth="lg">
@@ -56,12 +44,6 @@ export class Home extends Component {
           fetchPosts={fetchPosts}
           categoriesLoading={categoriesLoading}
           postsLoading={postsLoading}
-        />
-
-        <InfoSnackbar
-          open={openSnackbar}
-          onClose={this.closeSnackbar(true)}
-          message={location.snackbarMess}
         />
       </Container>
     );
@@ -77,6 +59,7 @@ Home.propTypes = {
   location: PropTypes.object.isRequired,
   categoriesLoading: PropTypes.bool.isRequired,
   postsLoading: PropTypes.bool.isRequired,
+  openSnackbar: PropTypes.func.isRequired,
 };
 
 Home.defaultProps = {
@@ -96,6 +79,7 @@ const mapSelectorToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = {
   fetchPosts: fetchPostsRedux,
+  openSnackbar: openSnackbarRedux,
 };
 
 export default connect(

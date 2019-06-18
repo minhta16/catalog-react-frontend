@@ -40,12 +40,11 @@ export const signOut = () => ({
  * @param {string} email email
  * @param {string} name name
  */
-export const createUser = (username, password, email, name) => (dispatch) => {
+export const createUser = (username, password, email, name) => (dispatch) =>
   dispatch({
     type: UsersType.CREATE_USER,
     promise: api.createUser(username, password, email, name),
   });
-};
 
 /**
  * dispatch a fetchCurrentUserPosts action which fetches all the posts by the current user
