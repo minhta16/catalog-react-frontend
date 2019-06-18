@@ -3,7 +3,8 @@ import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { configure, shallow } from 'enzyme';
 import { Post } from 'components/Post/Post';
-import InfoSnackbar from 'components/Shared/InfoSnackbar';
+import { CircularProgress } from '@material-ui/core';
+import PostPaper from '../PostPaper';
 
 configure({ adapter: new Adapter() });
 describe('components/Post', () => {
@@ -49,6 +50,7 @@ describe('components/Post', () => {
         name: 'name',
       },
       fetchPosts: jest.fn(),
+      openSnackbar: jest.fn(),
     };
   });
 
@@ -57,22 +59,20 @@ describe('components/Post', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should call closeSnackbar() correctly', () => {
+  it('should openSnackbar if snackbarMess is present', () => {
+    props.location.snackbarMess = 'meomeo';
     setup();
-    const snackbar = wrapper.find(InfoSnackbar);
-    snackbar.simulate('close');
-    expect(wrapper.state().openSnackbar).toBe(false);
+    expect(props.openSnackbar).toHaveBeenCalled();
   });
 
-  it('should call closeSnackbar(true) if snackbarMess exists', () => {
-    props.location.snackbarMess = 'asd';
+  it('should display postpaper if category and currentPost is present', () => {
     setup();
-    expect(wrapper.state().openSnackbar).toBe(true);
+    expect(wrapper.find(PostPaper).length).toBe(1);
   });
 
-  it('should call closeSnackbar(false) if snackbarMess does not exists', () => {
-    props.location.snackbarMess = '';
+  it('should not display postpaper if category and currentPost is not present', () => {
+    props.currentPost = undefined;
     setup();
-    expect(wrapper.state().openSnackbar).toBe(false);
+    expect(wrapper.find(CircularProgress).length).toBe(1);
   });
 });

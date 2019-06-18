@@ -20,6 +20,10 @@ describe('src/App', () => {
   beforeEach(() => {
     props = {
       fetchCategories: jest.fn(),
+      snackbarOpen: false,
+      snackbarMess: '',
+      closeSnackbar: jest.fn(),
+      openSnackbar: jest.fn(),
     };
   });
 

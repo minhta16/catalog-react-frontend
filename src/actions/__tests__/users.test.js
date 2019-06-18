@@ -8,6 +8,8 @@ import {
   createUser,
   fetchCurrentUserPost,
   deletePostAndRefetch,
+  clearError,
+  signOut,
 } from '../users';
 import { UsersType } from '../types';
 
@@ -42,6 +44,15 @@ describe('actions/users', () => {
     });
   });
 
+  it('should create SIGN_OUT when user sign out', async () => {
+    store.dispatch(signOut());
+    const actions = store.getActions();
+    expect(actions[0]).toEqual({
+      type: UsersType.SIGN_OUT,
+      payload: {},
+    });
+  });
+
   it('should create CREATE_USER when done creating user', async () => {
     store.dispatch(createUser('username', 'password', 'email', 'name'));
     const actions = store.getActions();
@@ -73,5 +84,13 @@ describe('actions/users', () => {
         promise: api.fetchCurrentUserPosts('abcxyz'),
       }),
     );
+  });
+
+  it('should create CLEAR_ERROR when clear error', () => {
+    store.dispatch(clearError());
+    const actions = store.getActions();
+    expect(actions[0]).toMatchObject({
+      type: UsersType.CLEAR_ERROR,
+    });
   });
 });

@@ -3,7 +3,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Home } from '../Home';
 
-describe('views/Home', () => {
+describe('components/Home/Home', () => {
   let wrapper;
   let props;
   // let warning;
@@ -41,6 +41,7 @@ describe('views/Home', () => {
       selectedCatItems: [],
       categoriesLoading: false,
       postsLoading: false,
+      openSnackbar: jest.fn(),
     };
   });
 
@@ -59,18 +60,6 @@ describe('views/Home', () => {
     it('should call fetchPosts if id is something', () => {
       setup();
       expect(props.fetchPosts).toHaveBeenCalled();
-    });
-
-    it('should close snackbar if snackbarMess is not present', () => {
-      props.location.snackbarMess = '';
-      setup();
-      expect(wrapper.state().openSnackbar).toBe(false);
-    });
-
-    it('should open snackbar if snackbarMess is present', () => {
-      props.location.snackbarMess = 'This is the message';
-      setup();
-      expect(wrapper.state().openSnackbar).toBe(true);
     });
   });
 });

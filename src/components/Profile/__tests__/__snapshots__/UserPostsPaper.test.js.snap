@@ -57,7 +57,7 @@ exports[`components/PostItem should render correctly 1`] = `
     </WithStyles(ForwardRef(Grid))>
   </WithStyles(ForwardRef(Grid))>
   <WithStyles(ForwardRef(Divider)) />
-  <PostList
+  <Connect(PostList)
     posts={
       Array [
         Object {

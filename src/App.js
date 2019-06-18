@@ -71,7 +71,7 @@ export class App extends Component {
 App.propTypes = {
   fetchCategories: PropTypes.func.isRequired,
   snackbarOpen: PropTypes.bool.isRequired,
-  snackbarMess: PropTypes.bool.isRequired,
+  snackbarMess: PropTypes.string.isRequired,
   closeSnackbar: PropTypes.func.isRequired,
 };
 

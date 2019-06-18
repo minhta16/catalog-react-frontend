@@ -17,7 +17,9 @@ exports[`components/SignUp/SignUp should render correctly 1`] = `
       onSubmit={[Function]}
     >
       <WithStyles(ForwardRef(TextField))
+        error={false}
         fullWidth={true}
+        helperText=""
         id="username"
         label="Username"
         margin="normal"

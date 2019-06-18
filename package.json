@@ -115,7 +115,8 @@
       "!src/serviceWorker.js",
       "!src/index.js",
       "!src/localStorage.js",
-      "!src/store.js"
+      "!src/store.js",
+      "!src/config/*"
     ],
     "setupFilesAfterEnv": [
       "<rootDir>/src/setupTests.js"

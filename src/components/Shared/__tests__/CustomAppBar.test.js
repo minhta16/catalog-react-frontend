@@ -31,6 +31,7 @@ describe('components/Shared/CustomAppBar', () => {
       },
       errorMessage: [],
       clearError: jest.fn(),
+      openSnackbar: jest.fn(),
     };
   });
 

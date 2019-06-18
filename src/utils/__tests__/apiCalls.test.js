@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import api from '../apiCalls';
-import config from '../../envConfig';
+import config from '../../config';
 
 describe('utils/apiCalls', () => {
   beforeEach(() => {

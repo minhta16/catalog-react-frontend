@@ -1,9 +1,9 @@
 /* eslint-disable no-undef */
-import api from 'utils/__mocks__/apiCalls';
+import api from 'utils/apiCalls';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { PostsType } from 'actions/types';
-import { fetchPosts, addPost, modifyPost } from '../posts';
+import { fetchPosts, addPost, modifyPost, resetAddPostSuccess, clearPostError } from '../posts';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -49,6 +49,22 @@ describe('actions/posts', () => {
     expect(actions[0]).toMatchObject({
       type: PostsType.MODIFY_POST,
       promise: api.addPost('value', '1', '1', post),
+    });
+  });
+
+  it('should create CLEAR_ERROR when clear error', () => {
+    store.dispatch(clearPostError());
+    const actions = store.getActions();
+    expect(actions[0]).toMatchObject({
+      type: PostsType.CLEAR_ERROR,
+    });
+  });
+
+  it('should create RESET_ADD_POST_SUCCESS when reset post success', () => {
+    store.dispatch(resetAddPostSuccess());
+    const actions = store.getActions();
+    expect(actions[0]).toMatchObject({
+      type: PostsType.RESET_ADD_POST_SUCCESS,
     });
   });
 });

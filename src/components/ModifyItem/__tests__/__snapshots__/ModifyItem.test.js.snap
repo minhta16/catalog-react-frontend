@@ -37,7 +37,9 @@ exports[`components/ModifyItem should render correctly 1`] = `
         </WithStyles(ForwardRef(MenuItem))>
       </WithStyles(ForwardRef(TextField))>
       <WithStyles(ForwardRef(TextField))
+        error={false}
         fullWidth={true}
+        helperText="Name needs to be at least 5 characters"
         id="title"
         label="Title"
         margin="normal"
@@ -46,7 +48,9 @@ exports[`components/ModifyItem should render correctly 1`] = `
         value="haha"
       />
       <WithStyles(ForwardRef(TextField))
+        error={false}
         fullWidth={true}
+        helperText="Description needs to be less than 200 characters. Current characters: 4"
         id="description"
         label="Description"
         margin="normal"
@@ -61,6 +65,7 @@ exports[`components/ModifyItem should render correctly 1`] = `
       >
         <WithStyles(ForwardRef(Button))
           color="primary"
+          disabled={false}
           type="submit"
           variant="contained"
         >

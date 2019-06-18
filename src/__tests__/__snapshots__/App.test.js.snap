@@ -396,5 +396,10 @@ exports[`src/App should render App without crashing 1`] = `
       </Switch>
     </div>
   </BrowserRouter>
+  <InfoSnackbar
+    message=""
+    onClose={[MockFunction]}
+    open={false}
+  />
 </ThemeProvider>
 `;

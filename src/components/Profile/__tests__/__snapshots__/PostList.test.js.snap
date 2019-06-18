@@ -27,10 +27,5 @@ exports[`components/Profile/PostList should render correctly 1`] = `
       }
     }
   />
-  <InfoSnackbar
-    message="Post Deleted!"
-    onClose={[Function]}
-    open={false}
-  />
 </div>
 `;

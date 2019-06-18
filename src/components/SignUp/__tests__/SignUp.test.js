@@ -31,6 +31,13 @@ describe('components/SignUp/SignUp', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should call signIn when created account', () => {
+    props.createAccountSuccess = true;
+    setup();
+    wrapper.instance().componentDidUpdate({ createAccountSuccess: false });
+    expect(props.signIn).toHaveBeenCalled();
+  });
+
   it('should call handleTermsClick when click Terms and Condition', () => {
     setup();
     jest.spyOn(wrapper.instance(), 'handleTermsClick');
@@ -57,7 +64,6 @@ describe('components/SignUp/SignUp', () => {
   it('should contain a redirect with createAccountSuccess', () => {
     props.createAccountSuccess = true;
     setup();
-    expect(props.signIn).toHaveBeenCalled();
     expect(wrapper.find(Redirect).length).toBe(1);
   });
 

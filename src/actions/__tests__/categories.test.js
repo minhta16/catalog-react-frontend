@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import api from 'utils/__mocks__/apiCalls';
+import api from 'utils/apiCalls';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { fetchCategories } from '../categories';

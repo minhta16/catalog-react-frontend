@@ -1,4 +1,4 @@
-import config from 'envConfig';
+import config from 'config';
 
 class ApiCalls {
   apiPath = config.API_ROOT;

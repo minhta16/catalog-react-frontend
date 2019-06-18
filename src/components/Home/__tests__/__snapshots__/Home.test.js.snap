@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`views/Home should render correctly 1`] = `
+exports[`components/Home/Home should render correctly 1`] = `
 <WithStyles(ForwardRef(Container))
   maxWidth="lg"
 >
@@ -36,11 +36,6 @@ exports[`views/Home should render correctly 1`] = `
     selectedCat={Object {}}
     selectedCatId="1"
     selectedCatItems={Array []}
-  />
-  <InfoSnackbar
-    message="true"
-    onClose={[Function]}
-    open={true}
   />
 </WithStyles(ForwardRef(Container))>
 `;
