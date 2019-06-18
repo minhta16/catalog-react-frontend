@@ -27,10 +27,21 @@ export class ModifyItem extends Component {
     descriptionWarning: false,
   };
 
+  /**
+   * @param {string} name text of name field
+   * @returns true if name has length 0 or more than 5
+   */
   qualifiedName = (name) => name.length === 0 || name.length >= 5;
 
+  /**
+   * @param {string} description text of description field
+   * @returns true if description has length 0 or less than 200
+   */
   qualifiedDescription = (description) => description.length === 0 || description.length <= 200;
 
+  /**
+   * Set the warning state if state is not qualified
+   */
   handleCreateWarnings = () => {
     const { title, description } = this.state;
     this.setState({

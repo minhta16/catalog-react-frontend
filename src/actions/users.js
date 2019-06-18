@@ -40,6 +40,7 @@ export const signOut = () => ({
  * @param {string} password password
  * @param {string} email email
  * @param {string} name name
+ *
  */
 export const createUser = (username, password, email, name) => async (dispatch) => {
   const response = await dispatch({

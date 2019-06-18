@@ -67,21 +67,21 @@ export class SignUp extends Component {
   };
 
   /**
-   * returns true if an email is qualified
+   * @returns true if an email is qualified
    */
   qualifiedUsername = (username) => {
     return username.length === 0 || username.length >= 5;
   };
 
   /**
-   * returns true if an email is qualified
+   * @returns true if an email is qualified
    */
   qualifiedEmail = (email) => {
     return email.length === 0 || /^\S+@[A-z]+\.[A-z]+$/.test(email);
   };
 
   /**
-   * returns true if password is 0 character long (user hasn't enter a password yet) or if the password is qualified (contains a number, character, and more than 8 chars long)
+   * @returns true if password is 0 character long (user hasn't enter a password yet) or if the password is qualified (contains a number, character, and more than 8 chars long)
    */
   qualifiedPassword = (password) => {
     return (
