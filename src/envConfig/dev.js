@@ -1,1 +1,3 @@
-export default { API_ROOT: 'http://secureserver.com' };
+import base from './base';
+
+export default { ...base, API_ROOT: 'http://secureserver.com' };
