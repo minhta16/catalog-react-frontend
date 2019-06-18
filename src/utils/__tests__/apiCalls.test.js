@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import api from '../apiCalls';
+import config from '../../envConfig';
 
 describe('utils/apiCalls', () => {
   beforeEach(() => {
@@ -33,9 +34,7 @@ describe('utils/apiCalls', () => {
         expect(Object.keys(res).length).toBe(3);
       });
       expect(fetch.mock.calls.length).toBe(1);
-      expect(fetch.mock.calls[0][0]).toBe(
-        `${process.env.REACT_APP_API_PATH}/categories?offset=0&limit=100`,
-      );
+      expect(fetch.mock.calls[0][0]).toBe(`${config.API_ROOT}/categories?offset=0&limit=100`);
     });
   });
   it('should call fetchApiItems correctly', () => {
@@ -59,9 +58,7 @@ describe('utils/apiCalls', () => {
       expect(Object.keys(res).length).toBe(2);
     });
     expect(fetch.mock.calls.length).toBe(1);
-    expect(fetch.mock.calls[0][0]).toBe(
-      `${process.env.REACT_APP_API_PATH}/categories/1/items?offset=0&limit=100`,
-    );
+    expect(fetch.mock.calls[0][0]).toBe(`${config.API_ROOT}/categories/1/items?offset=0&limit=100`);
   });
 
   it('should call signInApi correctly', () => {
@@ -73,7 +70,7 @@ describe('utils/apiCalls', () => {
       expect(res).toMatchObject(response);
     });
     expect(fetch.mock.calls.length).toBe(1);
-    expect(fetch.mock.calls[0][0]).toBe(`${process.env.REACT_APP_API_PATH}/auth`);
+    expect(fetch.mock.calls[0][0]).toBe(`${config.API_ROOT}/auth`);
   });
 
   it('should call createUser correctly', () => {
@@ -85,7 +82,7 @@ describe('utils/apiCalls', () => {
       expect(res).toMatchObject(response);
     });
     expect(fetch.mock.calls.length).toBe(1);
-    expect(fetch.mock.calls[0][0]).toBe(`${process.env.REACT_APP_API_PATH}/users`);
+    expect(fetch.mock.calls[0][0]).toBe(`${config.API_ROOT}/users`);
   });
 
   it('should call fetchCurrentUserPostsApi correctly', () => {
@@ -102,7 +99,7 @@ describe('utils/apiCalls', () => {
       expect(res).toMatchObject(response);
     });
     expect(fetch.mock.calls.length).toBe(1);
-    expect(fetch.mock.calls[0][0]).toBe(`${process.env.REACT_APP_API_PATH}/me/post`);
+    expect(fetch.mock.calls[0][0]).toBe(`${config.API_ROOT}/me/post`);
   });
 
   it('should call deletePostApi correctly', () => {
@@ -114,7 +111,7 @@ describe('utils/apiCalls', () => {
       expect(res).toMatchObject(response);
     });
     expect(fetch.mock.calls.length).toBe(1);
-    expect(fetch.mock.calls[0][0]).toBe(`${process.env.REACT_APP_API_PATH}/categories/1/items/2`);
+    expect(fetch.mock.calls[0][0]).toBe(`${config.API_ROOT}/categories/1/items/2`);
   });
 
   it('should call addPostApi correctly', () => {
@@ -132,7 +129,7 @@ describe('utils/apiCalls', () => {
         expect(res).toMatchObject(response);
       });
     expect(fetch.mock.calls.length).toBe(1);
-    expect(fetch.mock.calls[0][0]).toBe(`${process.env.REACT_APP_API_PATH}/categories/1/items`);
+    expect(fetch.mock.calls[0][0]).toBe(`${config.API_ROOT}/categories/1/items`);
   });
 
   it('should call modifyPostApi correctly', () => {
@@ -150,6 +147,6 @@ describe('utils/apiCalls', () => {
         expect(res).toMatchObject(response);
       });
     expect(fetch.mock.calls.length).toBe(1);
-    expect(fetch.mock.calls[0][0]).toBe(`${process.env.REACT_APP_API_PATH}/categories/1/items/2`);
+    expect(fetch.mock.calls[0][0]).toBe(`${config.API_ROOT}/categories/1/items/2`);
   });
 });
