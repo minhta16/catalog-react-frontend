@@ -11,12 +11,15 @@ exports[`components/CategoriesTable should render correctly 1`] = `
       item={true}
       xs={3}
     >
-      <WithStyles(ForwardRef(Typography))
+      <WithStyles(ForwardRef(Grid))
         className="mainmenu-categories-header"
-        variant="h4"
       >
-        Categories
-      </WithStyles(ForwardRef(Typography))>
+        <WithStyles(ForwardRef(Typography))
+          variant="h4"
+        >
+          Categories
+        </WithStyles(ForwardRef(Typography))>
+      </WithStyles(ForwardRef(Grid))>
       <ForwardRef(MenuList)>
         <WithStyles(ForwardRef(MenuItem))
           className="categoryMenuItem"

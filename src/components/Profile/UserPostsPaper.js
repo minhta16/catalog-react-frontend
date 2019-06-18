@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Typography, Divider, Paper, Avatar, Grid, Fab, CircularProgress } from '@material-ui/core';
+import randomMC from 'random-material-color';
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import PostList from './PostList';
 
@@ -14,7 +15,7 @@ export function UserPostsPaper(props) {
           <Grid container alignItems="center">
             <Avatar
               style={{
-                backgroundColor: '#fdb600',
+                backgroundColor: randomMC.getColor({ text: username }),
                 color: '#fff',
                 margin: '0.5rem',
               }}

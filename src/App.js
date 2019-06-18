@@ -6,7 +6,7 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import CustomAppBar from 'components/Shared/CustomAppBar';
 import InfoSnackbar from 'components/Shared/InfoSnackbar';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { indigo } from '@material-ui/core/colors';
+import { indigo, red } from '@material-ui/core/colors';
 import 'App.css';
 import { fetchCategories as fetchCategoriesRedux } from 'actions/categories';
 import {
@@ -25,15 +25,8 @@ const theme = createMuiTheme({
     secondary: {
       main: '#fff',
     },
-    overrides: {
-      MuiAvatar: {
-        colorDefault: {
-          '& *': {
-            backgroundColor: '#fdb600',
-            color: '#fff',
-          },
-        },
-      },
+    error: {
+      main: red[500],
     },
   },
 });

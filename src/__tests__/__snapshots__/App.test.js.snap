@@ -61,8 +61,8 @@ exports[`src/App should render App without crashing 1`] = `
         "divider": "rgba(0, 0, 0, 0.12)",
         "error": Object {
           "contrastText": "#fff",
-          "dark": "#d32f2f",
-          "light": "#e57373",
+          "dark": "rgb(170, 46, 37)",
+          "light": "rgb(246, 104, 94)",
           "main": "#f44336",
         },
         "getContrastText": [Function],
@@ -82,21 +82,11 @@ exports[`src/App should render App without crashing 1`] = `
           "A400": "#303030",
           "A700": "#616161",
         },
-        "overrides": Object {
-          "MuiAvatar": Object {
-            "colorDefault": Object {
-              "& *": Object {
-                "backgroundColor": "#fdb600",
-                "color": "#fff",
-              },
-            },
-          },
-        },
         "primary": Object {
           "contrastText": "#fff",
-          "dark": "rgb(45, 18, 145)",
-          "light": "rgb(103, 72, 217)",
-          "main": "#411bd0",
+          "dark": "rgb(44, 56, 126)",
+          "light": "rgb(101, 115, 195)",
+          "main": "#3f51b5",
         },
         "secondary": Object {
           "contrastText": "rgba(0, 0, 0, 0.87)",

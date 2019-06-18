@@ -6,7 +6,6 @@ import { Typography, Grid, IconButton, Menu, MenuItem, Link as MUILink } from '@
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import UpdateIcon from '@material-ui/icons/Update';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { red } from '@material-ui/core/colors';
 import { selectCategory } from 'selectors/categories';
 import { selectCurrentUserProp } from 'selectors/users';
 import { openSnackbar as openSnackbarRedux } from 'actions/misc';
@@ -81,8 +80,8 @@ export class PostItem extends Component {
           </Grid>
         </MenuItem>
         <MenuItem id="post-item-delete" onClick={this.toggleDeleteDialog}>
-          <DeleteIcon className="icon-padding" style={{ color: red[500] }} />
-          <Typography variant="button" style={{ color: red[500] }}>
+          <DeleteIcon className="icon-padding" color="error" />
+          <Typography variant="button" color="error">
             Delete
           </Typography>
         </MenuItem>

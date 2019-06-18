@@ -105,18 +105,10 @@ exports[`components/PostItem should render correctly 1`] = `
     >
       <DeleteIcon
         className="icon-padding"
-        style={
-          Object {
-            "color": "#f44336",
-          }
-        }
+        color="error"
       />
       <WithStyles(ForwardRef(Typography))
-        style={
-          Object {
-            "color": "#f44336",
-          }
-        }
+        color="error"
         variant="button"
       >
         Delete

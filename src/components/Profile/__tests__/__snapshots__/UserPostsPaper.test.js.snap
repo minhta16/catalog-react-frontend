@@ -19,7 +19,7 @@ exports[`components/PostItem should render correctly 1`] = `
         <WithStyles(ForwardRef(Avatar))
           style={
             Object {
-              "backgroundColor": "#fdb600",
+              "backgroundColor": "#607D8B",
               "color": "#fff",
               "margin": "0.5rem",
             }

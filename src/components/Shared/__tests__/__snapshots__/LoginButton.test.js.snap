@@ -15,7 +15,7 @@ exports[`components/LoginButton should render correctly 1`] = `
       onClick={[Function]}
       style={
         Object {
-          "backgroundColor": "#fdb600",
+          "backgroundColor": "#9C27B0",
           "color": "#fff",
           "margin": "0.5rem",
         }
@@ -61,7 +61,8 @@ exports[`components/LoginButton should render correctly 1`] = `
             }
           />
           <WithStyles(ForwardRef(Typography))
-            variant="body1"
+            color="primary"
+            variant="button"
           >
             Profile
           </WithStyles(ForwardRef(Typography))>
@@ -75,7 +76,7 @@ exports[`components/LoginButton should render correctly 1`] = `
         to="/"
       >
         <ExitToAppIcon
-          color="primary"
+          color="error"
           style={
             Object {
               "margin": "0 0.5rem 0 0",
@@ -83,7 +84,8 @@ exports[`components/LoginButton should render correctly 1`] = `
           }
         />
         <WithStyles(ForwardRef(Typography))
-          variant="body1"
+          color="error"
+          variant="button"
         >
           Logout
         </WithStyles(ForwardRef(Typography))>

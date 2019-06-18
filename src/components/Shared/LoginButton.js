@@ -52,7 +52,9 @@ export class LoginButton extends Component {
         <MenuItem onClick={this.handleCloseMenu} component={Link} exact="true" to="/profile">
           <Grid container alignItems="center">
             <PersonIcon color="primary" style={{ margin: '0 0.5rem 0 0' }} />
-            <Typography variant="body1">Profile</Typography>
+            <Typography color="primary" variant="button">
+              Profile
+            </Typography>
           </Grid>
         </MenuItem>
         <MenuItem
@@ -62,8 +64,10 @@ export class LoginButton extends Component {
           exact="true"
           to="/"
         >
-          <ExitIcon color="primary" style={{ margin: '0 0.5rem 0 0' }} />
-          <Typography variant="body1">Logout</Typography>
+          <ExitIcon color="error" style={{ margin: '0 0.5rem 0 0' }} />
+          <Typography color="error" variant="button">
+            Logout
+          </Typography>
         </MenuItem>
       </Menu>
     );
