@@ -53,7 +53,14 @@ export class CustomAppBar extends Component {
     return (
       <AppBar color={color}>
         <Toolbar>
-          <IconButton edge="start" color="inherit" component={Link} exact="true" to="/">
+          <IconButton
+            edge="start"
+            color="inherit"
+            component={Link}
+            exact="true"
+            to="/"
+            style={{ backgroundColor: 'transparent' }}
+          >
             <img src="/img/logo.svg" alt="site logo" />
           </IconButton>
           <Typography style={{ flexGrow: '1' }} />
