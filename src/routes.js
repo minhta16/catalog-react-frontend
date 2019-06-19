@@ -32,12 +32,12 @@ const routes = [
     exact: true,
   },
   {
-    path: '/:id',
+    path: '/category/:id',
     view: Home,
     exact: true,
   },
   {
-    path: '/:id/:postId',
+    path: '/category/:id/post/:postId',
     view: Post,
     exact: true,
   },

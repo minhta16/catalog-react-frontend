@@ -107,7 +107,7 @@ export class PostItem extends Component {
               component={Link}
               underline="none"
               exact="true"
-              to={`/${post.category_id}/${post.id}`}
+              to={`/category/${post.category_id}/post/${post.id}`}
             >
               {post.name}
             </MUILink>

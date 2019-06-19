@@ -56,7 +56,7 @@ class CategoriesTable extends Component {
                     key={category.id}
                     selected={String(selectedCatId) === String(category.id)}
                     component={Link}
-                    to={`/${category.id}`}
+                    to={`/category/${category.id}`}
                     onClick={() => fetchPosts(category.id)}
                   >
                     {category.name}
@@ -84,7 +84,7 @@ class CategoriesTable extends Component {
                           className="itemsMenuItem"
                           key={item.id}
                           component={Link}
-                          to={`/${selectedCatId}/${item.id}`}
+                          to={`/category/${selectedCatId}/post/${item.id}`}
                         >
                           <ListItemAvatar>
                             <Avatar

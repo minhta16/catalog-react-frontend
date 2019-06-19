@@ -7,7 +7,7 @@ export function PostPaper(props) {
   const { header, body, categoryId, categoryName, created } = props;
   return (
     <Paper className="left-margin">
-      <Button color="primary" component={Link} to={`/${categoryId}`}>
+      <Button color="primary" component={Link} to={`/category/${categoryId}`}>
         Back
       </Button>
       <Typography variant="h4">{header}</Typography>

@@ -367,7 +367,7 @@ exports[`src/App should render App without crashing 1`] = `
           }
           exact={true}
           key="[object Object]"
-          path="/:id"
+          path="/category/:id"
         />
         <Route
           component={
@@ -381,7 +381,7 @@ exports[`src/App should render App without crashing 1`] = `
           }
           exact={true}
           key="[object Object]"
-          path="/:id/:postId"
+          path="/category/:id/post/:postId"
         />
         <Route
           component={[Function]}

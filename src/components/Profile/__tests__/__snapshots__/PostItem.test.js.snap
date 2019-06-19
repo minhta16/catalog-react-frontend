@@ -25,7 +25,7 @@ exports[`components/PostItem should render correctly 1`] = `
         color="inherit"
         component={[Function]}
         exact="true"
-        to="/1/undefined"
+        to="/category/1/post/undefined"
         underline="none"
         variant="h4"
       >

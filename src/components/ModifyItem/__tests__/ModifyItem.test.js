@@ -118,7 +118,7 @@ describe('components/ModifyItem', () => {
       redirect: true,
     });
     expect(wrapper.find(Redirect).prop('to')).toEqual({
-      pathname: '/1/1',
+      pathname: '/category/1/post/1',
       snackbarMess: 'Post edited!',
     });
   });
@@ -131,7 +131,7 @@ describe('components/ModifyItem', () => {
       selectedCategory: '0',
     });
     expect(wrapper.find(Redirect).prop('to')).toEqual({
-      pathname: '/0',
+      pathname: '/category/0',
       snackbarMess: 'Post created!',
     });
   });

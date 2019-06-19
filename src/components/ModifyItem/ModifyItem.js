@@ -148,12 +148,12 @@ export class ModifyItem extends Component {
     if (redirect) {
       // If not editing, then return to the new post
       let path = {
-        pathname: `/${match.params.id}/${match.params.postId}`,
+        pathname: `/category/${match.params.id}/post/${match.params.postId}`,
         snackbarMess: 'Post edited!',
       };
       // If editing, then return to the category
       if (!editing) {
-        path = { pathname: `/${selectedCategory}`, snackbarMess: 'Post created!' };
+        path = { pathname: `/category/${selectedCategory}`, snackbarMess: 'Post created!' };
       }
       return <Redirect exact to={path} />;
     }

@@ -7,7 +7,7 @@ exports[`components/PostPaper should render correctly 1`] = `
   <WithStyles(ForwardRef(Button))
     color="primary"
     component={[Function]}
-    to="/1"
+    to="/category/1"
   >
     Back
   </WithStyles(ForwardRef(Button))>
