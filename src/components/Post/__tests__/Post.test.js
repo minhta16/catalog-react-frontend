@@ -4,7 +4,6 @@ import Adapter from 'enzyme-adapter-react-16';
 import { Redirect } from 'react-router-dom';
 import { configure, shallow } from 'enzyme';
 import { Post } from 'components/Post/Post';
-import { CircularProgress } from '@material-ui/core';
 import PostPaper from '../PostPaper';
 
 configure({ adapter: new Adapter() });
@@ -88,6 +87,6 @@ describe('components/Post', () => {
   it('should not display postpaper if category and currentPost is not present', () => {
     props.currentPost = undefined;
     setup();
-    expect(wrapper.find(CircularProgress).length).toBe(1);
+    expect(wrapper.find(Redirect).length).toBe(1);
   });
 });

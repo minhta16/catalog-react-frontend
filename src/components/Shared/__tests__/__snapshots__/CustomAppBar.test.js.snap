@@ -10,6 +10,11 @@ exports[`components/Shared/CustomAppBar should render correctly 1`] = `
       component={[Function]}
       edge="start"
       exact="true"
+      style={
+        Object {
+          "backgroundColor": "transparent",
+        }
+      }
       to="/"
     >
       <img

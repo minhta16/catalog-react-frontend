@@ -8,7 +8,7 @@ import { PostsType } from './types';
  * @param {string} id post Id that needs to fetch
  *
  */
-export const fetchPosts = (id) => (dispatch) =>
+export const fetchPosts = (id) => async (dispatch) =>
   dispatch({
     type: PostsType.FETCH_POSTS,
     promise: api.fetchItems(id),

@@ -12,14 +12,20 @@ import { openSnackbar as openSnackbarRedux } from 'actions/misc';
 export class Post extends Component {
   state = {
     redirect: false,
+    postNotFound: false,
   };
 
   /**
    * Open the snackbar if snackbarMess is available
    */
   componentDidMount = () => {
-    const { location, match, fetchPosts, openSnackbar } = this.props;
+    const { location, match, fetchPosts, openSnackbar, currentPost } = this.props;
     fetchPosts(match.params.id);
+    if (!currentPost) {
+      this.setState({
+        postNotFound: true,
+      });
+    }
     if (location.snackbarMess) {
       openSnackbar(location.snackbarMess);
     }
@@ -27,8 +33,11 @@ export class Post extends Component {
 
   render() {
     const { match, currentPost, category } = this.props;
-    const { redirect } = this.state;
+    const { redirect, postNotFound } = this.state;
 
+    if (postNotFound) {
+      return <Redirect to="/not-found" />;
+    }
     if (redirect) {
       return <Redirect exact="true" to="/" />;
     }

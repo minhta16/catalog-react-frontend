@@ -209,7 +209,7 @@ export class SignUp extends Component {
               variant="contained"
               color="primary"
               type="submit"
-              // disabled={usernameWarning || emailWarning || passWarning || passwordMatchWarning}
+              disabled={usernameWarning || emailWarning || passWarning || passwordMatchWarning}
             >
               Register
             </Button>
