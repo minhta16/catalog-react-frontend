@@ -45,12 +45,14 @@ describe('components/Post', () => {
         created: '2019',
         description: 'desc',
         id: '1',
+        price: 99,
       },
       category: {
         name: 'name',
       },
       fetchPosts: jest.fn(),
       openSnackbar: jest.fn(),
+      postsLoading: false,
     };
   });
 
@@ -82,11 +84,5 @@ describe('components/Post', () => {
   it('should display postpaper if category and currentPost is present', () => {
     setup();
     expect(wrapper.find(PostPaper).length).toBe(1);
-  });
-
-  it('should not display postpaper if category and currentPost is not present', () => {
-    props.currentPost = undefined;
-    setup();
-    expect(wrapper.find(Redirect).length).toBe(1);
   });
 });

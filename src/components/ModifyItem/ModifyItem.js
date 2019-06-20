@@ -77,6 +77,11 @@ export class ModifyItem extends Component {
     });
   };
 
+  // Format price from cents to dollars
+  formatPrice = (price) => {
+    return `$ ${price / 100}`;
+  };
+
   // Connect category to the state
   handleCategoryChange = (e) => {
     this.setState({
@@ -247,8 +252,7 @@ export class ModifyItem extends Component {
               }
               // NumberFormat props
               onValueChange={this.handlePriceChange}
-              thousandSeparator
-              prefix="$"
+              format={this.formatPrice}
               customInput={TextField}
               fullWidth
             />

@@ -15,7 +15,7 @@ export function PostPaper(props) {
       <Typography variant="subtitle1">{`Category: ${categoryName}`}</Typography>
       <Divider />
       <Typography variant="body1">{description}</Typography>
-      <Typography variant="body1">{`$ ${price.toFixed(2)}`}</Typography>
+      <Typography variant="body1">{`$ ${price / 100}`}</Typography>
     </Paper>
   );
 }

@@ -32,5 +32,10 @@ exports[`components/PostPaper should render correctly 1`] = `
   >
     body
   </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Typography))
+    variant="body1"
+  >
+    $ 1
+  </WithStyles(ForwardRef(Typography))>
 </WithStyles(ForwardRef(Paper))>
 `;

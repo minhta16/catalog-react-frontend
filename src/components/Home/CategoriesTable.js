@@ -30,7 +30,7 @@ class CategoriesTable extends Component {
   getSecondaryText = (item) => (
     <React.Fragment>
       <Typography component="span" variant="body2" style={{ display: 'inline' }}>
-        {`$${Number(item.price).toFixed(2)} - `}
+        {`$${Number(item.price) / 100} - `}
       </Typography>
       {this.getShortDescription(item.description)}
     </React.Fragment>

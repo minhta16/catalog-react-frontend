@@ -23,10 +23,11 @@ describe('components/PostPaper', () => {
   beforeEach(() => {
     props = {
       header: 'header',
-      body: 'body',
+      description: 'body',
       categoryId: '1',
       categoryName: 'name',
       created: '2019',
+      price: 100,
     };
   });
 

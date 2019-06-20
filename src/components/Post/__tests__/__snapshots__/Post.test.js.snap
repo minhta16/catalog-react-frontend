@@ -5,11 +5,12 @@ exports[`components/Post should render correctly 1`] = `
   maxWidth="lg"
 >
   <PostPaper
-    body="desc"
     categoryId="1"
     categoryName="name"
     created="2019"
+    description="desc"
     header="name"
+    price={99}
   />
 </WithStyles(ForwardRef(Container))>
 `;

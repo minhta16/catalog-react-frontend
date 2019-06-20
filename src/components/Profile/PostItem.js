@@ -118,7 +118,7 @@ export class PostItem extends Component {
               {`Description: ${post.description.substr(0, subtitleLength)}`}
               {post.description.length > subtitleLength && `...`}
             </Typography>
-            <Typography variant="caption">{`Price: $${Number(post.price).toFixed(2)}`}</Typography>
+            <Typography variant="caption">{`Price: $${Number(post.price) / 100}`}</Typography>
           </Grid>
         </Grid>
         <Grid item>
