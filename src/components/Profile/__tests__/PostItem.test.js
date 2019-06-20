@@ -48,6 +48,7 @@ describe('components/PostItem', () => {
     expect(
       wrapper
         .find('[variant="caption"]')
+        .at(0)
         .text()
         .includes('...'),
     ).toBe(false);
@@ -60,6 +61,7 @@ describe('components/PostItem', () => {
     expect(
       wrapper
         .find('[variant="caption"]')
+        .at(0)
         .text()
         .includes('...'),
     ).toBe(true);

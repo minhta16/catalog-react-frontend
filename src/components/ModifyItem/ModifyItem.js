@@ -14,17 +14,20 @@ import {
 import { Typography, Container, Paper, TextField, Button, MenuItem, Grid } from '@material-ui/core';
 import BackupIcon from '@material-ui/icons/Backup';
 import CancelIcon from '@material-ui/icons/Cancel';
+import NumberFormat from 'react-number-format';
 
 export class ModifyItem extends Component {
   state = {
     title: '',
     description: '',
+    price: 0,
     editing: false,
     redirect: false,
     // eslint-disable-next-line react/destructuring-assignment
     selectedCategory: this.props.categories.length ? this.props.categories[0].id : '',
     nameWarning: false,
     descriptionWarning: false,
+    priceWarning: false,
   };
 
   /**
@@ -40,13 +43,20 @@ export class ModifyItem extends Component {
   qualifiedDescription = (description) => description.length === 0 || description.length <= 200;
 
   /**
+   * @param {string} price number of description
+   * @returns true if price is legit
+   */
+  qualifiedPrice = (price) => price >= 0;
+
+  /**
    * Set the warning state if state is not qualified
    */
   handleCreateWarnings = () => {
-    const { title, description } = this.state;
+    const { title, description, price } = this.state;
     this.setState({
       nameWarning: !this.qualifiedName(title),
       descriptionWarning: !this.qualifiedDescription(description),
+      priceWarning: !this.qualifiedPrice(price),
     });
   };
 
@@ -58,6 +68,13 @@ export class ModifyItem extends Component {
       },
       this.handleCreateWarnings,
     );
+  };
+
+  // Special function for handling price change with NumberFormat
+  handlePriceChange = ({ value }) => {
+    this.setState({
+      price: Number(value),
+    });
   };
 
   // Connect category to the state
@@ -77,20 +94,18 @@ export class ModifyItem extends Component {
     e.preventDefault();
 
     const { token, match, modifyPost, addPost } = this.props;
-    const { title, description, editing, selectedCategory } = this.state;
+    const { title, description, price, editing, selectedCategory } = this.state;
+
+    const post = {
+      name: title,
+      description,
+      price,
+    };
 
     if (editing) {
-      modifyPost(token, match.params.id, match.params.postId, {
-        name: title,
-        description,
-        price: 0,
-      });
+      modifyPost(token, match.params.id, match.params.postId, post);
     } else {
-      addPost(token, selectedCategory, {
-        name: title,
-        description,
-        price: 0,
-      });
+      addPost(token, selectedCategory, post);
     }
   };
 
@@ -134,11 +149,13 @@ export class ModifyItem extends Component {
     const {
       title,
       description,
+      price,
       editing,
       redirect,
       selectedCategory,
       nameWarning,
       descriptionWarning,
+      priceWarning,
     } = this.state;
     const { match, categories, errorMessage } = this.props;
 
@@ -214,6 +231,25 @@ export class ModifyItem extends Component {
               helperText={`Description needs to be less than 200 characters. Current characters: ${description.length}`}
               fullWidth
               multiline
+            />
+            <NumberFormat
+              required
+              id="price"
+              label="Price"
+              value={price}
+              margin="normal"
+              error={priceWarning}
+              helperText={
+                priceWarning
+                  ? `Price must be positive! You don't want to sell your items for a negative price right?`
+                  : ''
+              }
+              // NumberFormat props
+              onValueChange={this.handlePriceChange}
+              thousandSeparator
+              prefix="$"
+              customInput={TextField}
+              fullWidth
             />
             <Grid container justify="space-evenly">
               <Button

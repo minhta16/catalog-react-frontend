@@ -30,6 +30,7 @@ describe('components/ModifyItem', () => {
         description: 'haha',
         id: '1',
         category_id: '1',
+        price: 0,
       },
       categories: [
         {
@@ -97,6 +98,12 @@ describe('components/ModifyItem', () => {
     update();
     wrapper.instance().handleOnSubmit({ preventDefault: jest.fn() });
     expect(props.addPost).toHaveBeenCalled();
+  });
+
+  it('should change state when handlePriceChange() is called', () => {
+    setup();
+    wrapper.instance().handlePriceChange({ value: '33' });
+    expect(wrapper.state().price).toBe(33);
   });
 
   it('should change state when handleCategoryChange() is called', () => {

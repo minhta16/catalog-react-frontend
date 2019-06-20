@@ -46,6 +46,11 @@ exports[`components/PostItem should render correctly 1`] = `
       >
         Description: bro
       </WithStyles(ForwardRef(Typography))>
+      <WithStyles(ForwardRef(Typography))
+        variant="caption"
+      >
+        Price: $NaN
+      </WithStyles(ForwardRef(Typography))>
     </WithStyles(ForwardRef(Grid))>
   </WithStyles(ForwardRef(Grid))>
   <WithStyles(ForwardRef(Grid))

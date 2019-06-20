@@ -27,6 +27,15 @@ class CategoriesTable extends Component {
     return retString;
   };
 
+  getSecondaryText = (item) => (
+    <React.Fragment>
+      <Typography component="span" variant="body2" style={{ display: 'inline' }}>
+        {`$${Number(item.price).toFixed(2)} - `}
+      </Typography>
+      {this.getShortDescription(item.description)}
+    </React.Fragment>
+  );
+
   render() {
     const {
       categories,
@@ -101,7 +110,7 @@ class CategoriesTable extends Component {
                           </ListItemAvatar>
                           <ListItemText
                             primary={item.name}
-                            secondary={this.getShortDescription(item.description)}
+                            secondary={this.getSecondaryText(item)}
                           />
                         </ListItem>
                       ))
