@@ -126,6 +126,7 @@ export class ModifyItem extends Component {
           this.setState({
             title: post.name,
             description: post.description,
+            price: post.price,
             selectedCategory: match.params.id,
           });
         },
